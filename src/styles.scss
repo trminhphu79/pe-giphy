@@ -1,1 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
+*,
+html {
+    font-family: "Nunito Sans", sans-serif;
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+:root {
+    --main-color: #111111;
+    --second-color: rgb(241, 241, 241);
+    --main-bg: #F9F9F9;
+    --main-bg-100: #ececec;
+    --second-bg: #c7c6c6;
+
+    --input-outline: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+
+}
+
+
+button {
+    padding: 6px 24px;
+    border-radius: 30px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        background-color: var(--second-bg);
+    }
+
+    &--primary {}
+
+    &--secondary {}
+}
