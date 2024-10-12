@@ -1,4 +1,5 @@
-# GifMaster
+# PeGiphy 
+# Author: TMP
 
 ## Check out the site on https://github.com/trminhphu79/pe-giphy.git
 
@@ -7,7 +8,7 @@ This project was focused on setting up mono-repo infrastructure using [Nx](https
 ## Table of Contents
 
 - [PeGiphy](#PeGiphy)
-  - [Checkout on https://github.com/trminhphu79/pe-giphy.git/](#check-out-the-site-on-httpsgifmasternetlifycom)
+  - [Checkout on https://github.com/trminhphu79/pe-giphy.git/](#check-out-pe-giphy)
   - [Table of Contents](#table-of-contents)
   - [Technologies](#technologies)
   - [Features Overview](#features-overview)
@@ -37,3 +38,8 @@ Follows 4 types of a specific library by [Nx Library Types](https://nx.dev/lates
 ### Linkedin:
 
 <a href="https://www.linkedin.com/in/tmp-dev79/">Phu Minh Tran</a>
+
+
+## Check out pe giphy:
+
+<a href="https://pe-giphy.vercel.app/">Pe giphy</a>
