@@ -8,7 +8,7 @@ This project aimed to establish a monorepo infrastructure using [Nx](https://nx.
 ## Table of Contents
 
 - [PeGiphy](#PeGiphy)
-  - [Checkout on https://github.com/trminhphu79/pe-giphy.git/](#check-out-pe-giphy)
+  - [Checkout on https://pe-giphy.vercel.app/](#check-out-pe-giphy)
   - [Table of Contents](#table-of-contents)
   - [Technologies](#technologies)
   - [Features Overview](#features-overview)
