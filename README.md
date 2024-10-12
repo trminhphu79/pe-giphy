@@ -1,4 +1,5 @@
-# PeGiphy 
+# PeGiphy
+
 # Author: TMP
 
 ## Check out the site on https://pe-giphy.vercel.app/
@@ -29,17 +30,18 @@ This project aimed to establish a monorepo infrastructure using [Nx](https://nx.
 - [Ngrx/Signal](https://ngrx.io/guide/signals) (18.1.0) for state management.
 
 ## Features Overview
+
 - Dark-mode supported
 - Multi-language (vi, en) supported
 
 ## Deep-dived Libraries
+
 Follows 4 types of a specific library by [Nx Library Types](https://nx.dev/latest/angular/structure/library-types)
 
 ### Linkedin:
 
-<a href="https://www.linkedin.com/in/tmp-dev79/">Phu Minh Tran</a>
-
+<a href="https://www.linkedin.com/in/tmp-dev79/" target="_blank">Phu Minh Tran</a>
 
 ## Check out pe giphy:
 
-<a href="https://pe-giphy.vercel.app/">Pe giphy</a>
+<a href="https://pe-giphy.vercel.app/" target="_blank">Pe giphy</a>
