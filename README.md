@@ -3,7 +3,7 @@
 
 ## Check out the site on https://github.com/trminhphu79/pe-giphy.git
 
-This project was focused on setting up mono-repo infrastructure using [Nx](https://nx.dev) for sharing and reusing libraries through Angular best practices collected from my own experiences with the [Giphy-API](https://developers.giphy.com/) demonstration.
+This project aimed to establish a monorepo infrastructure using [Nx](https://nx.dev), enabling the efficient sharing and reuse of libraries following Angular's best practices. The project incorporated lessons learned from previous experiences, demonstrated through the integration of the [Giphy-API](https://developers.giphy.com/).
 
 ## Table of Contents
 
