@@ -1,7 +1,7 @@
 # PeGiphy 
 # Author: TMP
 
-## Check out the site on https://github.com/trminhphu79/pe-giphy.git
+## Check out the site on https://pe-giphy.vercel.app/
 
 This project aimed to establish a monorepo infrastructure using [Nx](https://nx.dev), enabling the efficient sharing and reuse of libraries following Angular's best practices. The project incorporated lessons learned from previous experiences, demonstrated through the integration of the [Giphy-API](https://developers.giphy.com/).
 
