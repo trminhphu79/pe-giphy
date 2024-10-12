@@ -1,0 +1,36 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2022",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@pe-giphy/app-config": ["modules/shared/app-config/src/index.ts"],
+      "@pe-giphy/app-shell": ["modules/app-shell/feature/src/index.ts"],
+      "@pe-giphy/directives": ["modules/shared/directives/src/index.ts"],
+      "@pe-giphy/feature": ["modules/app-shell/feature/src/index.ts"],
+      "@pe-giphy/giphy-list": ["modules/giphy-list/src/index.ts"],
+      "@pe-giphy/home": ["modules/home/src/index.ts"],
+      "@pe-giphy/layout": ["modules/app-shell/ui/layout/src/index.ts"],
+      "@pe-giphy/main-view": ["modules/app-shell/ui/main-view/src/index.ts"],
+      "@pe-giphy/nav-bar": ["modules/app-shell/ui/nav-bar/src/index.ts"],
+      "@pe-giphy/pipes": ["modules/shared/pipes/src/index.ts"],
+      "@pe-giphy/search": ["modules/search/src/index.ts"],
+      "@pe-giphy/shared": ["modules/shared/src/index.ts"],
+      "@pe-giphy/top-bar": ["modules/app-shell/ui/top-bar/src/index.ts"],
+      "@pe-giphy/ui": ["modules/shared/ui/src/index.ts"],
+      "@pe-giphy/utils": ["modules/shared/utils/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
