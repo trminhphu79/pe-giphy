@@ -1,0 +1,9 @@
+{
+    "BUTTON.ACTION.UPLOAD": "Upload",
+    "BUTTON.ACTION.DELETE": "Delete",
+    
+    "NOTIFICATION.ACTION.UPLOAD_SUCCESS": "Upload success",
+    "NOTIFICATION.ACTION.UPLOAD_FAIL": "Upload fail",
+    "NOTIFICATION.ACTION.DELETE_FAIL": "Delete fail",
+    "NOTIFICATION.ACTION.DELETE_SUCCESS": "Delete fail"
+}

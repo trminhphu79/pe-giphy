@@ -1,0 +1,8 @@
+{
+    "BUTTON.ACTION.UPLOAD": "Tải lên",
+    "BUTTON.ACTION.DELETE": "Xóa",
+    "NOTIFICATION.ACTION.UPLOAD_SUCCESS": "Tải lên thành công.",
+    "NOTIFICATION.ACTION.UPLOAD_FAIL": "Tải lên thất bại.",
+    "NOTIFICATION.ACTION.DELETE_FAIL": "Xóa thất bại.",
+    "NOTIFICATION.ACTION.DELETE_SUCCESS": "Xóa thành công."
+}

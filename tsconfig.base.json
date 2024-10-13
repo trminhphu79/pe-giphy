@@ -21,6 +21,7 @@
       "@pe-giphy/feature": ["modules/app-shell/feature/src/index.ts"],
       "@pe-giphy/giphy-list": ["modules/giphy-list/src/index.ts"],
       "@pe-giphy/home": ["modules/home/src/index.ts"],
+      "@pe-giphy/language": ["modules/shared/language/src/index.ts"],
       "@pe-giphy/layout": ["modules/app-shell/ui/layout/src/index.ts"],
       "@pe-giphy/main-view": ["modules/app-shell/ui/main-view/src/index.ts"],
       "@pe-giphy/nav-bar": ["modules/app-shell/ui/nav-bar/src/index.ts"],

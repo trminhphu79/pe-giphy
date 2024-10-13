@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainViewComponent } from '@pe-giphy/main-view';
 import { NavBarComponent } from '@pe-giphy/nav-bar';
@@ -13,10 +13,11 @@ import { RouterOutlet } from '@angular/router';
     RouterOutlet,
     MainViewComponent,
     NavBarComponent,
-    TopBarComponent
+    TopBarComponent,
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LayoutComponent { }
+export class LayoutComponent {
+}
