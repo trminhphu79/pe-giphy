@@ -1,1 +1,12 @@
-<p>nav-bar works!</p>
+<div class="nav-bar">
+    <div class="nav-bar__logo">
+        <span class="nav-bar__title">PeGiphy</span>
+    </div>
+    <nav class="nav-bar__list">
+        <ul>
+            @for (item of MENU_ITEMS(); track item.label; let idx = $index, e = $even) {
+            <li (click)="onClicked(item, idx)" [class.active]="item?.active">{{ item.label | transloco }}</li>
+            }
+        </ul>
+    </nav>
+</div>

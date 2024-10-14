@@ -1,4 +1,8 @@
 {
+    "MENU.HOME": "Trang chủ",
+    "MENU.TRENDING": "Xu hướng",
+    "MENU.MY_GIFS": "Gif của tôi",
+    "MENU.MY_FAVORITES": "Mục yêu thích",
     "BUTTON.ACTION.UPLOAD": "Tải lên",
     "BUTTON.ACTION.DELETE": "Xóa",
     "NOTIFICATION.ACTION.UPLOAD_SUCCESS": "Tải lên thành công.",
