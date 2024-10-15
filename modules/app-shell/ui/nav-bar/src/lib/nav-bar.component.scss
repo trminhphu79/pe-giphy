@@ -29,9 +29,12 @@
                 transition: all 0.5s ease;
 
                 &.active {
-                    background: var(--background-main-hover);
+                    // background: var(rbg(--background-main-hover));
                     background: var(--background-linear-gradient-hover);
                 }
+
+                display: flex;
+                gap: 12px;
             }
         }
     }

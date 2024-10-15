@@ -5,7 +5,10 @@
     <nav class="nav-bar__list">
         <ul>
             @for (item of MENU_ITEMS(); track item.label; let idx = $index, e = $even) {
-            <li (click)="onClicked(item, idx)" [class.active]="item?.active">{{ item.label | transloco }}</li>
+            <li class="nav-bar__item" (click)="onClicked(item, idx)" [class.active]="item?.active">
+                <span class="nav-bar__icon" style="font-size: 24px;" nz-icon nzType="{{item.icon}}" nzTheme="outline"></span>
+                <span>{{ item.label | transloco }}</span>
+            </li>
             }
         </ul>
     </nav>

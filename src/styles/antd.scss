@@ -1,0 +1,19 @@
+.pe-dropdown-menu {
+    ul {
+        border-radius: 8px;
+        padding: 4px;
+        background-color: rgba(var(--background-highlight));
+
+        li {
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 6px;
+            // background: var(--background-main-hover);
+            // background: var(--background-linear-gradient-hover);
+
+            &:hover {
+                background-color: rgb(var(--background-main-hover))
+            }
+        }
+    }
+}

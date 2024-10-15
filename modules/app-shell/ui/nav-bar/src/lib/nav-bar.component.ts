@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { TranslocoModule } from '@jsverse/transloco';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @Component({
   selector: 'pe-nav-bar',
   standalone: true,
-  imports: [CommonModule, NzMenuModule, NzIconModule, TranslocoModule],
+  imports: [CommonModule, NzMenuModule, NzIconModule, TranslocoModule, NzButtonModule],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,22 +18,22 @@ export class NavBarComponent {
     {
       label: 'MENU.HOME',
       active: true,
-      icon: 'ic_home'
+      icon: 'home'
     },
     {
       label: 'MENU.TRENDING',
       active: false,
-      icon: 'ic_trending'
+      icon: 'rise'
     },
     {
       label: 'MENU.MY_GIFS',
       active: false,
-      icon: 'ic_gif'
+      icon: 'smile'
     },
     {
       label: 'MENU.MY_FAVORITES',
       active: false,
-      icon: 'ic_favorite'
+      icon: 'heart'
     }
   ])
 

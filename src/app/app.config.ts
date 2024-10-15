@@ -6,10 +6,13 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideMultipleLanguage } from '@pe-giphy/language';
 import { NzConfig, NZ_CONFIG } from 'ng-zorro-antd/core/config';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { NZ_ICONS } from 'ng-zorro-antd/icon';
+import * as AllIcons from '@ant-design/icons-angular/icons';
+import { IconDefinition } from '@ant-design/icons-angular';
 
 const ngZorroConfig: NzConfig = {
   theme: {
-    'primaryColor': '#172026',
+    'primaryColor': '#ffffffb3',
     'successColor': '#93D94E',
     'warningColor': '#F2AE30',
     'infoColor': '#41A0F2',
@@ -17,6 +20,12 @@ const ngZorroConfig: NzConfig = {
     'errorColor': '#D92525'
   },
 };
+
+
+const antDesignIcons = AllIcons as {
+  [key: string]: IconDefinition;
+};
+const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key])
 
 
 export const appConfig: ApplicationConfig = {
@@ -30,6 +39,7 @@ export const appConfig: ApplicationConfig = {
     }),
     provideAnimations(),
     provideMultipleLanguage(),
-    { provide: NZ_CONFIG, useValue: ngZorroConfig }
+    { provide: NZ_CONFIG, useValue: ngZorroConfig },
+    { provide: NZ_ICONS, useValue: icons }
   ],
 };

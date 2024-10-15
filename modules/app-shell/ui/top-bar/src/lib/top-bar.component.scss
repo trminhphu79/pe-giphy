@@ -1,21 +1,23 @@
-.checkbox-wrapper-54 input[type="checkbox"] {
+.checkbox-wrapper input[type="checkbox"] {
     visibility: hidden;
     display: none;
 }
 
-.checkbox-wrapper-54 *,
-.checkbox-wrapper-54 ::after,
-.checkbox-wrapper-54 ::before {
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-wrapper *,
+.checkbox-wrapper ::after,
+.checkbox-wrapper ::before {
     box-sizing: border-box;
 }
 
-/* The switch - the box around the slider */
-.checkbox-wrapper-54 .switch {
-    --width-of-switch: 3.5em;
-    --height-of-switch: 2em;
-    /* size of sliding icon -- sun and moon */
+.checkbox-wrapper .switch {
+    --width-of-switch: 6em;
+    --height-of-switch: 2.2em;
     --size-of-icon: 1.4em;
-    /* it is like a inline-padding of switch */
     --slider-offset: 0.3em;
     position: relative;
     width: var(--width-of-switch);
@@ -23,20 +25,19 @@
     display: inline-block;
 }
 
-/* The slider */
-.checkbox-wrapper-54 .slider {
+.checkbox-wrapper .slider {
     position: absolute;
     cursor: pointer;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #f4f4f5;
+    background-color: rgba(var(--text-baseline));
     transition: .4s;
     border-radius: 30px;
 }
 
-.checkbox-wrapper-54 .slider:before {
+.checkbox-wrapper .slider:before {
     position: absolute;
     content: "";
     height: var(--size-of-icon, 1.4em);
@@ -45,36 +46,50 @@
     left: var(--slider-offset, 0.3em);
     top: 50%;
     transform: translateY(-50%);
-    background: linear-gradient(40deg, #ff0080, #ff8c00 70%);
-    ;
+    background: linear-gradient(40deg, #ff0080, #ff8c00 80%);
     transition: .4s;
 }
 
-.checkbox-wrapper-54 input:checked+.slider {
+.checkbox-wrapper input:checked+.slider {
     background-color: #303136;
 }
 
-.checkbox-wrapper-54 input:checked+.slider:before {
+.checkbox-wrapper input:checked+.slider:before {
     left: calc(100% - (var(--size-of-icon, 1.4em) + var(--slider-offset, 0.3em)));
     background: #303136;
-    box-shadow: inset -3px -2px 5px -2px #8983f7, inset -10px -4px 0 0 #a3dafb;
+    box-shadow: inset -3px -2px 5px -2px #8983f7, inset -10px -4px 0 0 #269ce4
 }
 
 .top-bar {
-    padding: 8px 12px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 
     &__left {}
 
-    &__right {}
-
-    &__avatar {
+    &__right {
         display: flex;
         border-radius: 30px;
-        padding: 12px 16px;
         cursor: pointer;
+        align-items: center;
+        gap: 12px;
+        justify-content: space-between;
+        padding-right: 12px;
+        max-width: 200px;
+        min-width: 140px;
+        height: 36px;
         background-color: rgba(var(--background-highlight));
+
+    }
+
+    &__avatar {
+        width: 36px;
+        height: 36px;
+
+        img {
+            padding: 2px;
+            width: auto;
+            border-radius: 50%;
+        }
     }
 }
