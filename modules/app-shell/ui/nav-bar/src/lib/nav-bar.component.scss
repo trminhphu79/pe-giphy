@@ -4,8 +4,8 @@
     border-radius: 8px;
     box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
     height: 100%;
-    background: rgb(22, 21, 21);
-    background: linear-gradient(90deg, rgba(22, 21, 21, 0.87) 0%, rgba(0, 0, 0, 1) 50%, rgba(22, 21, 21, 0.87) 100%);
+    background: var(--background-main);
+    background: var(--background-linear-gradient-right);
 
     &__logo {
         padding: 4px 12px;
@@ -29,8 +29,8 @@
                 transition: all 0.5s ease;
 
                 &.active {
-                    background: rgb(43, 43, 43);
-                    background: linear-gradient(90deg, rgba(57, 57, 57, 0.958) 12%, rgba(42, 42, 42, 1) 70%, rgb(56, 55, 55) 100%);
+                    background: var(--background-main-hover);
+                    background: var(--background-linear-gradient-hover);
                 }
             }
         }
