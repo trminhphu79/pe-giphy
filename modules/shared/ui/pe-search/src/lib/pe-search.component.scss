@@ -3,6 +3,7 @@
     border-radius: 8px;
     background: transparent;
     margin-bottom: 12px;
+    position: relative;
 
     input {
         // background-color: transparent;
@@ -17,6 +18,48 @@
 
         &:focus {
             box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+        }
+    }
+
+    .pe-mention {
+        position: absolute;
+        background: rgb(var(--background-main));
+        box-shadow: var(--box-shadow);
+        width: 100%;
+        height: fit-content;
+        padding: 10px 0 0 0;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        margin-top: 4px;
+
+        .pe-mention-dropdown {
+            max-height: 320px;
+            overflow-y: auto;
+            height: fit-content;
+
+            &__item {
+                display: flex;
+                gap: 12px;
+                align-items: center;
+                color: #fff;
+                padding: 8px 16px;
+                border-radius: 6px;
+                cursor: pointer;
+                // background: var(--background-main-hover);
+                // background: var(--background-linear-gradient-hover);
+
+                &:hover {
+                    background-color: rgb(var(--background-main-hover))
+                }
+
+                img {
+                    width: 24px;
+                    height: 24px;
+                    border-radius: 8px;
+                }
+            }
         }
     }
 }

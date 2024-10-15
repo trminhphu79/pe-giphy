@@ -1,3 +1,69 @@
 <div class="pe-search">
-    <input #inputSearch placeholder="{{placeholderText() | transloco}}"/>
+    <input #inputSearch placeholder="{{placeholderText() | transloco}}" />
+    @if(showMention()){
+    <div class="pe-mention">
+        <ng-container [ngTemplateOutlet]="contentTemplateChannels"></ng-container>
+    </div>
+    }
 </div>
+
+
+
+<ng-template #contentTemplateChannels>
+    <ul class="pe-mention-dropdown">
+        <li class="pe-mention-dropdown__item">
+            <img
+                src="https://media.licdn.com/dms/image/v2/D5603AQHm5c-_jdcBtg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1692433828078?e=1734566400&v=beta&t=zNDQU4t6JvE_pky0QDhaRIHOQXQi38cIPSsMY4fAV1c" />
+            <span>{{'@trminhphu79'}}</span>
+        </li>
+
+        <li class="pe-mention-dropdown__item">
+            <img
+                src="https://media.licdn.com/dms/image/v2/D5603AQHm5c-_jdcBtg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1692433828078?e=1734566400&v=beta&t=zNDQU4t6JvE_pky0QDhaRIHOQXQi38cIPSsMY4fAV1c" />
+            <span>{{'@trminhphu79'}}</span>
+        </li>
+
+        <li class="pe-mention-dropdown__item">
+            <img
+                src="https://media.licdn.com/dms/image/v2/D5603AQHm5c-_jdcBtg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1692433828078?e=1734566400&v=beta&t=zNDQU4t6JvE_pky0QDhaRIHOQXQi38cIPSsMY4fAV1c" />
+            <span>{{'@trminhphu79'}}</span>
+        </li>
+
+        <li class="pe-mention-dropdown__item">
+            <img
+                src="https://media.licdn.com/dms/image/v2/D5603AQHm5c-_jdcBtg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1692433828078?e=1734566400&v=beta&t=zNDQU4t6JvE_pky0QDhaRIHOQXQi38cIPSsMY4fAV1c" />
+            <span>{{'@trminhphu79'}}</span>
+        </li>
+
+        <li class="pe-mention-dropdown__item">
+            <img
+                src="https://media.licdn.com/dms/image/v2/D5603AQHm5c-_jdcBtg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1692433828078?e=1734566400&v=beta&t=zNDQU4t6JvE_pky0QDhaRIHOQXQi38cIPSsMY4fAV1c" />
+            <span>{{'@trminhphu79'}}</span>
+        </li>
+
+        <li class="pe-mention-dropdown__item">
+            <img
+                src="https://media.licdn.com/dms/image/v2/D5603AQHm5c-_jdcBtg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1692433828078?e=1734566400&v=beta&t=zNDQU4t6JvE_pky0QDhaRIHOQXQi38cIPSsMY4fAV1c" />
+            <span>{{'@trminhphu79'}}</span>
+        </li>
+
+        <li class="pe-mention-dropdown__item">
+            <img
+                src="https://media.licdn.com/dms/image/v2/D5603AQHm5c-_jdcBtg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1692433828078?e=1734566400&v=beta&t=zNDQU4t6JvE_pky0QDhaRIHOQXQi38cIPSsMY4fAV1c" />
+            <span>{{'@trminhphu79'}}</span>
+        </li>
+
+        
+        <li class="pe-mention-dropdown__item">
+            <img
+                src="https://media.licdn.com/dms/image/v2/D5603AQHm5c-_jdcBtg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1692433828078?e=1734566400&v=beta&t=zNDQU4t6JvE_pky0QDhaRIHOQXQi38cIPSsMY4fAV1c" />
+            <span>{{'@trminhphu79'}}</span>
+        </li>
+
+        <li class="pe-mention-dropdown__item">
+            <img
+                src="https://media.licdn.com/dms/image/v2/D5603AQHm5c-_jdcBtg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1692433828078?e=1734566400&v=beta&t=zNDQU4t6JvE_pky0QDhaRIHOQXQi38cIPSsMY4fAV1c" />
+            <span>{{'@trminhphu79'}}</span>
+        </li>
+    </ul>
+</ng-template>
