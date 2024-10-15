@@ -1,11 +1,16 @@
 {
   "name": "pe-giphy",
+  "tags": ["scope:pe-giphy"],
   "$schema": "node_modules/nx/schemas/project-schema.json",
   "includedScripts": [],
   "projectType": "application",
   "prefix": "pe",
   "sourceRoot": "./src",
-  "tags": [],
+  "cli": {
+    "cache": {
+      "enabled": false
+    }
+  },
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",

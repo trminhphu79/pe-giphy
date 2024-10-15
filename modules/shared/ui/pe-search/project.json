@@ -1,8 +1,8 @@
 {
-  "name": "app-shell",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "modules/app-shell/feature/src",
-  "prefix": "lib",
+  "name": "pe-search",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "modules/shared/ui/pe-search/src",
+  "prefix": "pe",
   "projectType": "library",
   "tags": [],
   "targets": {
@@ -10,7 +10,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "modules/app-shell/feature/jest.config.ts"
+        "jestConfig": "modules/shared/ui/pe-search/jest.config.ts"
       }
     },
     "lint": {

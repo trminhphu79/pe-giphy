@@ -1,12 +1,15 @@
 {
-    "MENU.HOME": "Trang chủ",
-    "MENU.TRENDING": "Xu hướng",
-    "MENU.MY_GIFS": "Gif của tôi",
-    "MENU.MY_FAVORITES": "Mục yêu thích",
-    "BUTTON.ACTION.UPLOAD": "Tải lên",
-    "BUTTON.ACTION.DELETE": "Xóa",
-    "NOTIFICATION.ACTION.UPLOAD_SUCCESS": "Tải lên thành công.",
-    "NOTIFICATION.ACTION.UPLOAD_FAIL": "Tải lên thất bại.",
-    "NOTIFICATION.ACTION.DELETE_FAIL": "Xóa thất bại.",
-    "NOTIFICATION.ACTION.DELETE_SUCCESS": "Xóa thành công."
+  "MENU.HOME": "Trang chủ",
+  "MENU.TRENDING": "Xu hướng",
+  "MENU.MY_GIFS": "Gif của tôi",
+  "MENU.MY_FAVORITES": "Mục yêu thích",
+  "BUTTON.ACTION.UPLOAD": "Tải lên",
+  "BUTTON.ACTION.DELETE": "Xóa",
+  "NOTIFICATION.ACTION.UPLOAD_SUCCESS": "Tải lên thành công.",
+  "NOTIFICATION.ACTION.UPLOAD_FAIL": "Tải lên thất bại.",
+  "NOTIFICATION.ACTION.DELETE_FAIL": "Xóa thất bại.",
+  "NOTIFICATION.ACTION.DELETE_SUCCESS": "Xóa thành công.",
+
+  "SEARCH.PLACE_HOLDER.SEARCH_GIF": "Tìm kiếm GIFs, clips hoặc stickers...",
+  "SEARCH.PLACE_HOLDER.SEARCH_USERNAME": "Nhập @username để tìm kiếm kênh..."
 }

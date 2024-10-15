@@ -8,7 +8,11 @@ export const appShellRoutes: Route[] = [
         children: [
             {
                 path: '',
-                loadComponent: () => import('@pe-giphy/home').then(m => m.HomeComponent)
+                loadComponent: () => import('@pe-giphy/pe-home-list').then(m => m.PeHomeListComponent)
+            },
+            {
+                path: ':slug',
+                loadComponent: () => import('@pe-giphy/pe-home-detail').then(m => m.PeHomeDetailComponent)
             }
         ]
     }

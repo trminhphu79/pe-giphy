@@ -3,12 +3,14 @@
   "MENU.TRENDING": "Trending",
   "MENU.MY_GIFS": "My gifs",
   "MENU.MY_FAVORITES": "My favorites",
-  
+
   "BUTTON.ACTION.UPLOAD": "Upload",
   "BUTTON.ACTION.DELETE": "Delete",
 
   "NOTIFICATION.ACTION.UPLOAD_SUCCESS": "Upload success",
   "NOTIFICATION.ACTION.UPLOAD_FAIL": "Upload fail",
   "NOTIFICATION.ACTION.DELETE_FAIL": "Delete fail",
-  "NOTIFICATION.ACTION.DELETE_SUCCESS": "Delete fail"
+  "NOTIFICATION.ACTION.DELETE_SUCCESS": "Delete fail",
+  "SEARCH.PLACE_HOLDER.SEARCH_GIF": "Search gifs, videos or stickers...",
+  "SEARCH.PLACE_HOLDER.SEARCH_USERNAME": "@username to search channels..."
 }

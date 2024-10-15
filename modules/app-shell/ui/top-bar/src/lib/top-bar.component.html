@@ -1,6 +1,6 @@
 <div class="top-bar">
     <div class="top-bar__left">
-        Left
+        <pe-search (searchChanges)="searchChanges($event)"></pe-search>
     </div>
     <a class="top-bar__right" nz-dropdown [nzDropdownMenu]="menu" [nzOverlayClassName]="'pe-dropdown-menu'"
         [nzClickHide]="false" nzTrigger="click">
