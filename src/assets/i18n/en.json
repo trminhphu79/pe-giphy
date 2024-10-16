@@ -3,6 +3,11 @@
   "MENU.TRENDING": "Trending",
   "MENU.MY_GIFS": "My gifs",
   "MENU.MY_FAVORITES": "My favorites",
+  "MENU.CHANNELS": "Channels",
+  "COMMON.LABEL.PROFILE": "Profile",
+  "COMMON.LABEL.CHANGE_THEME_LIGHT": "Dark mode",
+  "COMMON.LABEL.CHANGE_THEME_DARK": "Light mode",
+  "COMMON.LABEL.LOGOUT": "Logout",
 
   "BUTTON.ACTION.UPLOAD": "Upload",
   "BUTTON.ACTION.DELETE": "Delete",

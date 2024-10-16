@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 import { TranslocoModule } from '@jsverse/transloco';
-import { NzButtonModule } from 'ng-zorro-antd/button';
+import { RouterLink } from '@angular/router';
+import { TuiDataList } from '@taiga-ui/core';
+import { TuiIcon } from '@taiga-ui/core';
 
 @Component({
   selector: 'pe-nav-bar',
   standalone: true,
-  imports: [CommonModule, NzMenuModule, NzIconModule, TranslocoModule, NzButtonModule],
+  imports: [CommonModule, TranslocoModule, TuiDataList, RouterLink, TuiIcon],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,23 +18,27 @@ export class NavBarComponent {
     {
       label: 'MENU.HOME',
       active: true,
-      icon: 'home'
+      icon: 'house',
+      pageLink: '/'
     },
     {
-      label: 'MENU.TRENDING',
+      label: 'MENU.CHANNELS',
       active: false,
-      icon: 'rise'
+      icon: 'tv-minimal-play',
+      pageLink: '/channels'
     },
     {
       label: 'MENU.MY_GIFS',
       active: false,
-      icon: 'smile'
+      icon: 'gift',
+      pageLink: '/me'
     },
-    {
-      label: 'MENU.MY_FAVORITES',
-      active: false,
-      icon: 'heart'
-    }
+    // {
+    //   label: 'MENU.MY_FAVORITES',
+    //   active: false,
+    //   icon: 'heart',
+    //   pageLink: '/me/favorites'
+    // }
   ])
 
   onClicked(item: { label: string, active: boolean, icon: string }, index: number) {

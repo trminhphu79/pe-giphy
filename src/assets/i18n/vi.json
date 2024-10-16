@@ -3,6 +3,11 @@
   "MENU.TRENDING": "Xu hướng",
   "MENU.MY_GIFS": "Gif của tôi",
   "MENU.MY_FAVORITES": "Mục yêu thích",
+  "MENU.CHANNELS": "Danh sách kênh",
+  "COMMON.LABEL.PROFILE": "Hồ sơ",
+  "COMMON.LABEL.CHANGE_THEME": "Đổi giao diện",
+  "COMMON.LABEL.LOGOUT": "Đăng xuất",
+
   "BUTTON.ACTION.UPLOAD": "Tải lên",
   "BUTTON.ACTION.DELETE": "Xóa",
   "NOTIFICATION.ACTION.UPLOAD_SUCCESS": "Tải lên thành công.",

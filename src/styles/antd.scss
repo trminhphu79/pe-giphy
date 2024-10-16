@@ -2,7 +2,7 @@
     ul {
         border-radius: 8px;
         padding: 4px;
-        background-color: rgba(var(--background-highlight));
+        // background-color: rgba(var(--background-highlight));
 
         li {
             color: #fff;
@@ -12,7 +12,7 @@
             // background: var(--background-linear-gradient-hover);
 
             &:hover {
-                background-color: rgb(var(--background-main-hover))
+                // background-color: rgb(var(--background-main-hover))
             }
         }
     }

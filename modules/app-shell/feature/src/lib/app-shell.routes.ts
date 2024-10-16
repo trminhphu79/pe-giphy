@@ -8,12 +8,16 @@ export const appShellRoutes: Route[] = [
         children: [
             {
                 path: '',
-                loadComponent: () => import('@pe-giphy/pe-home-list').then(m => m.PeHomeListComponent)
+                loadChildren: () => import("@pe-giphy/home-routes").then((routes) => routes.homeRoutes)
             },
             {
-                path: ':slug',
-                loadComponent: () => import('@pe-giphy/pe-home-detail').then(m => m.PeHomeDetailComponent)
-            }
+                path: 'channels',
+                loadChildren: () => import('@pe-giphy/channels-routes').then((routes) => routes.channelRoutes)
+            },
+            {
+                path: 'me',
+                loadChildren: () => import('@pe-giphy/my-gifs-routes').then((c) => c.myGifsRoutes)
+            },
         ]
     }
 ];

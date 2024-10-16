@@ -2,6 +2,7 @@
 // @import './style/andt.less';
 @import "ng-zorro-antd/ng-zorro-antd.variable.min.css";
 @import "./styles/antd.scss";
+@import '@taiga-ui/core/styles/taiga-ui-local.scss';
 
 *,
 html {
@@ -14,25 +15,25 @@ html {
 
 
 :root {
-  --background-baseline: 000 000 000;
-  --background-highlight: 68 68 68;
-  --text-baseline: 255 255 255;
-  --text-primary: 29 185 84;
-  --text-opacity-7: .7;
-  --text-opacity-6: .6;
-  --text-opacity-5: .5;
-  --text-opacity-8: .8;
-  --text-opacity-9: .9;
-  --text-opacity: 1;
+  // --background-baseline: 000 000 000;
+  // --background-highlight: 68 68 68;
+  // --text-baseline: 255 255 255;
+  // --text-primary: 29 185 84;
+  // --text-opacity-7: .7;
+  // --text-opacity-6: .6;
+  // --text-opacity-5: .5;
+  // --text-opacity-8: .8;
+  // --text-opacity-9: .9;
+  // --text-opacity: 1;
 
-  --background-main: 22, 21, 21;
-  --background-linear-gradient-left: linear-gradient(90deg, rgba(22, 21, 21, 1) 0%, rgba(0, 0, 0, 1) 45%, rgba(22, 21, 21, 1) 100%);
-  --background-linear-gradient-right: linear-gradient(90deg, rgba(22, 21, 21, 0.87) 0%, rgba(0, 0, 0, 1) 50%, rgba(22, 21, 21, 0.87) 100%);
+  // --background-main: 22, 21, 21;
+  // --background-linear-gradient-left: linear-gradient(90deg, rgba(22, 21, 21, 1) 0%, rgba(0, 0, 0, 1) 45%, rgba(22, 21, 21, 1) 100%);
+  // --background-linear-gradient-right: linear-gradient(90deg, rgba(22, 21, 21, 0.87) 0%, rgba(0, 0, 0, 1) 50%, rgba(22, 21, 21, 0.87) 100%);
 
-  --background-main-hover: 43, 43, 43;
-  --background-linear-gradient-hover: linear-gradient(90deg, rgba(57, 57, 57, 0.958) 12%, rgba(42, 42, 42, 1) 70%, rgb(56, 55, 55) 100%);
+  // --background-main-hover: 43, 43, 43;
+  // --background-linear-gradient-hover: linear-gradient(90deg, rgba(57, 57, 57, 0.958) 12%, rgba(42, 42, 42, 1) 70%, rgb(56, 55, 55) 100%);
 
-  --box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+  // --box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
 }
 
 body {
@@ -40,8 +41,8 @@ body {
   line-height: normal;
   font-size: 16px;
   letter-spacing: .015em;
-  background-color: rgba(var(--background-baseline));
-  color: rgb(var(--text-baseline) / var(--text-opacity));
+  // background-color: rgba(var(--background-baseline));
+  color: var(--tui-text-primary);
 }
 
 
@@ -153,4 +154,16 @@ h6 {
   background-color: rgb(var(--background-highlight));
   border-radius: 8px;
   border: 1px solid var(--background-highlight);
+}
+
+[tuiTheme=dark] {
+  --tui-text-action: #d6d6d6;
+  --tui-text-action-hover: #d6d6d6c9;
+}
+
+:root,
+[tuiTheme=light] {
+  --tui-text-action: #1b1f3b;
+  --tui-text-action-hover: #1b1f3bc1;
+
 }

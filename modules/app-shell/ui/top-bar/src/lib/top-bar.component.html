@@ -2,14 +2,9 @@
     <div class="top-bar__left">
         <pe-search (searchChanges)="searchChanges($event)"></pe-search>
     </div>
-    <a class="top-bar__right" nz-dropdown [nzDropdownMenu]="menu" [nzOverlayClassName]="'pe-dropdown-menu'"
+    <!-- <a class="top-bar__right" nz-dropdown [nzDropdownMenu]="menu" [nzOverlayClassName]="'pe-dropdown-menu'"
         [nzClickHide]="false" nzTrigger="click">
-        <div class="top-bar__avatar">
-            <img
-                src="https://scontent.fsgn8-4.fna.fbcdn.net/v/t39.30808-6/367735256_2400158307038395_7455402540095123111_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=vxr1g9INn1wQ7kNvgHSUh6I&_nc_zt=23&_nc_ht=scontent.fsgn8-4.fna&_nc_gid=ASDqtrMYCuvgQN3zFimMgSY&oh=00_AYBUTtLDLX-gLiiEe32apYqx7-EluHZdSSdrj-PtFIkeew&oe=67146CEF" />
-        </div>
-        <span> {{'Phu Tran'}}</span>
-        <span nz-icon nzType="down"></span>
+
     </a>
 
     <nz-dropdown-menu #menu="nzDropdownMenu">
@@ -25,6 +20,22 @@
             <li nz-menu-item>Profile</li>
             <li nz-menu-item>Logout</li>
         </ul>
-    </nz-dropdown-menu>
+    </nz-dropdown-menu> -->
 
+
+    <button class="top-bar__menu-action" tuiButton tuiChevron tuiDropdownOpen type="button" [tuiDropdown]="content"
+        appearance="secondary">
+        <div class="top-bar__avatar">
+            <img
+                src="https://scontent.fsgn8-4.fna.fbcdn.net/v/t39.30808-6/367735256_2400158307038395_7455402540095123111_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=vxr1g9INn1wQ7kNvgHSUh6I&_nc_zt=23&_nc_ht=scontent.fsgn8-4.fna&_nc_gid=ASDqtrMYCuvgQN3zFimMgSY&oh=00_AYBUTtLDLX-gLiiEe32apYqx7-EluHZdSSdrj-PtFIkeew&oe=67146CEF" />
+        </div>
+        <span s> {{'Phu Tran'}}</span>
+    </button>
+    <ng-template #content>
+        <tui-data-list role="menu" appearance="secondary" [style.width.rem]="11">
+            <a (click)="perform(item, i)" *ngFor="let item of items(); let i = index" role="menuitemradio" tuiOption>
+                {{ item.label | transloco }}
+            </a>
+        </tui-data-list>
+    </ng-template>
 </div>

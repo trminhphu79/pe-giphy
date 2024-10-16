@@ -2,14 +2,15 @@
     <div class="nav-bar__logo">
         <span class="nav-bar__title">PeGiphy</span>
     </div>
-    <nav class="nav-bar__list">
-        <ul>
-            @for (item of MENU_ITEMS(); track item.label; let idx = $index, e = $even) {
-            <li class="nav-bar__item" (click)="onClicked(item, idx)" [class.active]="item?.active">
-                <span class="nav-bar__icon" style="font-size: 24px;" nz-icon nzType="{{item.icon}}" nzTheme="outline"></span>
-                <span>{{ item.label | transloco }}</span>
-            </li>
-            }
-        </ul>
-    </nav>
+    <tui-data-list role="menu" appearance="secondary">
+        @for (item of MENU_ITEMS(); track item.label; let idx = $index, e = $even) {
+        <a tuiLink tuiOption routerLinkActive [routerLink]="item?.pageLink" (click)="onClicked(item, idx)"
+            [class.active]="item?.active">
+            <span>
+                <tui-icon icon="{{item.icon}}"></tui-icon>
+                <span style="margin-left: 12px;">{{ item.label | transloco }}</span>
+            </span>
+        </a>
+        }
+    </tui-data-list>
 </div>

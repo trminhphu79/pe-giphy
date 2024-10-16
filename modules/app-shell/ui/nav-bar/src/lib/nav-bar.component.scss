@@ -2,10 +2,10 @@
     padding: 12px 0;
     min-width: 320px;
     border-radius: 8px;
-    box-shadow: var(--box-shadow);
+    box-shadow: var(--tui-shadow);
     height: 100%;
-    background: var(--background-main);
-    background: var(--background-linear-gradient-right);
+    // background: var(--background-main);
+    // background: var(--background-linear-gradient-right);
 
     &__logo {
         padding: 4px 12px;
@@ -16,26 +16,20 @@
     }
 
 
-    &__list {
-        margin-top: 24px;
 
-        ul {
-            padding: 0 4px;
+}
 
-            li {
-                padding: 10px 12px;
-                cursor: pointer;
-                border-radius: 6px;
-                transition: all 0.5s ease;
+tui-data-list {
+    margin-top: 16px;
 
-                &.active {
-                    // background: var(rbg(--background-main-hover));
-                    background: var(--background-linear-gradient-hover);
-                }
+    a {
+        // box-shadow: var(--tui-shadow);
+    }
 
-                display: flex;
-                gap: 12px;
-            }
-        }
+    a.active {
+        // background: var(rbg(--background-main-hover));
+        // background: var(--background-linear-gradient-hover);
+        background-color: var(--tui-background-neutral-1);
+        // box-shadow: var(--tui-shadow-small-hover);
     }
 }
