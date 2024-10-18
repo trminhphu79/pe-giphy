@@ -5,10 +5,9 @@
     margin-bottom: 12px;
     position: relative;
 
+
     input {
-        // background-color: transparent;
-        // background: rgb(var(--background-main));
-        // box-shadow: var(--box-shadow);
+        background: var(--background-linear-gradient-right);
         border: none;
         outline: none;
         width: 100%;
@@ -16,10 +15,7 @@
         padding: 0 18px;
         border-radius: 8px;
         box-shadow: var(--tui-shadow);
-
-        &:focus {
-            // box-shadow: var(--tui-shadow-small-hover);
-        }
+        color: var(--tui-text-primary);
     }
 
     .pe-mention {
@@ -62,4 +58,11 @@
             }
         }
     }
+}
+
+
+.loader {
+    display: flex;
+    inline-size: fit-content;
+    margin: 1rem 0;
 }

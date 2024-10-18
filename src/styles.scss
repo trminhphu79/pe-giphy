@@ -2,6 +2,7 @@
 // @import './style/andt.less';
 @import "ng-zorro-antd/ng-zorro-antd.variable.min.css";
 @import "./styles/antd.scss";
+@import "./styles/tui-dropdown.scss";
 @import '@taiga-ui/core/styles/taiga-ui-local.scss';
 
 *,
@@ -26,14 +27,14 @@ html {
   // --text-opacity-9: .9;
   // --text-opacity: 1;
 
-  // --background-main: 22, 21, 21;
-  // --background-linear-gradient-left: linear-gradient(90deg, rgba(22, 21, 21, 1) 0%, rgba(0, 0, 0, 1) 45%, rgba(22, 21, 21, 1) 100%);
-  // --background-linear-gradient-right: linear-gradient(90deg, rgba(22, 21, 21, 0.87) 0%, rgba(0, 0, 0, 1) 50%, rgba(22, 21, 21, 0.87) 100%);
+  --background-main: 22, 21, 21;
+  --background-linear-gradient-left: rgba(29,29,29,1);
+  --background-linear-gradient-right: rgba(29,29,29,1);
 
-  // --background-main-hover: 43, 43, 43;
-  // --background-linear-gradient-hover: linear-gradient(90deg, rgba(57, 57, 57, 0.958) 12%, rgba(42, 42, 42, 1) 70%, rgb(56, 55, 55) 100%);
+  --background-main-hover: 43, 43, 43;
+  --background-linear-gradient-hover: rgba(29,29,29,1);
 
-  // --box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+  --box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
 }
 
 body {
