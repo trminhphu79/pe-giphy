@@ -1,12 +1,11 @@
 .top-bar {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-right: 12px;
+
 
     button {
-        width: 100%;
-        padding: 0px;
+        // width: 100%;
+        // padding: 0px;
+        height: 40px;
     }
 
     &__left {
@@ -15,16 +14,19 @@
     }
 
     &__menu-action {
-        max-width: 200px;
-        min-width: 200px;
-        width: 200px;
         display: flex;
-        justify-content: start;
+        justify-content: end;
+        flex: 1;
+
+        .dropdown-button {
+            padding: 0px 12px 0 4px;
+            width: 170px;
+        }
     }
 
     &__avatar {
-        min-width: 36px;
-        min-height: 36px;
+        min-width: 24px;
+        min-height: 24px;
 
         img {
             padding: 2px;
@@ -37,19 +39,22 @@
         display: flex;
         gap: 10px;
         justify-content: start;
+
+        button {
+            font-weight: 400;
+            padding: 0px !important;
+            min-width: 80px;
+        }
     }
 }
 
 .truncate {
     display: inline-block;
-    /* Required for truncating */
-    max-width: calc(100% - 85px);
-    /* Set a maximum width as needed */
-    min-width: calc(100% - 85px);
+    max-width: calc(100% - 75px);
+    min-width: calc(100% - 75px);
     white-space: nowrap;
     /* Prevent text from wrapping */
     overflow: hidden;
-    /* Hide overflow text */
     text-overflow: ellipsis;
-    /* Add ellipsis (...) for overflowed text */
+    font-weight: 400;
 }

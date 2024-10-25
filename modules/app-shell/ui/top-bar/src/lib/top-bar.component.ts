@@ -77,4 +77,21 @@ export class TopBarComponent {
         break;
     }
   }
+
+  register() {
+    this.router.navigate(['/']);
+    this.appStore.updateState({
+      user: {
+        isLogin: true,
+        avatarUrl: 'https://scontent.fsgn8-4.fna.fbcdn.net/v/t39.30808-6/367735256_2400158307038395_7455402540095123111_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFpucHVmPlmdZqIJP7wD9THN64EtvPMcKw3rgS288xwrDu4Dj6NZaFhCAEgqzqYMCLL5Hp6CZdapNTLWPE2msQr&_nc_ohc=2Vlzl1eZIcUQ7kNvgEOlrTL&_nc_zt=23&_nc_ht=scontent.fsgn8-4.fna&_nc_gid=A8APLxhVBzdQ9Hl7e6IHTBK&oh=00_AYBV88o19rgf3Mz7ZCnrxiq3U321UF3oAO3XEK065N1uxQ&oe=67219BEF',
+        fullName: 'Micheal Tran',
+        username: 'micheal',
+        email: ''
+      }
+    });
+  }
+
+  login() {
+
+  }
 }

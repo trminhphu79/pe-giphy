@@ -1,13 +1,13 @@
 <div class="top-bar">
     <div class="top-bar__left">
-        <pe-search (searchChanges)="searchChanges($event)"></pe-search>
+        <pe-search class="search" (searchChanges)="searchChanges($event)"></pe-search>
     </div>
     <div class="top-bar__menu-action">
         <ng-container *ngIf="userState.isLogin(); else noneLoginTemplate">
-            <button #btnElement tuiButton tuiChevron tuiDropdownOpen type="button"
+            <button class="dropdown-button" #btnElement tuiButton tuiChevron tuiDropdownOpen type="button"
                 [tuiDropdown]="actionDropdownTemplate" appearance="secondary">
                 <div class="top-bar__avatar">
-                    <img alt="avatar" [ngSrc]="userState.avatarUrl()" priority width="36" height="36" />
+                    <img alt="avatar" [ngSrc]="userState.avatarUrl()" priority width="34" height="34" />
                 </div>
                 <div class="truncate"> {{userState.fullName()}}</div>
             </button>
@@ -27,11 +27,11 @@
 
 <ng-template #noneLoginTemplate>
     <div class="top-bar__register-action">
-        <button appearance="secondary" tuiButton type="button" size="m">
-            Login
+        <button (click)="login()" appearance="secondary" tuiButton type="button" size="m">
+            {{'BUTTON.ACTION.LOGIN' | transloco}}
         </button>
-        <button appearance="secondary" tuiButton type="button" size="m">
-            Register
+        <button (click)="register()" appearance="secondary" tuiButton type="button" size="m">
+            {{'BUTTON.ACTION.REGISTER' | transloco}}
         </button>
     </div>
 </ng-template>
