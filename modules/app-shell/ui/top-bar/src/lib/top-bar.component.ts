@@ -1,30 +1,31 @@
 import { ChangeDetectionStrategy, Component, inject, signal, WritableSignal } from '@angular/core';
-import { NgForOf, NgIf } from '@angular/common';
+import { NgForOf, NgIf, NgOptimizedImage, NgStyle } from '@angular/common';
 import { TranslocoService } from "@jsverse/transloco";
 import { TranslocoModule } from "@jsverse/transloco";
 import { PeSearchComponent } from '@pe-giphy/ui/pe-search';
 import { PeSearchData } from '@pe-giphy/ui/pe-search';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { TUI_DARK_MODE, TUI_DARK_MODE_KEY, TuiButton, TuiDataList, TuiDropdown, TuiIcon } from '@taiga-ui/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { TUI_DARK_MODE, TuiButton, TuiDataList, TuiDropdown, TuiIcon } from '@taiga-ui/core';
 import { TuiChevron } from '@taiga-ui/kit';
-import { WA_LOCAL_STORAGE, WA_WINDOW } from '@ng-web-apis/common';
-
+import { AppStore } from "@pe-giphy/app-store";
 @Component({
   selector: 'pe-top-bar',
   standalone: true,
   imports: [
-    NgForOf,
     NgIf,
-    TranslocoModule,
-    TranslocoModule,
-    PeSearchComponent,
-    RouterLink,
-    RouterLinkActive,
+    NgForOf,
+    NgStyle,
+    TuiIcon,
     TuiButton,
     TuiChevron,
     TuiDataList,
     TuiDropdown,
-    TuiIcon,
+    RouterLink,
+    NgOptimizedImage,
+    TranslocoModule,
+    TranslocoModule,
+    PeSearchComponent,
+    RouterLinkActive,
   ],
   templateUrl: './top-bar.component.html',
   styleUrl: './top-bar.component.scss',
@@ -32,44 +33,48 @@ import { WA_LOCAL_STORAGE, WA_WINDOW } from '@ng-web-apis/common';
 })
 export class TopBarComponent {
 
-  private readonly key = inject(TUI_DARK_MODE_KEY);
-  private readonly storage = inject(WA_LOCAL_STORAGE);
-  private readonly media = inject(WA_WINDOW).matchMedia('(prefers-color-scheme: dark)');
+  private readonly router = inject(Router);
 
+  protected readonly appStore = inject(AppStore);
   protected readonly darkMode = inject(TUI_DARK_MODE);
+
+  protected userState = this.appStore.user;
 
   switchValue = signal(false);
   visible = false;
-  protected readonly items: WritableSignal<any[]> = signal([{
-    label: "COMMON.LABEL.PROFILE",
-  },
-  {
-    label: "COMMON.LABEL.CHANGE_THEME_LIGHT",
-  }, {
-    label: "COMMON.LABEL.LOGOUT",
-  }])
+  protected readonly items: WritableSignal<any[]> = signal([
+    {
+      pageLink: 'me',
+      label: "COMMON.LABEL.PROFILE",
+
+    },
+    {
+      pageLink: 'logout',
+      label: "COMMON.LABEL.LOGOUT",
+    }
+  ])
+
   translocoService: TranslocoService = inject(TranslocoService);
-
-  change(event: any) {
-    console.log("event: ", event)
-    this.translocoService.setDefaultLang(event?.target?.checked ? 'vi' : 'en')
-  }
-
   searchChanges(event: PeSearchData) {
     console.log("PeSearchData: ", event)
   }
 
-  perform(action: { label: string }, index: number) {
-    if (index == 1) {
-      action.label = action.label == 'COMMON.LABEL.CHANGE_THEME_LIGHT' ? 'COMMON.LABEL.CHANGE_THEME_DARK' : 'COMMON.LABEL.CHANGE_THEME_LIGHT'
-      this.darkMode.set(action.label == 'COMMON.LABEL.CHANGE_THEME_DARK');
-
+  clickAction(item: any) {
+    switch (item.pageLink) {
+      case 'me':
+        this.router.navigate([item.pageLink])
+        break;
+      case 'logout':
+        this.appStore.resetState({
+          user: {
+            avatarUrl: '',
+            username: '',
+            email: '',
+            fullName: '',
+            isLogin: false,
+          }
+        });
+        break;
     }
-  }
-
-  protected reset(): void {
-    this.darkMode.set(this.media.matches);
-    this.storage.removeItem(this.key);
-    console.log("reset: ", this.darkMode())
   }
 }

@@ -17,6 +17,7 @@
     "paths": {
       "@pe-giphy/app-config": ["modules/shared/app-config/src/index.ts"],
       "@pe-giphy/app-shell": ["modules/app-shell/feature/src/index.ts"],
+      "@pe-giphy/app-store": ["modules/shared/store/src/index.ts"],
       "@pe-giphy/channels-detail": [
         "modules/channels/feature/detail/src/index.ts"
       ],
@@ -29,7 +30,6 @@
       "@pe-giphy/language": ["modules/shared/language/src/index.ts"],
       "@pe-giphy/layout": ["modules/app-shell/ui/layout/src/index.ts"],
       "@pe-giphy/main-view": ["modules/app-shell/ui/main-view/src/index.ts"],
-    
       "@pe-giphy/my-gifs-routes": [
         "modules/my-gifs/feature/routes/src/index.ts"
       ],

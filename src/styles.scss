@@ -17,7 +17,7 @@ html {
 
 :root {
   // --background-baseline: 000 000 000;
-  // --background-highlight: 68 68 68;
+  --background-highlight: 68 68 68;
   // --text-baseline: 255 255 255;
   // --text-primary: 29 185 84;
   // --text-opacity-7: .7;
@@ -28,11 +28,11 @@ html {
   // --text-opacity: 1;
 
   --background-main: 22, 21, 21;
-  --background-linear-gradient-left: rgba(29,29,29,1);
-  --background-linear-gradient-right: rgba(29,29,29,1);
+  --background-linear-gradient-left: rgba(29, 29, 29, 1);
+  --background-linear-gradient-right: rgba(29, 29, 29, 1);
 
   --background-main-hover: 43, 43, 43;
-  --background-linear-gradient-hover: rgba(29,29,29,1);
+  --background-linear-gradient-hover: rgba(29, 29, 29, 1);
 
   --box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
 }
@@ -44,6 +44,7 @@ body {
   letter-spacing: .015em;
   // background-color: rgba(var(--background-baseline));
   color: var(--tui-text-primary);
+  overflow: hidden;
 }
 
 
@@ -138,7 +139,7 @@ h6 {
 /* Works on Firefox */
 * {
   scrollbar-width: 6px;
-  scrollbar-color: rgb(var(--background-highlight))
+  scrollbar-color: rgb(var(--background-highlight));
 }
 
 /* Works on Chrome, Edge, and Safari */
@@ -167,4 +168,10 @@ h6 {
   --tui-text-action: #1b1f3b;
   --tui-text-action-hover: #1b1f3bc1;
 
+}
+
+.t-root-scrollbar {
+  .t-bar_vertical {
+    display: none;
+  }
 }

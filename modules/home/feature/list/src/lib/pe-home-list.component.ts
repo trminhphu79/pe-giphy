@@ -12,5 +12,5 @@ import { PeSearchComponent } from "@pe-giphy/ui/pe-search";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PeHomeListComponent {
-  items = signal([1, 2, 3, 4, 5, 6, 7, 8, 9])
+  items = signal([1, 2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5, 6, 7, 8, 9])
 }

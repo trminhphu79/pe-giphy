@@ -1,5 +1,8 @@
 .pe-home {
-    padding: 20px 0;
+    padding: 0px 0px 20px 0;
+    overflow-y: auto;
+    height: calc(100% - 66px);
+    margin-top: 12px;
 }
 
 .pe-card-list {

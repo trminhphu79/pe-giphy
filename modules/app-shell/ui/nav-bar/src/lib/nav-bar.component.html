@@ -4,8 +4,8 @@
     </div>
     <tui-data-list role="menu" appearance="secondary">
         @for (item of MENU_ITEMS(); track item.label; let idx = $index, e = $even) {
-        <a tuiLink tuiOption routerLinkActive [routerLink]="item?.pageLink" (click)="onClicked(item, idx)"
-            [class.active]="item?.active">
+        <a tuiLink tuiOption routerLinkActive="active-link" [routerLink]="item?.pageLink"
+            [routerLinkActiveOptions]="{exact: true}">
             <span>
                 <tui-icon icon="{{item.icon}}"></tui-icon>
                 <span style="margin-left: 12px;">{{ item.label | transloco }}</span>
