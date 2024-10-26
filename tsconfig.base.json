@@ -26,14 +26,19 @@
         "modules/channels/feature/routes/src/index.ts"
       ],
       "@pe-giphy/directives": ["modules/shared/directives/src/index.ts"],
+      "@pe-giphy/home-data-access": ["modules/home/data-access/src/index.ts"],
       "@pe-giphy/home-routes": ["modules/home/feature/routes/src/index.ts"],
       "@pe-giphy/language": ["modules/shared/language/src/index.ts"],
       "@pe-giphy/layout": ["modules/app-shell/ui/layout/src/index.ts"],
       "@pe-giphy/main-view": ["modules/app-shell/ui/main-view/src/index.ts"],
+      "@pe-giphy/models": ["modules/shared/data-access/models/src/index.ts"],
       "@pe-giphy/my-gifs-routes": [
         "modules/my-gifs/feature/routes/src/index.ts"
       ],
       "@pe-giphy/nav-bar": ["modules/app-shell/ui/nav-bar/src/index.ts"],
+      "@pe-giphy/pe-giphy-api": [
+        "modules/shared/data-access/pe-giphy-api/src/index.ts"
+      ],
       "@pe-giphy/pe-home-detail": ["modules/home/feature/detail/src/index.ts"],
       "@pe-giphy/pe-home-list": ["modules/home/feature/list/src/index.ts"],
       "@pe-giphy/pipes": ["modules/shared/pipes/src/index.ts"],

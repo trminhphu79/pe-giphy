@@ -1,17 +1,18 @@
-import { ApplicationConfig, provideZoneChangeDetection, isDevMode, importProvidersFrom } from '@angular/core';
-import { provideRouter, withViewTransitions } from '@angular/router';
+import { ApplicationConfig, provideZoneChangeDetection, isDevMode, importProvidersFrom, APP_INITIALIZER } from '@angular/core';
+import { provideRouter, withComponentInputBinding, withViewTransitions } from '@angular/router';
 import { appShellRoutes } from '@pe-giphy/app-shell';
 import { provideServiceWorker } from '@angular/service-worker';
 import { provideHttpClient } from '@angular/common/http';
 import { provideMultipleLanguage } from '@pe-giphy/language';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import {NG_EVENT_PLUGINS} from '@taiga-ui/event-plugins';
-
+import { NG_EVENT_PLUGINS } from '@taiga-ui/event-plugins';
+import { environment } from 'src/environments/environment';
+import { providerAppConfigInitialize } from "@pe-giphy/app-config";
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(appShellRoutes, withViewTransitions()),
+    provideRouter(appShellRoutes, withViewTransitions(), withComponentInputBinding()),
     provideHttpClient(),
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
@@ -19,6 +20,7 @@ export const appConfig: ApplicationConfig = {
     }),
     provideAnimations(),
     provideMultipleLanguage(),
-    NG_EVENT_PLUGINS
+    NG_EVENT_PLUGINS,
+    providerAppConfigInitialize(environment)
   ],
 };

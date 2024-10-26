@@ -1,1 +1,61 @@
-<div class="pe-card"></div>
+<div class="pe-card {{wrapperClass}}">
+    <div class="thumbnail-wrapper">
+        <!-- Use custom thumbnail template if provided; otherwise, show default thumbnail -->
+        <ng-container *ngIf="externalThumbnailTemplate; else defaultThumbnail">
+            <ng-container *ngTemplateOutlet="externalThumbnailTemplate; context: { $implicit: item }"></ng-container>
+        </ng-container>
+
+        <!-- Default thumbnail template -->
+        <ng-template #defaultThumbnail>
+            <img class="thumbnail" alt="{{ item.alt_text }}" *ngIf="item.images.fixed_width.webp" priority
+                [ngSrc]="item.images.fixed_width.webp" [width]="item.images.fixed_width.width"
+                [height]="item.images.fixed_width.height" (load)="loading.set(false)" />
+        </ng-template>
+
+        <!-- Overlay section -->
+        <div class="overlay">
+            <div class="overlay__content">
+                <span class="title" (click)="titleClick.emit(item)">
+                    <ng-container *ngIf="externalOverlayTitleTemplate; else defaultOverlayTitle">
+                        <ng-container
+                            *ngTemplateOutlet="externalOverlayTitleTemplate; context: { $implicit: item }"></ng-container>
+                    </ng-container>
+                </span>
+                <div class="actions">
+                    <ng-container *ngIf="externalOverlayActionTemplate; else defaultOverlayAction">
+                        <ng-container
+                            *ngTemplateOutlet="externalOverlayActionTemplate; context: { $implicit: item }"></ng-container>
+                    </ng-container>
+                </div>
+            </div>
+
+
+            <!-- Default overlay template -->
+            <ng-template #defaultOverlayAction>
+                <!-- <button class="action-btn bookmark"></button> -->
+                <button class="action-btn like" (click)="favoriteClick.emit(item)"></button>
+            </ng-template>
+
+            <ng-template #defaultOverlayTitle>
+                {{item.title}}
+            </ng-template>
+        </div>
+    </div>
+
+    <!-- Footer section -->
+    <div class="pe-card-footer">
+        <ng-container *ngIf="externalFooterTemplate; else defaultFooter">
+            <ng-container *ngTemplateOutlet="externalFooterTemplate; context: { $implicit: item }"></ng-container>
+        </ng-container>
+
+        <!-- Default footer template -->
+        <ng-template #defaultFooter>
+            <div class="pe-card-footer__left">
+                <span class="author-name">{{ item.user?.display_name || ('COMMON.LABEL.UNKNOWN_AUTHOR' | transloco)}}</span>
+            </div>
+            <div class="pe-card-footer__right">
+                <span class="stats">💖 94 &nbsp;&nbsp; 👀 8.1k</span>
+            </div>
+        </ng-template>
+    </div>
+</div>

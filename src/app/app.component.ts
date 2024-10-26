@@ -4,6 +4,7 @@ import { WA_LOCAL_STORAGE, WA_WINDOW } from '@ng-web-apis/common';
 import { TUI_DARK_MODE, TUI_DARK_MODE_KEY, TuiButton, TuiOption, TuiIcon } from '@taiga-ui/core';
 import { TuiRoot } from '@taiga-ui/core';
 import { TuiDropdown } from '@taiga-ui/core';
+import { APP_CONFIG } from '@pe-giphy/app-config';
 
 @Component({
   standalone: true,
@@ -19,7 +20,13 @@ export class AppComponent {
   private readonly media = inject(WA_WINDOW).matchMedia('(prefers-color-scheme: dark)');
 
   protected readonly darkMode = inject(TUI_DARK_MODE);
+  protected readonly appConfig = inject(APP_CONFIG);
 
+  ngAfterViewInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+    console.log('appConfig: ', this.appConfig)
+  }
   protected reset(): void {
     this.darkMode.set(this.media.matches);
     this.storage.removeItem(this.key);

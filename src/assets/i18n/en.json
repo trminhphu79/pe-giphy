@@ -19,5 +19,6 @@
   "NOTIFICATION.ACTION.DELETE_FAIL": "Delete fail",
   "NOTIFICATION.ACTION.DELETE_SUCCESS": "Delete fail",
   "SEARCH.PLACE_HOLDER.SEARCH_GIF": "Search gifs, videos or stickers...",
-  "SEARCH.PLACE_HOLDER.SEARCH_USERNAME": "@username to search channels..."
+  "SEARCH.PLACE_HOLDER.SEARCH_USERNAME": "@username to search channels...",
+  "COMMON.LABEL.UNKNOWN_AUTHOR":"Unknown author"
 }

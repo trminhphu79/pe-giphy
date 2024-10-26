@@ -1,7 +1,9 @@
 <div class="pe-home">
     <div class="pe-card-list">
         @for(item of items(); track item){
-        <pe-card></pe-card>
+        <pe-card [item]="item" [wrapperClass]="'pe-card-custom-wrapper'" (titleClick)="titleClick($event)"
+            (favoriteClick)="favoriteClick($event)">
+        </pe-card>
         }
     </div>
 </div>

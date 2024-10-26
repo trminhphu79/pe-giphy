@@ -1,1 +1,3 @@
-export * from './lib/app-config/app-config.component';
+export * from './lib/di';
+export * from './lib/model';
+export * from './lib/provider';

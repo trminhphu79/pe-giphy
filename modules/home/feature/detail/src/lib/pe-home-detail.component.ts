@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,4 +9,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './pe-home-detail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PeHomeDetailComponent {}
+export class PeHomeDetailComponent {
+  @Input() set slug(input: string) {
+    console.log("Input id: ", input)
+  }
+}
