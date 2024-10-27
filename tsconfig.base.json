@@ -36,11 +36,19 @@
         "modules/my-gifs/feature/routes/src/index.ts"
       ],
       "@pe-giphy/nav-bar": ["modules/app-shell/ui/nav-bar/src/index.ts"],
+      "@pe-giphy/pe-decorator": ["modules/shared/decorator/src/index.ts"],
       "@pe-giphy/pe-giphy-api": [
         "modules/shared/data-access/pe-giphy-api/src/index.ts"
       ],
       "@pe-giphy/pe-home-detail": ["modules/home/feature/detail/src/index.ts"],
       "@pe-giphy/pe-home-list": ["modules/home/feature/list/src/index.ts"],
+      "@pe-giphy/pe-image-loader": [
+        "modules/shared/ui/pe-image-loader/src/index.ts"
+      ],
+      "@pe-giphy/pe-image-loder": [
+        "modules/shared/ui/pe-image-loder/src/index.ts"
+      ],
+      "@pe-giphy/pe-loading": ["modules/shared/ui/pe-loading/src/index.ts"],
       "@pe-giphy/pipes": ["modules/shared/pipes/src/index.ts"],
       "@pe-giphy/self": ["modules/my-gifs/feature/self/src/index.ts"],
       "@pe-giphy/shared": ["modules/shared/src/index.ts"],

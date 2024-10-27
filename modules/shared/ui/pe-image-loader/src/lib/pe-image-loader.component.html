@@ -1,0 +1,7 @@
+<div #divIntersectContainer class="image-container">
+    <div *ngIf="loading()">
+        <pe-loading> </pe-loading>
+    </div>
+    <img #imageEl class="thumbnail" alt="{{ altText() }}" [width]="width()" priority [height]="height()"
+        [attr.data-imagesrc]="imageSrc()" class="thumbnail" alt="Image" />
+</div>

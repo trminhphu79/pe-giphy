@@ -3,7 +3,7 @@ import { APP_CONFIG } from "@pe-giphy/app-config";
 import { HttpClient } from "@angular/common/http"
 import { SearchOptions, TrendingOptions } from "@pe-giphy/models";
 import { MultiResponse, SingleResponse } from 'giphy-api';
-
+import { DefaultParams } from "@pe-giphy/pe-decorator"
 @Injectable({
     providedIn: 'root'
 })
@@ -15,17 +15,17 @@ export class GifApiService {
         return this.httpClient.get<MultiResponse>(this.appConfig.apiUrl, {})
     }
 
-    searchTrending(options: Partial<TrendingOptions>) {
+    @DefaultParams({ bundle: 'messaging_non_clips', rating: 'g' })
+    searchTrending(params: Partial<TrendingOptions>) {
         return this.httpClient.get<MultiResponse>(this.appConfig.apiUrl + this.appConfig.apiVersion + "/gifs/trending", {
-            params: {
-                ...options,
-                api_key: this.appConfig.apiKey,
-                bundle: 'messaging_non_clips',
-                rating: 'g'
-            }
+            params: { ...params }
         })
     }
 
     searchSuggestion() {
+    }
+
+    getDetailGif(id: string) {
+        return this.httpClient.get<SingleResponse>(this.appConfig.apiUrl + this.appConfig.apiVersion + `/gifs/${id}`)
     }
 }

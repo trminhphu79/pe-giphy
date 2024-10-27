@@ -8,3 +8,25 @@ tui-dropdown {
         }
     }
 }
+
+
+tui-dialogs section.t-dialog {
+    // min-block-size: 85% !important;
+    border-radius: 12px !important;
+}
+
+tui-dialogs section.t-dialog {
+    height: 94% !important;
+}
+
+
+button {
+    &[tuiButton],
+    &[tuiIconButton] {
+        border-radius: 30px !important;
+    }
+}
+
+[tuiSkeleton]._skeleton{
+    border-radius: 8px !important;
+}

@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UtilsComponent } from './utils.component';
+import { PeImageLoaderComponent } from './pe-image-loader.component';
 
-describe('UtilsComponent', () => {
-  let component: UtilsComponent;
-  let fixture: ComponentFixture<UtilsComponent>;
+describe('PeImageLoaderComponent', () => {
+  let component: PeImageLoaderComponent;
+  let fixture: ComponentFixture<PeImageLoaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UtilsComponent],
+      imports: [PeImageLoaderComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(UtilsComponent);
+    fixture = TestBed.createComponent(PeImageLoaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

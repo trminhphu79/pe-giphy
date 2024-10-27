@@ -5,7 +5,8 @@ import { TrendingOptions } from "@pe-giphy/models";
 
 
 export type HomeState = {
-    trendingGifs: GIFObject[],
     loading: boolean,
-    filterModel: TrendingOptions
+    detailGif: null|GIFObject,
+    filterModel: TrendingOptions,
+    trendingGifs: GIFObject[],
 }

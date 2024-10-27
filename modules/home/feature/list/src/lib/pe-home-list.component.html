@@ -1,9 +1,14 @@
-<div class="pe-home">
-    <div class="pe-card-list">
-        @for(item of items(); track item){
-        <pe-card [item]="item" [wrapperClass]="'pe-card-custom-wrapper'" (titleClick)="titleClick($event)"
-            (favoriteClick)="favoriteClick($event)">
-        </pe-card>
-        }
-    </div>
+<div class="pe-home" #element>
+    <cdk-virtual-scroll-viewport style="height: 100%;" #viewport [itemSize]="itemSize()" autosize [appendOnly]="true">
+        <div class="pe-card-list">
+            <pe-card *cdkVirtualFor="let item of items(); trackBy: trackById" [item]="item"
+                [wrapperClass]="'pe-card-custom-wrapper'" (titleClick)="titleClick($event)"
+                (favoriteClick)="favoriteClick($event)">
+            </pe-card>
+        </div>
+    </cdk-virtual-scroll-viewport>
 </div>
+
+<ng-template #template let-observer>
+    <pe-home-detail [viewMode]="true" [slug]="gifId()"></pe-home-detail>
+</ng-template>

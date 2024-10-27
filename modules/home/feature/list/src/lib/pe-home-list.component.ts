@@ -1,45 +1,89 @@
-import { ChangeDetectionStrategy, Component, inject, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, ViewChild, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PeCardComponent } from "@pe-giphy/ui/pe-card";
 import { PeSearchComponent } from "@pe-giphy/ui/pe-search";
+import { PeHomeDetailComponent } from "@pe-giphy/pe-home-detail";
 import { GifApiService } from "@pe-giphy/pe-giphy-api";
-import { GIFObject } from 'giphy-api';
 import { Router } from '@angular/router';
+import { HomeStore } from '@pe-giphy/home-data-access';
+import { CdkVirtualScrollViewport, ScrollingModule } from '@angular/cdk/scrolling';
+import { map, pairwise, filter, tap, throttleTime, switchMap } from 'rxjs';
+import { TuiButton, TuiDialog, TuiDialogService } from '@taiga-ui/core';
+import type { TuiDialogContext } from '@taiga-ui/core';
+import type { PolymorpheusContent } from '@taiga-ui/polymorpheus';
+import { Location } from '@angular/common';
+
 @Component({
   selector: 'pe-pe-home-list',
   standalone: true,
-  imports: [CommonModule, PeCardComponent, PeSearchComponent],
+  imports: [CommonModule, PeCardComponent, PeSearchComponent, ScrollingModule, TuiButton, PeHomeDetailComponent],
   templateUrl: './pe-home-list.component.html',
   styleUrl: './pe-home-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PeHomeListComponent {
-  items: WritableSignal<GIFObject[]> = signal([]);
 
-  gifService = inject(GifApiService);
-  router = inject(Router);
+  @ViewChild(CdkVirtualScrollViewport)
+  private viewport!: CdkVirtualScrollViewport;
+  @ViewChild('template') detailDialog!: PeHomeDetailComponent;
+
+  private readonly store = inject(HomeStore);
+  private readonly router = inject(Router);
+  private readonly dialogs = inject(TuiDialogService);
+  private readonly location = inject(Location);
+  private readonly gifService = inject(GifApiService);
+
+  protected readonly items = this.store.trendingGifs;
+  protected readonly gifId = signal('');
+  protected readonly loading = this.store.loading;
+  protected readonly itemSize = signal(20);
+  protected readonly throttleTime = signal(100);
+
 
   ngAfterViewInit(): void {
-    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-    //Add 'implements AfterViewInit' to the class.
-    this.gifService.searchTrending({
-      offset: 0,
-      limit: 50,
-    }).subscribe((r) => {
-      console.log("trending data: ", r)
-      this.items.set(r.data);
-    })
+    this.viewport.elementScrolled()
+      .pipe(
+        map(() => this.viewport.measureScrollOffset('bottom')),
+        pairwise(),
+        filter(([y1, y2]) => y2 < y1 && y2 < 100),
+        filter(() => !this.loading()),
+        throttleTime(this.throttleTime()),
+        tap(() => {
+          this.store.loadMore$(null);
+        }),
+      ).subscribe()
   }
 
   favoriteClick(event: any) {
-    console.log("favoriteClick", event)
   }
 
   titleClick(event: any) {
     if (!event?.id) {
       return
     }
-    console.log("titleClick", event)
-    this.router.navigateByUrl(`/gif/${event.id}`)
+    this.gifId.set(event.id);
+    this.location.go(`/gif/${event.id}`);
+    this.showDialog(this.detailDialog);
+  }
+
+  protected showDialog(content: PolymorpheusContent<TuiDialogContext>): void {
+    this.dialogs.open(content, {
+      size: 'page',
+      closeable: true,
+      dismissible: true,
+    }).subscribe({
+      complete: () => {
+        this.store.resetDetail();
+        this.location.go(`/`);
+      },
+    });
+  }
+
+  onLoadMore() {
+    console.log("Loadmore trigger...")
+  }
+
+  trackById(id: any, item: any) {
+    return id
   }
 }

@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DirectivesComponent } from './directives.component';
+import { PeLoadingComponent } from './pe-loading.component';
 
-describe('DirectivesComponent', () => {
-  let component: DirectivesComponent;
-  let fixture: ComponentFixture<DirectivesComponent>;
+describe('PeLoadingComponent', () => {
+  let component: PeLoadingComponent;
+  let fixture: ComponentFixture<PeLoadingComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DirectivesComponent],
+      imports: [PeLoadingComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(DirectivesComponent);
+    fixture = TestBed.createComponent(PeLoadingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

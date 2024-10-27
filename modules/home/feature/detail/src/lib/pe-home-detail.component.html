@@ -1,1 +1,26 @@
-<p>pe-home-detail works!</p>
+<div class="pe-home-detail" [class.dialog-mode]="viewMode()">
+    <div class="pe-home-detail__header" [tuiSkeleton]="loading()">
+        <span class="title">{{item()?.title}}</span>
+    </div>
+    <div class="pe-home-detail__body">
+        <div class="left">
+            <div class="author-avatar">
+                <tui-avatar [tuiSkeleton]="loading()" [src]="item()?.user?.avatar_url || defaultAuthorAvatar()"
+                    width="50" height="50" />
+            </div>
+            <div class="author-info">
+                <div [tuiSkeleton]="loading()">Extej UI UX Design Agency</div>
+                <div [tuiSkeleton]="loading()">14:22 12/05/2024</div>
+            </div>
+        </div>
+        <div class="right">
+            <button appearance="primary" iconStart="@tui.heart" size="m" tuiButton type="button">
+                {{'BUTTON.ACTION.ADD_FAVORITE' | transloco}}
+            </button>
+        </div>
+    </div>
+    <div class="pe-home-detail__related-gif" [tuiSkeleton]="loading()">
+        <img [src]="item()?.images?.original?.webp" priority="" />
+    </div>
+
+</div>
