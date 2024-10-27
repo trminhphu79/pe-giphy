@@ -43,6 +43,13 @@
                 gap: 4px;
                 min-width: 200px;
 
+                .user-name {
+                    &:hover {
+                        cursor: pointer;
+                        text-decoration: underline;
+                    }
+                }
+
                 div {
                     height: 20px;
                     min-width: 100%;

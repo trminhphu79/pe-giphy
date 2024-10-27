@@ -8,5 +8,9 @@ export type AppState = {
     },
     language: string,
     themeMode: string,
+    defaultAsset: {
+        avatarUrl: string,
+        backgroundUrl: string
+    }
 }
 

@@ -9,6 +9,6 @@
     </cdk-virtual-scroll-viewport>
 </div>
 
-<ng-template #template let-observer>
+<ng-template #template let-observer *ngIf="showDialogDetail()">
     <pe-home-detail [viewMode]="true" [slug]="gifId()"></pe-home-detail>
 </ng-template>

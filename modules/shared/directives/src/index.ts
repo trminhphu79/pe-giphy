@@ -1,1 +1,1 @@
-export * from './lib/infinity-loader.directive';
+export * from './lib/background-image-loader.directive';

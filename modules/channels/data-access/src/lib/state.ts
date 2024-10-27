@@ -2,6 +2,8 @@ import { ChannelState } from "./model";
 
 export const initialChannelState: ChannelState = {
     loading: false,
+    detailChannel: null,
+    relatedGifs: [],
     filterModel: {
         offset: 0,
         limit: 30,

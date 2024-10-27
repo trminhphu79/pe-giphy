@@ -1,0 +1,16 @@
+<div class="pe-channel-info" [tuiSkeleton]="backgroundLoading()" appBackgroundImageLoad
+    [backgroundImageUrl]="backgroundImg()" (imageLoaded)="onBackgroundImageLoad()">
+</div>
+<div class="author-avatar">
+    <img [tuiSkeleton]="authorAvatarLoading()" width="100" height="100" [src]="authorAvatar()" priority
+        (load)="authorAvatarLoading.set(false)" />
+    <div class="author-common-info">
+        <div class="user-name">{{item()?.display_name}}</div>
+        <div class="bio">{{item()?.user?.description}}</div>
+        <div class="reaction">
+            <span class="follower">44,1480 followers</span>
+            <span class="following">44 following</span>
+            <span class="like">1480 likes</span>
+        </div>
+    </div>
+</div>

@@ -5,7 +5,7 @@
         </ng-container>
         <ng-template #defaultThumbnail>
             <img class="thumbnail" alt="{{ item.alt_text }}" *ngIf="item.images.fixed_width.webp"
-                [ngSrc]="item.images.fixed_width.webp" [width]="imgWidth()" priority [height]="imgHeight()"
+                [src]="item.images.fixed_width.webp" [width]="imgWidth()" [height]="imgHeight()" priority
                 (load)="imgLoading()" />
         </ng-template>
         <div class="overlay">

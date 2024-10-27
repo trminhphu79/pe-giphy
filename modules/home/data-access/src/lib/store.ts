@@ -58,7 +58,6 @@ export const HomeStore = signalStore(
                 switchMap((id) => {
                     return gifApi.getDetailGif(id)
                 }),
-                delay(200),
                 tap((response) => patchState(store, { loading: false, detailGif: response.data })),
             )
         ),
@@ -66,13 +65,11 @@ export const HomeStore = signalStore(
             pipe(
                 tap(() => patchState(store, { loading: true })),
                 switchMap((keyword: string) => {
-                    console.log("keyword: ", keyword);
                     return gifApi.search({
                         ...store.filterModel(),
                         q: keyword
                     })
                 }),
-                delay(200),
                 tap((response) => patchState(store, { loading: false, trendingGifs: response.data })),
             )
         ),
@@ -88,7 +85,6 @@ export const HomeStore = signalStore(
     })),
     withHooks({
         onInit(store) {
-            console.log("onInit: ", store);
             store.loadTrending$(null)
         },
         onDestroy(store) {

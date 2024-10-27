@@ -7,13 +7,17 @@ import { provideMultipleLanguage } from '@pe-giphy/language';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { NG_EVENT_PLUGINS } from '@taiga-ui/event-plugins';
 import { environment } from 'src/environments/environment';
-import { providerAppConfigInitialize } from "@pe-giphy/app-config";
+import { APP_CONFIG, providerAppConfigInitialize } from "@pe-giphy/app-config";
 import { apiKeyIntorceptor } from "@pe-giphy/utils";
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(appShellRoutes, withComponentInputBinding()),
+    provideRouter(
+      appShellRoutes,
+      withViewTransitions(),
+      withComponentInputBinding()
+    ),
     provideHttpClient(
       withInterceptors([apiKeyIntorceptor])
     ),
@@ -24,6 +28,9 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideMultipleLanguage(),
     NG_EVENT_PLUGINS,
-    providerAppConfigInitialize(environment),
+    {
+      provide: APP_CONFIG,
+      useValue: environment
+    }
   ],
 };

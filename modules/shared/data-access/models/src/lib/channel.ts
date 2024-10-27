@@ -4,6 +4,7 @@ export type UserChannel = {
     url: string;
     display_name: string;
     slug: string;
+    banner_image:string;
     type: string;
     content_type: string;
     has_children: boolean;

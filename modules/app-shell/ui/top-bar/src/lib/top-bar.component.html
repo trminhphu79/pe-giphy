@@ -5,10 +5,15 @@
     </div>
     <div class="top-bar__menu-action">
         <ng-container *ngIf="userState.isLogin(); else noneLoginTemplate">
+            <button class="upload-icon" appearance="secondary" iconStart="@tui.upload" size="m" tuiButton type="button">
+                {{'BUTTON.ACTION.UPLOAD' | transloco}}
+            </button>
+
+
             <button class="dropdown-button" #btnElement tuiButton tuiChevron tuiDropdownOpen type="button"
                 [tuiDropdown]="actionDropdownTemplate" appearance="secondary">
                 <div class="top-bar__avatar">
-                    <img alt="avatar" [ngSrc]="userState.avatarUrl()" priority width="34" height="34" />
+                    <img alt="avatar" [src]="userState.avatarUrl()" priority width="34" height="34" />
                 </div>
                 <div class="truncate"> {{userState.fullName()}}</div>
             </button>

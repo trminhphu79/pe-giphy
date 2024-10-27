@@ -20,11 +20,11 @@ export class NavBarComponent {
       icon: 'house',
       pageLink: '/'
     },
-    {
-      label: 'MENU.CHANNELS',
-      icon: 'tv-minimal-play',
-      pageLink: '/channels'
-    },
+    // {
+    //   label: 'MENU.CHANNELS',
+    //   icon: 'tv-minimal-play',
+    //   pageLink: '/channels'
+    // },
     {
       label: 'MENU.MY_GIFS',
       icon: 'gift',

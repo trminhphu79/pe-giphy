@@ -10,117 +10,90 @@
     "importHelpers": true,
     "target": "es2022",
     "module": "esnext",
-    "lib": [
-      "es2020",
-      "dom"
-    ],
+    "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@pe-giphy/app-config": [
-        "modules/shared/app-config/src/index.ts"
-      ],
-      "@pe-giphy/app-shell": [
-        "modules/app-shell/feature/src/index.ts"
-      ],
-      "@pe-giphy/app-store": [
-        "modules/shared/store/src/index.ts"
+      "@pe-giphy/app-config": ["modules/shared/app-config/src/index.ts"],
+      "@pe-giphy/app-shell": ["modules/app-shell/feature/src/index.ts"],
+      "@pe-giphy/app-store": ["modules/shared/store/src/index.ts"],
+      "@pe-giphy/channel-action-tabs": [
+        "modules/channels/ui/channel-action-tabs/src/index.ts"
       ],
       "@pe-giphy/channels-detail": [
         "modules/channels/feature/detail/src/index.ts"
       ],
-      "@pe-giphy/channels-list": [
-        "modules/channels/feature/list/src/index.ts"
-      ],
+      "@pe-giphy/channels-list": ["modules/channels/feature/list/src/index.ts"],
       "@pe-giphy/channels-routes": [
         "modules/channels/feature/routes/src/index.ts"
+      ],
+      "@pe-giphy/channels/channel-collections": [
+        "modules/channels/ui/channel-collections/src/index.ts"
+      ],
+      "@pe-giphy/channels/channel-followers": [
+        "modules/channels/ui/channel-followers/src/index.ts"
+      ],
+      "@pe-giphy/channels/channel-info": [
+        "modules/channels/ui/channel-info/src/index.ts"
       ],
       "@pe-giphy/channels/data-access": [
         "modules/channels/data-access/src/index.ts"
       ],
-      "@pe-giphy/directives": [
-        "modules/shared/directives/src/index.ts"
-      ],
-      "@pe-giphy/home-data-access": [
-        "modules/home/data-access/src/index.ts"
-      ],
-      "@pe-giphy/home-routes": [
-        "modules/home/feature/routes/src/index.ts"
-      ],
-      "@pe-giphy/language": [
-        "modules/shared/language/src/index.ts"
-      ],
-      "@pe-giphy/layout": [
-        "modules/app-shell/ui/layout/src/index.ts"
-      ],
-      "@pe-giphy/main-view": [
-        "modules/app-shell/ui/main-view/src/index.ts"
-      ],
-      "@pe-giphy/models": [
-        "modules/shared/data-access/models/src/index.ts"
+      "@pe-giphy/directives": ["modules/shared/directives/src/index.ts"],
+      "@pe-giphy/home-data-access": ["modules/home/data-access/src/index.ts"],
+      "@pe-giphy/home-routes": ["modules/home/feature/routes/src/index.ts"],
+      "@pe-giphy/home-test": ["modules/home/ui/test/src/index.ts"],
+      "@pe-giphy/language": ["modules/shared/language/src/index.ts"],
+      "@pe-giphy/layout": ["modules/app-shell/ui/layout/src/index.ts"],
+      "@pe-giphy/main-view": ["modules/app-shell/ui/main-view/src/index.ts"],
+      "@pe-giphy/models": ["modules/shared/data-access/models/src/index.ts"],
+      "@pe-giphy/my-gifs-data-access": [
+        "modules/my-gifs/data-access/src/index.ts"
       ],
       "@pe-giphy/my-gifs-routes": [
         "modules/my-gifs/feature/routes/src/index.ts"
       ],
-      "@pe-giphy/nav-bar": [
-        "modules/app-shell/ui/nav-bar/src/index.ts"
+      "@pe-giphy/nav-bar": ["modules/app-shell/ui/nav-bar/src/index.ts"],
+      "@pe-giphy/pe-action-tabs": [
+        "modules/shared/ui/pe-action-tabs/src/index.ts"
       ],
-      "@pe-giphy/pe-decorator": [
-        "modules/shared/decorator/src/index.ts"
+      "@pe-giphy/pe-author-info": [
+        "modules/shared/ui/pe-author-info/src/index.ts"
       ],
+      "@pe-giphy/pe-collections": [
+        "modules/shared/ui/pe-collections/src/index.ts"
+      ],
+      "@pe-giphy/pe-decorator": ["modules/shared/decorator/src/index.ts"],
       "@pe-giphy/pe-giphy-api": [
         "modules/shared/data-access/pe-giphy-api/src/index.ts"
       ],
-      "@pe-giphy/pe-home-detail": [
-        "modules/home/feature/detail/src/index.ts"
-      ],
-      "@pe-giphy/pe-home-list": [
-        "modules/home/feature/list/src/index.ts"
-      ],
+      "@pe-giphy/pe-home-detail": ["modules/home/feature/detail/src/index.ts"],
+      "@pe-giphy/pe-home-list": ["modules/home/feature/list/src/index.ts"],
       "@pe-giphy/pe-image-loader": [
         "modules/shared/ui/pe-image-loader/src/index.ts"
       ],
       "@pe-giphy/pe-image-loder": [
         "modules/shared/ui/pe-image-loder/src/index.ts"
       ],
-      "@pe-giphy/pe-loading": [
-        "modules/shared/ui/pe-loading/src/index.ts"
+      "@pe-giphy/pe-list-channels": [
+        "modules/channels/ui/channel-list/src/index.ts"
       ],
-      "@pe-giphy/pipes": [
-        "modules/shared/pipes/src/index.ts"
+      "@pe-giphy/pe-loading": ["modules/shared/ui/pe-loading/src/index.ts"],
+      "@pe-giphy/pipes": ["modules/shared/pipes/src/index.ts"],
+      "@pe-giphy/self": ["modules/my-gifs/feature/self/src/index.ts"],
+      "@pe-giphy/shared": ["modules/shared/src/index.ts"],
+      "@pe-giphy/test": [
+        "modules/channels/ui/modules/home/ui/test/src/index.ts"
       ],
-      "@pe-giphy/self": [
-        "modules/my-gifs/feature/self/src/index.ts"
-      ],
-      "@pe-giphy/shared": [
-        "modules/shared/src/index.ts"
-      ],
-      "@pe-giphy/test2": [
-        "modules/home/ui/test/src/index.ts"
-      ],
-      "@pe-giphy/top-bar": [
-        "modules/app-shell/ui/top-bar/src/index.ts"
-      ],
-      "@pe-giphy/ui": [
-        "modules/shared/ui/src/index.ts"
-      ],
-      "@pe-giphy/ui/pe-card": [
-        "modules/shared/ui/pe-card/src/index.ts"
-      ],
-      "@pe-giphy/ui/pe-search": [
-        "modules/shared/ui/pe-search/src/index.ts"
-      ],
-      "@pe-giphy/upload": [
-        "modules/my-gifs/feature/upload/src/index.ts"
-      ],
-      "@pe-giphy/utils": [
-        "modules/shared/utils/src/index.ts"
-      ]
+      "@pe-giphy/test2": ["modules/home/ui/test/src/index.ts"],
+      "@pe-giphy/top-bar": ["modules/app-shell/ui/top-bar/src/index.ts"],
+      "@pe-giphy/ui": ["modules/shared/ui/src/index.ts"],
+      "@pe-giphy/ui/pe-card": ["modules/shared/ui/pe-card/src/index.ts"],
+      "@pe-giphy/ui/pe-search": ["modules/shared/ui/pe-search/src/index.ts"],
+      "@pe-giphy/upload": ["modules/my-gifs/feature/upload/src/index.ts"],
+      "@pe-giphy/utils": ["modules/shared/utils/src/index.ts"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }

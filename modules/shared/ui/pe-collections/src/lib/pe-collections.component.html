@@ -1,0 +1,6 @@
+<div class="pe-channel-collections">
+    <pe-card [item]="item" *ngFor="let item of dataSource()" (titleClick)="titleClick.emit($event)"
+        (favoriteClick)="favoriteClick.emit($event)">
+        <ng-template #footerTemplate></ng-template>
+    </pe-card>
+</div>

@@ -1,0 +1,67 @@
+.pe-channel-info {
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 8px;
+    position: relative;
+    min-height: 340px;
+}
+
+.author-avatar {
+    padding-bottom: 24px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+        border: 2px solid var(--background-highlight);
+        margin-top: -40px;
+        z-index: 1;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .author-common-info {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
+
+
+        .user-name {
+            font-size: 1.4rem;
+            margin-top: 12px;
+        }
+
+        .bio {
+            text-align: center;
+            padding-top: 12px;
+            font-size: 1rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            white-space: normal;
+            font-size: var(--tui-font-text-lg);
+
+        }
+
+        .reaction {
+            padding-top: 12px;
+            gap: 10px;
+            display: flex;
+            justify-content: center;
+
+            span {
+                font-size: 0.8rem;
+            }
+        }
+
+    }
+}

@@ -10,7 +10,7 @@ import { CdkVirtualScrollViewport, ScrollingModule } from '@angular/cdk/scrollin
 import { map, pairwise, filter, tap, throttleTime, switchMap } from 'rxjs';
 import { TuiButton, TuiDialog, TuiDialogService } from '@taiga-ui/core';
 import type { TuiDialogContext } from '@taiga-ui/core';
-import type { PolymorpheusContent } from '@taiga-ui/polymorpheus';
+import { type PolymorpheusContent } from '@taiga-ui/polymorpheus';
 import { Location } from '@angular/common';
 
 @Component({
@@ -27,17 +27,18 @@ export class PeHomeListComponent {
   private viewport!: CdkVirtualScrollViewport;
   @ViewChild('template') detailDialog!: PeHomeDetailComponent;
 
+
   private readonly store = inject(HomeStore);
   private readonly router = inject(Router);
   private readonly dialogs = inject(TuiDialogService);
   private readonly location = inject(Location);
-  private readonly gifService = inject(GifApiService);
 
   protected readonly items = this.store.trendingGifs;
   protected readonly gifId = signal('');
   protected readonly loading = this.store.loading;
   protected readonly itemSize = signal(20);
   protected readonly throttleTime = signal(100);
+  protected readonly showDialogDetail = signal(true);
 
 
   ngAfterViewInit(): void {
@@ -77,10 +78,6 @@ export class PeHomeListComponent {
         this.location.go(`/`);
       },
     });
-  }
-
-  onLoadMore() {
-    console.log("Loadmore trigger...")
   }
 
   trackById(id: any, item: any) {

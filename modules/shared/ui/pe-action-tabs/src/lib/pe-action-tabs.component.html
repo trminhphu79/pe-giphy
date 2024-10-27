@@ -1,0 +1,7 @@
+<tui-tabs-with-more underline="#fff" class="tabs" [activeItemIndex]="activeItemIndex">
+    <ng-container *ngFor="let tab of tabs()">
+        <button *tuiItem tuiTab type="button" (click)="onClick(tab)">
+            {{ tab }}
+        </button>
+    </ng-container>
+</tui-tabs-with-more>

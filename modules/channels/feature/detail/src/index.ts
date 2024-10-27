@@ -1,1 +1,1 @@
-export * from './lib/channels-detail/channels-detail.component';
+export * from './lib/channels-detail.component';

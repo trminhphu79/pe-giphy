@@ -39,8 +39,8 @@ export class PeCardComponent {
   titleClick = output();
   favoriteClick = output();
 
-  imgWidth = computed(() => this.item.images.fixed_width.width);
-  imgHeight = computed(() => this.item.images.fixed_width.height);
+  imgWidth = computed(() => this.item?.images?.fixed_width?.width);
+  imgHeight = computed(() => this.item?.images?.fixed_width?.height);
 
   imgLoading() {
     this.loading.set(false)
@@ -48,7 +48,7 @@ export class PeCardComponent {
 
   like(event: any) {
     event.stopPropagation();
-    this.favoriteClick.emit();
+    this.favoriteClick.emit(this.item);
   }
 
 }
