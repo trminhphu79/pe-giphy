@@ -1,13 +1,13 @@
-import { ChangeDetectionStrategy, Component, inject, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal, WritableSignal } from '@angular/core';
 import { NgForOf, NgIf, NgOptimizedImage, NgStyle } from '@angular/common';
-import { TranslocoService } from "@jsverse/transloco";
 import { TranslocoModule } from "@jsverse/transloco";
-import { PeSearchComponent } from '@pe-giphy/ui/pe-search';
-import { PeSearchData } from '@pe-giphy/ui/pe-search';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { PeSearchComponent, PeSearchType } from '@pe-giphy/ui/pe-search';
+import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { TUI_DARK_MODE, TuiButton, TuiDataList, TuiDropdown, TuiIcon } from '@taiga-ui/core';
 import { TuiChevron } from '@taiga-ui/kit';
 import { AppStore } from "@pe-giphy/app-store";
+import { HomeStore } from "@pe-giphy/home-data-access";
+import { ChannelStore } from "@pe-giphy/channels/data-access";
 @Component({
   selector: 'pe-top-bar',
   standalone: true,
@@ -37,11 +37,26 @@ export class TopBarComponent {
 
   protected readonly appStore = inject(AppStore);
   protected readonly darkMode = inject(TUI_DARK_MODE);
+  protected readonly homeStore = inject(HomeStore);
+  protected readonly channelStore = inject(ChannelStore);
 
-  protected userState = this.appStore.user;
+  protected readonly loading = computed(() => {
+    return this.homeStore.loading() || this.channelStore.loading();
+  })
 
-  switchValue = signal(false);
-  visible = false;
+  protected readonly suggestionItems = computed(() => {
+    if (this.currentSearchMode() == PeSearchType.CHANNEL) {
+      return this.channelStore.suggestionChannels()
+    }
+    return this.homeStore.suggestionTags()
+  })
+
+  protected readonly suggestionTags = this.homeStore.suggestionTags;
+
+  protected readonly userState = this.appStore.user;
+  private readonly currentSearchMode: WritableSignal<PeSearchType> = signal(PeSearchType.GIF);
+  private readonly currentPage: WritableSignal<'CHANNEL' | 'HOME'> = signal('HOME');
+
   protected readonly items: WritableSignal<any[]> = signal([
     {
       pageLink: 'me',
@@ -54,9 +69,63 @@ export class TopBarComponent {
     }
   ])
 
-  translocoService: TranslocoService = inject(TranslocoService);
-  searchChanges(event: PeSearchData) {
-    console.log("PeSearchData: ", event)
+
+  searchChanges(event: string) {
+    switch (this.getSearchForPage()) {
+      case PeSearchType.CHANNEL:
+        console.log("searchChanges in channel page")
+        this.searchInChannelPage(event)
+        break;
+      case PeSearchType.GIF:
+        console.log("searchChanges in home page")
+        this.searchInHomePage(event)
+        break;
+    }
+  }
+
+  searchInChannelPage(keyword: string) { }
+
+  searchInHomePage(keyword: string) {
+    if (this.currentSearchMode() == PeSearchType.CHANNEL) {
+      if (!keyword) {
+        this.homeStore.clearTrendingData();
+        // this.channelStore.loadTrending$(null);
+        return;
+      }
+
+      if (keyword) {
+        // this.homeStore.searchGifs$(keyword);
+      }
+    } else {
+      if (!keyword) {
+        this.homeStore.clearTrendingData();
+        this.homeStore.loadTrending$(null);
+        return;
+      }
+
+      if (keyword) {
+        this.homeStore.searchGifs$(keyword);
+      }
+    }
+
+  }
+
+  keywordChanges(keyword: string) {
+    if (!keyword) {
+      this.homeStore.clearSuggestionTags();
+      this.channelStore.clearSuggestionChannels();
+    }
+    const isSearchChannel = keyword?.[0] == '@';
+    this.currentSearchMode.set(isSearchChannel ? PeSearchType.CHANNEL : PeSearchType.GIF);
+    if (isSearchChannel) {
+      keyword = keyword.replace("@", '');
+      this.channelStore.searchChannels$(keyword);
+    } else {
+      if (keyword) {
+        this.homeStore.searchSuggestionTags$(keyword);
+        return;
+      }
+    }
   }
 
   clickAction(item: any) {
@@ -93,5 +162,9 @@ export class TopBarComponent {
 
   login() {
 
+  }
+
+  getSearchForPage() {
+    return window.location?.pathname?.includes?.('channels') ? PeSearchType.CHANNEL : PeSearchType.GIF
   }
 }

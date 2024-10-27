@@ -10,8 +10,14 @@ export interface BaseOptions {
 
 export interface SearchOptions extends BaseOptions {
     q: string;
+    bundle: Bundle
 }
 
 export type TrendingOptions = {
     bundle: Bundle
 } & BaseOptions;
+
+
+export type SuggestionTagResponse = {
+    data: Array<{ name: string, analytics_response_payload: string }>
+}

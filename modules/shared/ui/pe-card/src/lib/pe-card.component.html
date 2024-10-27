@@ -1,15 +1,13 @@
 <div class="pe-card {{wrapperClass}}" (click)="titleClick.emit(item)">
-    <div class="thumbnail-wrapper">
+    <div class="thumbnail-wrapper" [tuiSkeleton]="loading()">
         <ng-container *ngIf="externalThumbnailTemplate; else defaultThumbnail">
             <ng-container *ngTemplateOutlet="externalThumbnailTemplate; context: { $implicit: item }"></ng-container>
         </ng-container>
-
         <ng-template #defaultThumbnail>
             <img class="thumbnail" alt="{{ item.alt_text }}" *ngIf="item.images.fixed_width.webp"
                 [ngSrc]="item.images.fixed_width.webp" [width]="imgWidth()" priority [height]="imgHeight()"
                 (load)="imgLoading()" />
         </ng-template>
-
         <div class="overlay">
             <div class="overlay__content">
                 <span class="title">
@@ -25,12 +23,9 @@
                     </ng-container>
                 </div>
             </div>
-
-
             <ng-template #defaultOverlayAction>
-                <input tuiLike="var(--tui-status-negative)" type="checkbox" (click)="favoriteClick.emit(item)" />
+                <input tuiLike="var(--tui-status-negative)" type="checkbox" (click)="like($event)" />
             </ng-template>
-
             <ng-template #defaultOverlayTitle>
                 {{item.title}}
             </ng-template>

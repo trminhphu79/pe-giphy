@@ -4,8 +4,8 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { PeLoadingComponent } from '@pe-giphy/pe-loading';
 import { PeImageLoaderComponent } from '@pe-giphy/pe-image-loader';
 import { TuiButton, TuiIcon } from '@taiga-ui/core';
-import { TuiAvatar } from '@taiga-ui/kit';
-import {TuiLike} from '@taiga-ui/kit';
+import { TuiAvatar, TuiSkeleton } from '@taiga-ui/kit';
+import { TuiLike } from '@taiga-ui/kit';
 
 @Component({
   selector: 'pe-card',
@@ -14,6 +14,7 @@ import {TuiLike} from '@taiga-ui/kit';
     TuiIcon,
     TuiLike,
     TuiButton,
+    TuiSkeleton,
     CommonModule,
     TranslocoModule,
     NgOptimizedImage,
@@ -42,8 +43,12 @@ export class PeCardComponent {
   imgHeight = computed(() => this.item.images.fixed_width.height);
 
   imgLoading() {
-    console.log('loading')
     this.loading.set(false)
+  }
+
+  like(event: any) {
+    event.stopPropagation();
+    this.favoriteClick.emit();
   }
 
 }

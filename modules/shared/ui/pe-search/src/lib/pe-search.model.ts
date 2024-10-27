@@ -6,6 +6,7 @@ export type PeSearchData = {
 }
 
 
-export type Channels = {
-
+export type SuggestionItem = {
+    name: string,
+    avatarUrl: string
 }

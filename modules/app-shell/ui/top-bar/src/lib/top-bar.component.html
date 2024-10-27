@@ -1,6 +1,7 @@
 <div class="top-bar">
     <div class="top-bar__left">
-        <pe-search class="search" (searchChanges)="searchChanges($event)"></pe-search>
+        <pe-search class="search" [loading]="loading()" [suggestionItems]="suggestionItems()"
+            (searchChanges)="searchChanges($event)" (keywordChanges)="keywordChanges($event)"></pe-search>
     </div>
     <div class="top-bar__menu-action">
         <ng-container *ngIf="userState.isLogin(); else noneLoginTemplate">
@@ -13,8 +14,7 @@
             </button>
 
             <ng-template #actionDropdownTemplate>
-                <tui-data-list [ngStyle]="{'width': btnElement.offsetWidth + 'px' }" role="menu" appearance="secondary"
-                    [style.width.rem]="11">
+                <tui-data-list [ngStyle]="{'width': btnElement.offsetWidth + 'px' }" role="menu" appearance="secondary">
                     <a (click)="clickAction(item)" *ngFor="let item of items(); let i = index" role="menuitemradio"
                         tuiOption>
                         {{ item.label | transloco }}

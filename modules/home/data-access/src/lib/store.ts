@@ -29,16 +29,27 @@ export const HomeStore = signalStore(
                         offset: store.filterModel().offset + 20
                     };
                     patchState(store, { loading: true, filterModel: newFilter })
-                    console.log("Store state; ", store.loading());
-                    console.log("start time; ", new Date().getTime());
                 }),
                 switchMap(() => {
                     return gifApi.searchTrending(store.filterModel())
                 }),
                 tap((response) => {
-                    console.log("end time; ", new Date().getTime());
                     patchState(store, { loading: false, trendingGifs: store.trendingGifs().concat(response.data) })
                 }),
+            )
+        ),
+        searchSuggestionTags$: rxMethod<string>(
+            pipe(
+                tap(() => patchState(store, { loading: true })),
+                switchMap((keyword: string) => {
+                    return gifApi.searchSuggestionTags({
+                        ...store.filterModel(),
+                        q: keyword
+                    })
+                }),
+                tap((response) => {
+                    patchState(store, { loading: false, suggestionTags: response.data.map((item) => ({ avatarUrl: '', name: item.name })) });
+                })
             )
         ),
         loadDetail$: rxMethod<string>(
@@ -47,12 +58,32 @@ export const HomeStore = signalStore(
                 switchMap((id) => {
                     return gifApi.getDetailGif(id)
                 }),
-                delay(500),
+                delay(200),
                 tap((response) => patchState(store, { loading: false, detailGif: response.data })),
             )
         ),
+        searchGifs$: rxMethod<string>(
+            pipe(
+                tap(() => patchState(store, { loading: true })),
+                switchMap((keyword: string) => {
+                    console.log("keyword: ", keyword);
+                    return gifApi.search({
+                        ...store.filterModel(),
+                        q: keyword
+                    })
+                }),
+                delay(200),
+                tap((response) => patchState(store, { loading: false, trendingGifs: response.data })),
+            )
+        ),
+        clearSuggestionTags() {
+            patchState(store, { loading: false, suggestionTags: [] })
+        },
+        clearTrendingData() {
+            patchState(store, { loading: false, trendingGifs: [] })
+        },
         resetDetail() {
-            patchState(store, { detailGif: null })
+            patchState(store, { loading: false, detailGif: null })
         }
     })),
     withHooks({

@@ -5,14 +5,19 @@
 </div>
 
 <ng-template #content>
-    <tui-data-list role="menu" [ngStyle]="{'width': inputSearch.offsetWidth + 'px' }" tuiDataListDropdownManager>
-        <button type="button" class="item" *ngFor="let item of dataSource()" tuiOption
+    <tui-data-list role="menu" [ngStyle]="{'width': inputSearch.offsetWidth + 'px' }" tuiDataListDropdownManager
+        [className]="getClassEmptyContent()" [emptyContent]="emptyContent">
+        <button type="button" class="item" *ngFor="let item of suggestionItems()" tuiOption
             (click)="onSelect(item); dropdown.toggle(false)">
-            <tui-avatar size="s" [src]="item.avatarUrl">
+            <tui-avatar [tuiSkeleton]="loading()" *ngIf="item?.avatarUrl" size="s" [src]="item?.avatarUrl">
             </tui-avatar>
-            <span [tuiHighlight]="searchControl().value" [tuiHighlightColor]="'#666'">
-                {{ item.label }}
+            <span [tuiSkeleton]="loading()" [tuiHighlight]="searchControl().value" [tuiHighlightColor]="'#666'">
+                {{ item.name }}
             </span>
         </button>
     </tui-data-list>
- </ng-template>
+</ng-template>
+
+<ng-template #emptyContent>
+    {{'COMMON.LABEL.EMPTY_DATA' | transloco}}
+</ng-template>
