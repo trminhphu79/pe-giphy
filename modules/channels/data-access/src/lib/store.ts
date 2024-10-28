@@ -66,7 +66,7 @@ export const ChannelStore = signalStore(
                     }
                     const payload = {
                         q: '@' + response.data?.[0].user.username,
-                        limit: 50,
+                        limit: 200,
                     }
                     return gifApi.search(payload)
                 }),
