@@ -13,7 +13,7 @@ export type UserChannel = {
     is_private: boolean;
     is_live: boolean;
     featured_gif: GifDetails;
-    user: User;
+    user: Partial<User>;
     ancestors: any[]; // Adjust type if needed
     tags: any[];       // Adjust type if needed
     syncable_tags: any[]; // Adjust type if needed

@@ -52,6 +52,7 @@ export class GifApiService {
             formData.append('username', payload.username);
             formData.append('tags', payload.tags);
             formData.append('is_hidden', '0');
+            formData.append('title', 'Hello im a cat cute');
             return this.httpClient.post<UploadGifResponse>(
                 `${this.appConfig.uploadUrl}${this.appConfig.apiVersion}/gifs`,
                 formData

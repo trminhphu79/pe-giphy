@@ -30,11 +30,12 @@ export const SelfStore = signalStore(
                     ])
                 }),
                 tap(([gifRes, channelRes]) => {
-                    patchState(store, { loading: false, relatedGifs: gifRes.data, detailChannel: channelRes.data?.[0] })
+                    console.log("channelRes: ", channelRes);
+                    console.log("gifRes: ", gifRes);
                 }),
             )
         ),
-        loadGifByIds: (ids: string[]) => {
+        loadGifByIds: (ids: string[] = getState(store).uploadGifIds) => {
             patchState(store, { loading: true });
             return gifApi.getGifByIds({ ids: ids.join(",") }).pipe(
                 tap((response) => {

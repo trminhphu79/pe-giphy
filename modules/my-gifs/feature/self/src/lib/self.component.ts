@@ -37,17 +37,17 @@ export class SelfComponent {
   router = inject(Router);
   appStore = inject(AppStore);
 
-  protected readonly item = this.appStore.user;
   protected readonly loading = this.store.loading;
   protected readonly tabActions = this.store.tabActions;
   protected readonly selectedList = this.store.selectedList;
+  protected readonly detailChannel = this.store.detailChannel;
 
   titleClick(event: GIFObject) {
     this.router.navigateByUrl(`gif/${event.id}`).then()
   }
 
   ngOnInit() {
-    this.store.loadMe$(null);
+    this.store.loadGifByIds().subscribe()
   }
 
   selectedTabChanges(event: any) {

@@ -29,7 +29,7 @@ export const ChannelStore = signalStore(
                 tap((response) => {
                     patchState(store, {
                         loading: false,
-                        suggestionChannels: response.data.map((item) => ({ ...item, username: item.user.username, name: item.display_name, avatarUrl: item.user.avatar_url }))
+                        suggestionChannels: response.data.map((item) => ({ ...item, username: item.user.username as string, name: item.display_name as string, avatarUrl: item.user.avatar_url as string }))
                     });
                 })
             )

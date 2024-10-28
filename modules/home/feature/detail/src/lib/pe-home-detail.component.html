@@ -4,15 +4,14 @@
     </div>
     <div class="pe-home-detail__body">
         <div class="left">
-            <div class="author-avatar">
-                <img (click)="onAuthorTitleClick(item()?.user?.username)" [tuiSkeleton]="avatarLoading()"
-                    (load)="avatarLoading.set(false)" [ngSrc]="defaultAuthorAvatar()" width="50" height="50"
-                     />
+            <div class="author-avatar" [tuiSkeleton]="avatarLoading()">
+                <img (click)="onAuthorTitleClick(item()?.user?.username)"
+                    (load)="avatarLoading.set(false)" [ngSrc]="defaultAuthorAvatar()" width="50" height="50" />
             </div>
             <div class="author-info">
                 <div [tuiSkeleton]="loading()">
-                    <span class="user-name"
-                        (click)="onAuthorTitleClick(item()?.user?.username)">{{authorName() | transloco}}</span>
+                    <span class="user-name" (click)="onAuthorTitleClick(item()?.user?.username)">{{authorName() |
+                        transloco}}</span>
                 </div>
                 <div [tuiSkeleton]="loading()">
                     <span>{{item()?.import_datetime | date: 'HH:mm dd/MM/yyyy'}}</span>

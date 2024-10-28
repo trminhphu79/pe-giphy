@@ -9,7 +9,7 @@ export type SelfState = {
     filterModel: BaseOptions,
     relatedGifs: GIFObject[],
     uploadGifIds: string[],
-    detailChannel: UserChannel | null,
+    detailChannel: Partial<UserChannel> | null,
     tabActions: { value: string, label: string }[],
     favoriteGifs: Array<GIFObject>
 }
