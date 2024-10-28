@@ -3,7 +3,7 @@
         <form [formGroup]="uploadForm">
             <p>
                 <tui-input formControlName="sourceImageUrl" tuiTextfieldSize="m" [tuiTextfieldCleaner]="true"
-                    tuiHintContent="{{acceptHint() | transloco}}"
+                    tuiHintContent="{{'COMMON.LABEL.ENTER_VALID_GIF_LINK' | transloco}}"
                     [tuiTextfieldCustomContent]="uploadForm.controls.sourceImageUrl.valid && uploadForm.controls.sourceImageUrl.value ? successTemplate : ''">
                     {{'COMMON.LABEL.SOURCE_IMG_PLACEHOLDER' | transloco}}
                     <input tuiTextfieldLegacy type="text" />
@@ -11,7 +11,7 @@
             </p>
             <p>
                 <tui-input formControlName="sourcePostUrl" tuiTextfieldSize="m" [tuiTextfieldCleaner]="true"
-                    tuiHintContent="{{acceptHint() | transloco}}"
+                    tuiHintContent="{{'COMMON.LABEL.ENTER_VALID_LINK' | transloco}}"
                     [tuiTextfieldCustomContent]="uploadForm.controls.sourcePostUrl.valid && uploadForm.controls.sourcePostUrl.value ? successTemplate : ''">
                     {{'COMMON.LABEL.SOURCE_POST_PLACEHOLDER' | transloco}}
                     <input tuiTextfieldLegacy type="text" />

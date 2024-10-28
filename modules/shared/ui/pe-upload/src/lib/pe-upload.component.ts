@@ -34,7 +34,6 @@ import { urlValidator, urlValidatorMedia } from '@pe-giphy/utils';
 export class PeUploadComponent {
 
   accept = input('.gif,.webp');
-  acceptHint = input('COMMON.LABEL.ENTER_VALID_GIF_LINK');
 
   protected readonly control = new FormControl<TuiFileLike | null>(null);
   protected readonly uploadForm = new FormGroup({
