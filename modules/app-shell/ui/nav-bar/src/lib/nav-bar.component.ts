@@ -4,11 +4,12 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TuiDataList } from '@taiga-ui/core';
 import { TuiIcon } from '@taiga-ui/core';
+import { TuiAvatar } from '@taiga-ui/kit';
 
 @Component({
   selector: 'pe-nav-bar',
   standalone: true,
-  imports: [CommonModule, TranslocoModule, TuiDataList, RouterLink, TuiIcon, RouterLinkActive],
+  imports: [CommonModule, TuiAvatar, TranslocoModule, TuiDataList, RouterLink, TuiIcon, RouterLinkActive],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

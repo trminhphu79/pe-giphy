@@ -1,6 +1,9 @@
 <div class="nav-bar">
     <div class="nav-bar__logo">
-        <span class="nav-bar__title">PeGiphy</span>
+        <span class="nav-bar__title">
+            <tui-avatar src="assets/icons/main-logo.webp"></tui-avatar>
+            Pe Giphy
+        </span>
     </div>
     <tui-data-list role="menu" appearance="secondary">
         @for (item of MENU_ITEMS(); track item.label; let idx = $index, e = $even) {
