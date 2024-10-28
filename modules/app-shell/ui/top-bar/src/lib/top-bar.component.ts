@@ -1,13 +1,18 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, signal, ViewChild, WritableSignal } from '@angular/core';
 import { NgForOf, NgIf, NgOptimizedImage, NgStyle } from '@angular/common';
 import { TranslocoModule } from "@jsverse/transloco";
 import { PeSearchComponent, PeSearchType } from '@pe-giphy/ui/pe-search';
 import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { TUI_DARK_MODE, TuiButton, TuiDataList, TuiDropdown, TuiIcon } from '@taiga-ui/core';
+import { TUI_DARK_MODE, TuiButton, TuiDataList, TuiDialogContext, TuiDialogService, TuiDropdown, TuiIcon } from '@taiga-ui/core';
 import { TuiChevron } from '@taiga-ui/kit';
 import { AppStore } from "@pe-giphy/app-store";
 import { HomeStore } from "@pe-giphy/home-data-access";
 import { ChannelStore } from "@pe-giphy/channels/data-access";
+import { PeUploadComponent } from "@pe-giphy/ui/pe-upload";
+import { type PolymorpheusContent } from '@taiga-ui/polymorpheus';
+import { SelfStore } from "@pe-giphy/my-gifs/data-access";
+import { UploadGifOptions } from '@pe-giphy/models';
+
 @Component({
   selector: 'pe-top-bar',
   standalone: true,
@@ -26,6 +31,7 @@ import { ChannelStore } from "@pe-giphy/channels/data-access";
     TranslocoModule,
     PeSearchComponent,
     RouterLinkActive,
+    PeUploadComponent,
   ],
   templateUrl: './top-bar.component.html',
   styleUrl: './top-bar.component.scss',
@@ -34,10 +40,12 @@ import { ChannelStore } from "@pe-giphy/channels/data-access";
 export class TopBarComponent {
 
   private readonly router = inject(Router);
+  private readonly dialogs = inject(TuiDialogService);
 
   protected readonly appStore = inject(AppStore);
   protected readonly darkMode = inject(TUI_DARK_MODE);
   protected readonly homeStore = inject(HomeStore);
+  protected readonly selfStore = inject(SelfStore);
   protected readonly channelStore = inject(ChannelStore);
 
   protected readonly loading = computed(() => {
@@ -69,6 +77,8 @@ export class TopBarComponent {
     }
   ])
 
+  @ViewChild('uploadCompTempRef') uploadCompTempRef!: ElementRef<PeUploadComponent>;
+  @ViewChild(PeUploadComponent) peComponent!: PeUploadComponent;
 
   searchChanges(event: string) {
     switch (this.getSearchForPage()) {
@@ -166,5 +176,35 @@ export class TopBarComponent {
 
   getSearchForPage() {
     return window.location?.pathname?.includes?.('channels') ? PeSearchType.CHANNEL : PeSearchType.GIF
+  }
+
+  protected upload() {
+    this.showDialog(this.uploadCompTempRef);
+  }
+
+  protected showDialog(content: PolymorpheusContent<TuiDialogContext>): void {
+    this.dialogs.open(content, {
+      size: 'auto',
+      closeable: true,
+      dismissible: true,
+      label: 'Upload Your Animations',
+    }).subscribe({
+      complete: () => {
+        // this.location.go(`/`);
+      },
+    });
+  }
+
+  protected submitUpload(event: UploadGifOptions) {
+    console.log("Event", event);
+    this.selfStore.uploadGif$(event);
+  }
+
+  protected cancel() {
+
+  }
+
+  protected save() {
+    console.log("uploadComponent: ", this.peComponent.formValue)
   }
 }

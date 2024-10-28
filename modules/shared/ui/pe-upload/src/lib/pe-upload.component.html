@@ -1,0 +1,71 @@
+<div class="pe-upload">
+    <div class="pe-upload__form">
+        <form [formGroup]="uploadForm">
+            <p>
+                <tui-input formControlName="username" tuiTextfieldSize="m" [tuiTextfieldCleaner]="true">
+                    Enter username
+                    <input tuiTextfieldLegacy type="text" />
+                </tui-input>
+            </p>
+            <p>
+                <tui-input formControlName="sourceImageUrl" tuiTextfieldSize="m" [tuiTextfieldCleaner]="true"
+                    tuiHintContent="Enter the valid url"
+                    [tuiTextfieldCustomContent]="uploadForm.controls.sourceImageUrl.valid && uploadForm.controls.sourceImageUrl.value ? successTemplate : ''">
+                    Enter source image url
+                    <input tuiTextfieldLegacy type="text" />
+                </tui-input>
+            </p>
+            <p>
+                <tui-input formControlName="sourcePostUrl" tuiTextfieldSize="m" [tuiTextfieldCleaner]="true"
+                    tuiHintContent="Enter the valid url"
+                    [tuiTextfieldCustomContent]="uploadForm.controls.sourcePostUrl.valid && uploadForm.controls.sourcePostUrl.value ? successTemplate : ''">
+                    Enter source post url
+                    <input tuiTextfieldLegacy type="text" />
+                </tui-input>
+            </p>
+            <tui-input-tag formControlName="tags" [tuiTextfieldLabelOutside]="true" tuiTextfieldSize="m">
+                Enter tags
+            </tui-input-tag>
+        </form>
+    </div>
+    <label tuiInputFiles class="pe-upload__container">
+        <input tuiInputFiles [formControl]="control" />
+        <ng-template let-dragged>
+            <div *ngIf="dragged; else base" class="content">
+                <tui-avatar appearance="secondary" src="@tui.droplet" />
+                <div>
+                    {{'COMMON.LABEL.IDIOM_UPLOAD' | transloco}}
+                    <br />
+                    <br />
+                </div>
+            </div>
+            <ng-template #base>
+                <div class="content">
+                    <tui-avatar appearance="secondary" src="@tui.cloud-upload" />
+                    <div>
+                        {{'COMMON.LABEL.DRAG_AND_DROP' | transloco}}
+                        <a tuiLink>
+                            {{'COMMON.LABEL.CLICK_TO_UPLOAD' | transloco}}
+                        </a>
+                    </div>
+                </div>
+            </ng-template>
+        </ng-template>
+    </label>
+
+    <div class="pe-upload__uploaded-imgs">
+        <div class="item">Img 1</div>
+        <div class="item">Img 1</div>
+        <div class="item">Img 1</div>
+        <div class="item">Img 1</div>
+        <div class="item">Img 1</div>
+        <div class="item">Img 1</div>
+        <div class="item">Img 1</div>
+        <div class="item">Img 1</div>
+        <div class="item">Img 1</div>
+    </div>
+</div>
+
+<ng-template #successTemplate>
+    <tui-icon icon="@tui.check" class="success tui-space_left-3" />
+</ng-template>

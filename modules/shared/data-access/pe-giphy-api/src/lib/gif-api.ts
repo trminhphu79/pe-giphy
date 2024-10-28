@@ -1,7 +1,7 @@
 import { inject, Injectable } from "@angular/core"
 import { APP_CONFIG } from "@pe-giphy/app-config";
 import { HttpClient } from "@angular/common/http"
-import { SearchOptions, TrendingOptions, SuggestionTagResponse } from "@pe-giphy/models";
+import { SearchOptions, TrendingOptions, SuggestionTagResponse, UploadGifOptions } from "@pe-giphy/models";
 import { MultiResponse, SingleResponse } from 'giphy-api';
 import { DefaultParams } from "@pe-giphy/pe-decorator"
 @Injectable({
@@ -34,5 +34,24 @@ export class GifApiService {
 
     getDetailGif(id: string) {
         return this.httpClient.get<SingleResponse>(this.appConfig.apiUrl + this.appConfig.apiVersion + `/gifs/${id}`)
+    }
+
+    uploadGif(payload: UploadGifOptions) {
+        let completedPayload: FormData | UploadGifOptions;
+        if (payload.file) {
+            completedPayload = new FormData();
+            completedPayload.append('file', payload.file);
+            completedPayload.append('api_key', this.appConfig.apiKey);
+            completedPayload.append('username', payload.username);
+            completedPayload.append('tags', payload.tags);
+        } else {
+            completedPayload = {
+                source_post_url: payload.source_post_url,
+                source_image_url: payload.source_image_url,
+                username: payload.username,
+                tags: payload.tags
+            }
+        }
+        return this.httpClient.post<SingleResponse>(this.appConfig.uploadUrl + this.appConfig.apiVersion + `/gifs`, completedPayload)
     }
 }

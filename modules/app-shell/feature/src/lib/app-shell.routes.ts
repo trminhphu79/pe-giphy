@@ -16,7 +16,7 @@ export const appShellRoutes: Route[] = [
             },
             {
                 path: 'me',
-                loadChildren: () => import('@pe-giphy/my-gifs-routes').then((c) => c.myGifsRoutes)
+                loadChildren: () => import('@pe-giphy/my-gifs/routes').then((c) => c.myGifsRoutes)
             },
         ]
     }

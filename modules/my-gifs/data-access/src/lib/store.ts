@@ -4,7 +4,7 @@ import { inject } from "@angular/core";
 import { ChannelApiService, GifApiService } from "@pe-giphy/pe-giphy-api";
 import { rxMethod } from "@ngrx/signals/rxjs-interop";
 import { forkJoin, pipe, switchMap, tap } from "rxjs";
-import { SearchOptions } from "@pe-giphy/models";
+import { SearchOptions, UploadGifOptions } from "@pe-giphy/models";
 
 export const SelfStore = signalStore(
     { providedIn: "root" },
@@ -34,6 +34,14 @@ export const SelfStore = signalStore(
                 }),
             )
         ),
+        uploadGif$: rxMethod<UploadGifOptions>(
+            pipe(
+                tap(),
+                switchMap((payload) => {
+                    return gifApi.uploadGif(payload)
+                })
+            )
+        )
     })),
     withHooks({
         onInit() {

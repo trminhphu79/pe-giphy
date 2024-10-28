@@ -13,7 +13,6 @@
   "BUTTON.ACTION.LOGIN": "Login",
   "BUTTON.ACTION.REGISTER": "Register",
   "BUTTON.ACTION.ADD_FAVORITE": "Add Favorite",
-  
   "NOTIFICATION.ACTION.UPLOAD_SUCCESS": "Upload success",
   "NOTIFICATION.ACTION.UPLOAD_FAIL": "Upload fail",
   "NOTIFICATION.ACTION.DELETE_FAIL": "Delete fail",
@@ -23,5 +22,10 @@
   "COMMON.LABEL.UNKNOWN_AUTHOR": "Unknown Author",
   "COMMON.LABEL.UNKNOWN_TITLE": "Unknown Title",
   "COMMON.LABEL.UNKNOWN_TIME": "Unknown Time",
-  "COMMON.LABEL.EMPTY_DATA": "Emty data found"
+  "COMMON.LABEL.EMPTY_DATA": "Emty data found",
+  "COMMON.LABEL.IDIOM_UPLOAD": "Drop it like it's hot!",
+  "COMMON.LABEL.DRAG_AND_DROP": "Drag and drop file here or",
+  "COMMON.LABEL.CLICK_TO_UPLOAD": "click to upload",
+  "COMMON.LABEL.UPLOAD_YOUR_ANIMATIONS": "Upload your gifs or animations",
+  "BUTTON.ACTION.CANCEL": "Cancel"
 }

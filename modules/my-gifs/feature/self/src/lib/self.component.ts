@@ -6,7 +6,7 @@ import { PeActionTabsComponent } from '@pe-giphy/pe-action-tabs';
 import { BackgroundImageLoadDirective } from '@pe-giphy/directives';
 import { TuiIcon, TuiButton, TuiDropdown, TuiDataList } from '@taiga-ui/core';
 import { TuiTabs, TuiAvatar, TuiChevron, TuiSkeleton } from '@taiga-ui/kit';
-import { SelfStore } from '@pe-giphy/my-gifs-data-access';
+import { SelfStore } from '@pe-giphy/my-gifs/data-access';
 import { AppStore } from '@pe-giphy/app-store';
 @Component({
   selector: 'pe-self',

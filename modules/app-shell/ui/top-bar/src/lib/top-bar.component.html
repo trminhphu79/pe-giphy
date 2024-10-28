@@ -5,7 +5,8 @@
     </div>
     <div class="top-bar__menu-action">
         <ng-container *ngIf="userState.isLogin(); else noneLoginTemplate">
-            <button class="upload-icon" appearance="secondary" iconStart="@tui.upload" size="m" tuiButton type="button">
+            <button class="upload-icon" (click)="upload()" appearance="secondary" iconStart="@tui.upload" size="m"
+                tuiButton type="button">
                 {{'BUTTON.ACTION.UPLOAD' | transloco}}
             </button>
 
@@ -37,6 +38,22 @@
         </button>
         <button (click)="register()" appearance="secondary" tuiButton type="button" size="m">
             {{'BUTTON.ACTION.REGISTER' | transloco}}
+        </button>
+    </div>
+</ng-template>
+
+
+<ng-template #uploadCompTempRef let-observer>
+    <div class="pe-upload-wrapper">
+        <pe-upload #peComponent (formSubmit)="submitUpload($event)"></pe-upload>
+    </div>
+    <div class="pe-upload-actions">
+        <button (click)="cancel()" appearance="secondary" tuiButton type="button" size="m" iconStart="@tui.x">
+            {{'BUTTON.ACTION.CANCEL' | transloco}}
+        </button>
+        <button class="upload-icon" (click)="save()" appearance="primary" iconStart="@tui.upload" size="m" tuiButton
+            type="button">
+            {{'BUTTON.ACTION.UPLOAD' | transloco}}
         </button>
     </div>
 </ng-template>

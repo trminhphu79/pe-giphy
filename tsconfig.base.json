@@ -48,10 +48,10 @@
       "@pe-giphy/layout": ["modules/app-shell/ui/layout/src/index.ts"],
       "@pe-giphy/main-view": ["modules/app-shell/ui/main-view/src/index.ts"],
       "@pe-giphy/models": ["modules/shared/data-access/models/src/index.ts"],
-      "@pe-giphy/my-gifs-data-access": [
+      "@pe-giphy/my-gifs/data-access": [
         "modules/my-gifs/data-access/src/index.ts"
       ],
-      "@pe-giphy/my-gifs-routes": [
+      "@pe-giphy/my-gifs/routes": [
         "modules/my-gifs/feature/routes/src/index.ts"
       ],
       "@pe-giphy/nav-bar": ["modules/app-shell/ui/nav-bar/src/index.ts"],
@@ -92,7 +92,8 @@
       "@pe-giphy/ui/pe-card": ["modules/shared/ui/pe-card/src/index.ts"],
       "@pe-giphy/ui/pe-search": ["modules/shared/ui/pe-search/src/index.ts"],
       "@pe-giphy/upload": ["modules/my-gifs/feature/upload/src/index.ts"],
-      "@pe-giphy/utils": ["modules/shared/utils/src/index.ts"]
+      "@pe-giphy/utils": ["modules/shared/utils/src/index.ts"],
+      "@pe-giphy/ui/pe-upload": ["modules/shared/ui/pe-upload/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

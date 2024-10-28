@@ -21,3 +21,11 @@ export type TrendingOptions = {
 export type SuggestionTagResponse = {
     data: Array<{ name: string, analytics_response_payload: string }>
 }
+
+export type UploadGifOptions = {
+    username: string,
+    file?: File,
+    source_image_url?: string,
+    tags: string,
+    source_post_url: string
+}

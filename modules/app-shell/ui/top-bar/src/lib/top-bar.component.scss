@@ -58,3 +58,15 @@
     text-overflow: ellipsis;
     font-weight: 400;
 }
+
+
+.pe-upload-wrapper {
+    height: 70vh;
+    width: 40vw;
+}
+
+.pe-upload-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
