@@ -23,6 +23,10 @@
         z-index: 1;
         border-radius: 50%;
         object-fit: cover;
+
+        &._skeleton {
+            border-radius: 50% !important;
+        }
     }
 
     .author-common-info {
@@ -52,8 +56,17 @@
 
         }
 
+        .social {
+            padding-top: 8px;
+            display: flex;
+
+            tui-icon {
+                font-size: 2rem;
+            }
+        }
+
         .reaction {
-            padding-top: 12px;
+            padding-top: 8px;
             gap: 10px;
             display: flex;
             justify-content: center;

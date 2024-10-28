@@ -5,7 +5,7 @@ import { PeSearchComponent, PeSearchType } from '@pe-giphy/ui/pe-search';
 import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { TUI_DARK_MODE, TuiAlertService, TuiButton, TuiDataList, TuiDialogContext, TuiDialogService, TuiDropdown, TuiIcon } from '@taiga-ui/core';
 import { TuiButtonLoading, TuiChevron } from '@taiga-ui/kit';
-import { AppStore } from "@pe-giphy/app-store";
+import { APP_STATE_BLANK, AppStore } from "@pe-giphy/app-store";
 import { HomeStore } from "@pe-giphy/home-data-access";
 import { ChannelStore } from "@pe-giphy/channels/data-access";
 import { PeUploadComponent } from "@pe-giphy/ui/pe-upload";
@@ -129,13 +129,7 @@ export class TopBarComponent {
         break;
       case 'logout':
         this.appStore.resetState({
-          user: {
-            avatarUrl: '',
-            username: '',
-            email: '',
-            fullName: '',
-            isLogin: false,
-          }
+          user: APP_STATE_BLANK.user
         });
         break;
     }
@@ -160,6 +154,7 @@ export class TopBarComponent {
     this.dialogs.open(this.uploadCompTempRef, {
       size: 'l',
       closeable: true,
+      dismissible: false,
       label: this.transloco.translate('COMMON.LABEL.UPLOAD_GIF_TITLE'),
     }).subscribe();
   }
@@ -178,6 +173,10 @@ export class TopBarComponent {
   protected saveFiles() {
     if (!this.peComponent.isValid) {
       this.peComponent.formInstance.markAllAsTouched();
+      this.alert.open(this.transloco.translate('COMMON.LABEL.PLEASE_FILL_DATA'), {
+        label: 'Form validation',
+        appearance: 'error',
+      }).subscribe(() => this.selfStore.setLoading(false))
       return;
     }
 
@@ -196,12 +195,13 @@ export class TopBarComponent {
           }).subscribe()
           return err;
         }),
-        tap(() => {
+        tap((uploadedIds) => {
+          this.cancel();
           this.alert.open(this.transloco.translate('COMMON.LABEL.UPLOAD_GIF_SUCCESS'), {
             label: 'Upload',
             appearance: 'info',
           }).subscribe();
-          this.cancel();
+          this.selfStore.loadGifByIds(uploadedIds as string[]).subscribe();
         })
       )
       .subscribe()

@@ -39,5 +39,6 @@
   "COMMON.LABEL.FOLLOWERS": "Followers",
   "COMMON.LABEL.FAVORITES": "Favorites",
   "COMMON.LABEL.CHANNEL_NOT_FOUND": "Channel not found",
-  "COMMON.LABEL.UPLOAD_GIF_TITLE": "Upload Your Gifs"
+  "COMMON.LABEL.UPLOAD_GIF_TITLE": "Upload Your Gifs",
+  "COMMON.LABEL.PLEASE_FILL_DATA": "Please fill data!"
 }

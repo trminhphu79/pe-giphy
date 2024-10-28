@@ -7,6 +7,10 @@
     <div class="author-common-info">
         <div class="user-name">{{item()?.display_name || ('COMMON.LABEL.UNKNOWN_AUTHOR' | transloco)}}</div>
         <div class="bio">{{item()?.user?.description}}</div>
+        <div class="social">
+            <tui-icon (click)="toSocial('instagram')" icon="@tui.instagram" tuiTooltip="Instagram"></tui-icon>
+            <tui-icon (click)="toSocial('portfolio')" icon="@tui.briefcase-business" tuiTooltip="Portfolio"></tui-icon>
+        </div>
         <div class="reaction" *ngIf="item()">
             <span class="follower" [tuiSkeleton]="loading()">4,312 followers</span>
             <span class="following" [tuiSkeleton]="loading()">49 following</span>

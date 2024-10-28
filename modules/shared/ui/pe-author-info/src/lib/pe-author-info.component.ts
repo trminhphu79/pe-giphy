@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { TuiSkeleton } from '@taiga-ui/kit';
-import { TuiButton } from '@taiga-ui/core';
+import { TuiSkeleton, TuiTooltip } from '@taiga-ui/kit';
+import { TuiButton, TuiIcon } from '@taiga-ui/core';
 import { BackgroundImageLoadDirective } from '@pe-giphy/directives';
 import { TranslocoModule } from '@jsverse/transloco';
 
@@ -9,6 +9,8 @@ import { TranslocoModule } from '@jsverse/transloco';
   selector: 'pe-author-info',
   standalone: true,
   imports: [
+    TuiIcon,
+    TuiTooltip,
     TuiButton,
     TuiSkeleton,
     CommonModule,
@@ -28,16 +30,16 @@ export class PeAuthorInfoComponent {
     backgroundUrl: string
   }>({ avatarUrl: '', backgroundUrl: '' })
 
-  authorAvatarLoading = signal(true);
-  authorAvatar = computed(() => {
+  protected readonly authorAvatarLoading = signal(true);
+  protected readonly authorAvatar = computed(() => {
     if (!this.loading()) {
       return this.item()?.user?.avatar_url || this.defaultAsset().avatarUrl
     }
     return ''
   })
 
-  backgroundLoading = signal(true);
-  backgroundImg = computed(() => {
+  protected readonly backgroundLoading = signal(true);
+  protected readonly backgroundImg = computed(() => {
     if (!this.loading()) {
       return this.item()?.banner_image || this.defaultAsset().backgroundUrl
     }
@@ -46,5 +48,15 @@ export class PeAuthorInfoComponent {
 
   onBackgroundImageLoad() {
     this.backgroundLoading.set(false);
+  }
+
+  protected toSocial(type: 'instagram' | 'portfolio') {
+    switch (type) {
+      case 'instagram':
+        window.open(this.item()?.user?.instagram_url, '_blank')
+        break;
+      case 'portfolio':
+        break;
+    }
   }
 }

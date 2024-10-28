@@ -46,10 +46,6 @@ export class SelfComponent {
     this.router.navigateByUrl(`gif/${event.id}`).then()
   }
 
-  ngOnInit() {
-    this.store.loadGifByIds().subscribe()
-  }
-
   selectedTabChanges(event: any) {
     this.store.setTab(event)
   }

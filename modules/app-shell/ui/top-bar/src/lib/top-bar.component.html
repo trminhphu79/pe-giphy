@@ -46,12 +46,12 @@
         <pe-upload #peComponent></pe-upload>
     </div>
     <div class="pe-upload-actions">
-        <button (click)="cancel()" [loading]="uploadLoading()" appearance="secondary" tuiButton type="button" size="m"
+        <button [disabled]="uploadLoading()" (click)="cancel()" appearance="secondary" tuiButton type="button" size="m"
             iconStart="@tui.x">
             {{'BUTTON.ACTION.CANCEL' | transloco}}
         </button>
-        <button class="upload-icon" [loading]="uploadLoading()" (click)="saveFiles()" appearance="primary"
-            iconStart="@tui.upload" size="m" tuiButton type="button">
+        <button [disabled]="uploadLoading()" class="upload-icon" [loading]="uploadLoading()" (click)="saveFiles()"
+            appearance="primary" iconStart="@tui.upload" size="m" tuiButton type="button">
             {{'BUTTON.ACTION.UPLOAD' | transloco}}
         </button>
     </div>

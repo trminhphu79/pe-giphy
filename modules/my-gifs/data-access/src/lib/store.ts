@@ -30,8 +30,6 @@ export const SelfStore = signalStore(
                     ])
                 }),
                 tap(([gifRes, channelRes]) => {
-                    console.log("channelRes: ", channelRes);
-                    console.log("gifRes: ", gifRes);
                 }),
             )
         ),
@@ -39,7 +37,8 @@ export const SelfStore = signalStore(
             patchState(store, { loading: true });
             return gifApi.getGifByIds({ ids: ids.join(",") }).pipe(
                 tap((response) => {
-                    patchState(store, { loading: false, relatedGifs: response.data })
+                    const newRelatedGifs = getState(store).relatedGifs.concat(response.data)
+                    patchState(store, { loading: false, relatedGifs: newRelatedGifs })
                 })
             )
         },
@@ -57,7 +56,6 @@ export const SelfStore = signalStore(
                         patchState(store, { loading: false, uploadGifIds });
                         storageApi.set('uploadGifIds', uploadGifIds);
                     }),
-                    map(() => (true))
                 )
             }
 
@@ -70,7 +68,7 @@ export const SelfStore = signalStore(
                     patchState(store, { loading: false, uploadGifIds });
                     storageApi.set('uploadGifIds', uploadGifIds);
                 }),
-                map(() => (true))
+                map((res) => ([res?.data?.id] as string[]))
             )
         },
         likeGifs: (input: GIFObject) => {
@@ -80,7 +78,8 @@ export const SelfStore = signalStore(
         },
         setTab(tab: "COLLECTION" | "FAVORITE") {
             patchState(store, { currentTab: tab });
-        }
+        },
+        setLoading(value: boolean) { patchState(store, { loading: value }) }
     })),
     withComputed((store) => ({
         selectedList: computed(() => {
