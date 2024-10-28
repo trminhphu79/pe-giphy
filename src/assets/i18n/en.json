@@ -28,7 +28,7 @@
   "COMMON.LABEL.CLICK_TO_UPLOAD": "click to upload",
   "COMMON.LABEL.UPLOAD_YOUR_ANIMATIONS": "Upload your gifs or animations",
   "BUTTON.ACTION.CANCEL": "Cancel",
-  "COMMON.LABEL.ENTER_VALID_GIF_LINK": "Only accept valid link or media link",
+  "COMMON.LABEL.ENTER_VALID_GIF_LINK": "Only accept link: .webp, .gif",
   "COMMON.LABEL.ENTER_VALID_LINK": "Only accept valid link",
   "COMMON.LABEL.SOURCE_IMG_PLACEHOLDER": "Enter source image url",
   "COMMON.LABEL.SOURCE_POST_PLACEHOLDER": "Enter source post url",
