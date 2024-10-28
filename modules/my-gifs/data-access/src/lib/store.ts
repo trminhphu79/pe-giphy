@@ -1,9 +1,9 @@
 import { getState, patchState, signalStore, withComputed, withHooks, withMethods, withState } from "@ngrx/signals";
 import { initialSleftState } from "./state";
 import { computed, inject } from "@angular/core";
-import { ChannelApiService, GifApiService } from "@pe-giphy/pe-giphy-api";
+import { ChannelApiService, GifApiService, LocalStorageApiService } from "@pe-giphy/pe-giphy-api";
 import { rxMethod } from "@ngrx/signals/rxjs-interop";
-import { catchError, forkJoin, of, pipe, switchMap, tap } from "rxjs";
+import { catchError, forkJoin, map, of, pipe, switchMap, tap } from "rxjs";
 import { SearchOptions, UploadGifOptions } from "@pe-giphy/models";
 import { GIFObject } from "giphy-api";
 import { AppStore } from "@pe-giphy/app-store";
@@ -11,7 +11,7 @@ import { AppStore } from "@pe-giphy/app-store";
 export const SelfStore = signalStore(
     { providedIn: "root" },
     withState(initialSleftState),
-    withMethods((store, gifApi = inject(GifApiService), channelApi = inject(ChannelApiService), appStore = inject(AppStore)) => ({
+    withMethods((store, gifApi = inject(GifApiService), channelApi = inject(ChannelApiService), appStore = inject(AppStore), storageApi = inject(LocalStorageApiService)) => ({
         loadMe$: rxMethod(
             pipe(
                 tap(() => patchState(store, { loading: true })),
@@ -34,18 +34,48 @@ export const SelfStore = signalStore(
                 }),
             )
         ),
-        uploadGif: (input: UploadGifOptions) => {
-            patchState(store, { loading: true })
-            return gifApi.uploadGif(input).pipe(
-                tap(() => {
-                    patchState(store, { loading: false })
+        loadGifByIds: (ids: string[]) => {
+            patchState(store, { loading: true });
+            return gifApi.getGifByIds({ ids: ids.join(",") }).pipe(
+                tap((response) => {
+                    patchState(store, { loading: false, relatedGifs: response.data })
                 })
+            )
+        },
+        uploadGif: (input: UploadGifOptions) => {
+            patchState(store, { loading: true });
+
+            if (input.files.length) {
+                return gifApi.uploadWithFormData(input).pipe(
+                    map((response) => response.map((item) => item.data?.id)),
+                    tap((response) => {
+                        if (!response?.length) {
+                            return
+                        }
+                        const uploadGifIds = [...getState(store).uploadGifIds, ...response];
+                        patchState(store, { loading: false, uploadGifIds });
+                        storageApi.set('uploadGifIds', uploadGifIds);
+                    }),
+                    map(() => (true))
+                )
+            }
+
+            return gifApi.uploadNormal(input).pipe(
+                tap((response) => {
+                    if (!response?.data?.id) {
+                        return;
+                    }
+                    const uploadGifIds = [...getState(store).uploadGifIds, response.data.id];
+                    patchState(store, { loading: false, uploadGifIds });
+                    storageApi.set('uploadGifIds', uploadGifIds);
+                }),
+                map(() => (true))
             )
         },
         likeGifs: (input: GIFObject) => {
             const newGifs = [...store.favoriteGifs(), input];
             patchState(store, { favoriteGifs: newGifs });
-            localStorage.setItem('favoriteGifs', JSON.stringify(newGifs))
+            storageApi.set('favoriteGifs', newGifs);
         },
         setTab(tab: "COLLECTION" | "FAVORITE") {
             patchState(store, { currentTab: tab });
@@ -58,8 +88,10 @@ export const SelfStore = signalStore(
     })),
     withHooks({
         onInit(store) {
-            const favoriteGifs = localStorage.getItem('favoriteGifs') ?? '';
-            patchState(store, { favoriteGifs: favoriteGifs ? JSON.parse(favoriteGifs) : [] });
+            const storageApi = inject(LocalStorageApiService)
+            patchState(store, { favoriteGifs: storageApi.get<GIFObject[]>('favoriteGifs') || [] });
+            patchState(store, { uploadGifIds: storageApi.get<string[]>('uploadGifIds') || [] });
+            store.loadGifByIds(getState(store).uploadGifIds).subscribe();
         },
     })
 )

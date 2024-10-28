@@ -38,5 +38,6 @@
   "COMMON.LABEL.COLLECTIONS": "Collections",
   "COMMON.LABEL.FOLLOWERS": "Followers",
   "COMMON.LABEL.FAVORITES": "Favorites",
-  "COMMON.LABEL.CHANNEL_NOT_FOUND": "Channel not found"
+  "COMMON.LABEL.CHANNEL_NOT_FOUND": "Channel not found",
+  "COMMON.LABEL.UPLOAD_GIF_TITLE": "Upload Your Gifs"
 }

@@ -6,6 +6,11 @@
 
 This project aimed to establish a monorepo infrastructure using [Nx](https://nx.dev), enabling the efficient sharing and reuse of libraries following Angular's best practices. The project incorporated lessons learned from previous experiences, demonstrated through the integration of the [Giphy-API](https://developers.giphy.com/).
 
+## Setup Project
+1. yarn install or npm install
+2. yarn start or npm start
+
+
 ## Table of Contents
 
 - [PeGiphy](#PeGiphy)
@@ -19,6 +24,9 @@ This project aimed to establish a monorepo infrastructure using [Nx](https://nx.
     - [shared/ui](#sharedui)
     - [shared/directives](#shareddirectives)
     - [shared/pipes](#sharedpipes)
+    - [modules/my-gifs](#my-gifs)
+    - [modules/home](#home)
+    - [modules/channels](#channels)
   - [OpenToWork](#opentowork)
     - [Linkedin:](#linkedin)
     - [My Resume](#my-resume)

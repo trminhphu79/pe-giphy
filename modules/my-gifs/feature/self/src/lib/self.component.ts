@@ -53,8 +53,4 @@ export class SelfComponent {
   selectedTabChanges(event: any) {
     this.store.setTab(event)
   }
-
-  ngOnDestroy(): void {
-    this.store.setTab('COLLECTION');
-  }
 }

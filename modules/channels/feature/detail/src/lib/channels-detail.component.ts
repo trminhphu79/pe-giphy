@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { PeCollectionsComponent } from '@pe-giphy/pe-collections';
 import { PeAuthorInfoComponent } from '@pe-giphy/pe-author-info';
 import { PeActionTabsComponent } from '@pe-giphy/pe-action-tabs';
+import { SelfStore } from '@pe-giphy/my-gifs/data-access';
 
 @Component({
   selector: 'pe-channels-detail',
@@ -38,6 +39,7 @@ export class ChannelsDetailComponent {
   }
 
   protected readonly appStore = inject(AppStore);
+  protected readonly selfStore = inject(SelfStore);
   protected readonly channelStore = inject(ChannelStore);
 
   protected readonly tabs = this.channelStore.tabs;
@@ -47,7 +49,9 @@ export class ChannelsDetailComponent {
 
   private readonly router = inject(Router);
 
-  favoriteClick(event: any) { }
+  favoriteClick(event: any) {
+    this.selfStore.likeGifs(event)
+  }
 
   titleClick(event: any) {
     if (!event?.id) {

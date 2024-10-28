@@ -68,7 +68,6 @@ export class TopBarComponent {
 
   protected readonly userState = this.appStore.user;
   private readonly currentSearchMode: WritableSignal<PeSearchType> = signal(PeSearchType.GIF);
-  private readonly currentPage: WritableSignal<'CHANNEL' | 'HOME'> = signal('HOME');
 
   protected readonly items: WritableSignal<any[]> = signal([
     {
@@ -161,7 +160,7 @@ export class TopBarComponent {
     this.dialogs.open(this.uploadCompTempRef, {
       size: 'l',
       closeable: true,
-      label: 'Upload Your Animations',
+      label: this.transloco.translate('COMMON.LABEL.UPLOAD_GIF_TITLE'),
     }).subscribe();
   }
 

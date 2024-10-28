@@ -24,10 +24,15 @@ export type SuggestionTagResponse = {
 
 export type UploadGifOptions = {
     username: string,
-    files?: Array<File>,
+    files: Array<File>,
     source_image_url?: string,
     tags: string,
     source_post_url: string,
     is_hidden?: number
     channel_id?: string,
+}
+
+export type UploadGifResponse = {
+    data: { id: string },
+    meta: { status: number, msg: string }
 }

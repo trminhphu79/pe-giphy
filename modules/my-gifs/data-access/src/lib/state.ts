@@ -8,6 +8,7 @@ export const initialSleftState: SelfState = {
     tabActions: TabAction,
     currentTab: 'COLLECTION',
     relatedGifs: [],
+    uploadGifIds: [],
     favoriteGifs: [],
     filterModel: {
         offset: 0,

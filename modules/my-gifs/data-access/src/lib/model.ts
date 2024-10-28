@@ -8,6 +8,7 @@ export type SelfState = {
     currentTab: 'COLLECTION' | 'FAVORITE',
     filterModel: BaseOptions,
     relatedGifs: GIFObject[],
+    uploadGifIds: string[],
     detailChannel: UserChannel | null,
     tabActions: { value: string, label: string }[],
     favoriteGifs: Array<GIFObject>

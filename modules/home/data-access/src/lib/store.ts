@@ -26,7 +26,7 @@ export const HomeStore = signalStore(
                 tap(() => {
                     const newFilter = {
                         ...store.filterModel(),
-                        offset: store.filterModel().offset + 20
+                        offset: store.filterModel().offset + store.filterModel().limit
                     };
                     patchState(store, { loading: true, filterModel: newFilter })
                 }),

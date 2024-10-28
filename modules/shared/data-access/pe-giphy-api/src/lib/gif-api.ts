@@ -1,7 +1,7 @@
 import { inject, Injectable } from "@angular/core"
 import { APP_CONFIG } from "@pe-giphy/app-config";
 import { HttpClient } from "@angular/common/http"
-import { SearchOptions, TrendingOptions, SuggestionTagResponse, UploadGifOptions } from "@pe-giphy/models";
+import { SearchOptions, TrendingOptions, SuggestionTagResponse, UploadGifOptions, UploadGifResponse } from "@pe-giphy/models";
 import { MultiResponse, SingleResponse } from 'giphy-api';
 import { DefaultParams } from "@pe-giphy/pe-decorator"
 import { forkJoin, Observable, of } from "rxjs";
@@ -37,36 +37,42 @@ export class GifApiService {
         return this.httpClient.get<SingleResponse>(this.appConfig.apiUrl + this.appConfig.apiVersion + `/gifs/${id}`)
     }
 
-    uploadGif(payload: UploadGifOptions): Observable<any> {
+    @DefaultParams({ rating: 'g' })
+    getGifByIds(params: { ids: string }) {
+        return this.httpClient.get<MultiResponse>(this.appConfig.apiUrl + this.appConfig.apiVersion + "/gifs", {
+            params: { ...params }
+        })
+    }
 
-        if (payload.files && payload.files.length > 0) {
-            const uploadRequests = payload.files.map((file) => {
-                const formData = new FormData();
-                formData.append('file', file);
-                formData.append('api_key', this.appConfig.apiKey);
-                formData.append('username', payload.username);
-                formData.append('tags', payload.tags);
-                formData.append('is_hidden', '0');
-                return this.httpClient.post<SingleResponse>(
-                    `${this.appConfig.uploadUrl}${this.appConfig.apiVersion}/gifs`,
-                    formData
-                )
-            });
-
-            return forkJoin(uploadRequests);
-        } else {
-            const completedPayload: UploadGifOptions = {
-                source_post_url: payload.source_post_url,
-                source_image_url: payload.source_image_url,
-                username: payload.username,
-                tags: payload.tags,
-                is_hidden: 0,
-            };
-
-            return this.httpClient.post<SingleResponse>(
+    uploadWithFormData(payload: UploadGifOptions) {
+        const uploadRequests = payload.files.map((file) => {
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('api_key', this.appConfig.apiKey);
+            formData.append('username', payload.username);
+            formData.append('tags', payload.tags);
+            formData.append('is_hidden', '0');
+            return this.httpClient.post<UploadGifResponse>(
                 `${this.appConfig.uploadUrl}${this.appConfig.apiVersion}/gifs`,
-                completedPayload
-            );
-        }
+                formData
+            )
+        });
+
+        return forkJoin(uploadRequests);
+    }
+
+    uploadNormal(payload: UploadGifOptions) {
+        const completedPayload: Omit<UploadGifOptions, 'files'> = {
+            source_post_url: payload.source_post_url,
+            source_image_url: payload.source_image_url,
+            username: payload.username,
+            tags: payload.tags,
+            is_hidden: 0
+        };
+
+        return this.httpClient.post<UploadGifResponse>(
+            `${this.appConfig.uploadUrl}${this.appConfig.apiVersion}/gifs`,
+            completedPayload
+        );
     }
 }
