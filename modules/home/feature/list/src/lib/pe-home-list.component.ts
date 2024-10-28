@@ -49,7 +49,7 @@ export class PeHomeListComponent {
       .pipe(
         map(() => this.viewport.measureScrollOffset('bottom')),
         pairwise(),
-        filter(([y1, y2]) => y2 < y1 && y2 < 100),
+        filter(([y1, y2]) => y2 < y1 && y2 < 200),
         filter(() => !this.loading()),
         throttleTime(this.throttleTime()),
         tap(() => {
@@ -69,6 +69,7 @@ export class PeHomeListComponent {
     this.gifId.set(event.id);
     this.location.go(`/gif/${event.id}`);
     this.showDialog(this.detailDialog);
+    this.store.resetDetail();
   }
 
   protected showDialog(content: PolymorpheusContent<TuiDialogContext>): void {

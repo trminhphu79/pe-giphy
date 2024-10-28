@@ -27,5 +27,16 @@
   "COMMON.LABEL.DRAG_AND_DROP": "Drag and drop file here or",
   "COMMON.LABEL.CLICK_TO_UPLOAD": "click to upload",
   "COMMON.LABEL.UPLOAD_YOUR_ANIMATIONS": "Upload your gifs or animations",
-  "BUTTON.ACTION.CANCEL": "Cancel"
+  "BUTTON.ACTION.CANCEL": "Cancel",
+  "COMMON.LABEL.ENTER_VALID_GIF_LINK": "Only accept link: .gif or .webp",
+  "COMMON.LABEL.SOURCE_IMG_PLACEHOLDER": "Enter source image url",
+  "COMMON.LABEL.SOURCE_POST_PLACEHOLDER": "Enter source post url",
+  "COMMON.LABEL.ENTER_TABS_PLACEHOLDER": "Enter tags",
+  "COMMON.LABEL.UPLOAD_GIF_SUCCESS": "Upload gif success",
+  "COMMON.LABEL.UPLOAD_GIF_FAIL": "Upload gif fail",
+  "COMMON.LABEL.CAN_NOT_CLOSE_WHEN_UPLOADING": "Cannot close dialog when uploading",
+  "COMMON.LABEL.COLLECTIONS": "Collections",
+  "COMMON.LABEL.FOLLOWERS": "Followers",
+  "COMMON.LABEL.FAVORITES": "Favorites",
+  "COMMON.LABEL.CHANNEL_NOT_FOUND": "Channel not found"
 }

@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http"
 import { SearchOptions, TrendingOptions, SuggestionTagResponse, UploadGifOptions } from "@pe-giphy/models";
 import { MultiResponse, SingleResponse } from 'giphy-api';
 import { DefaultParams } from "@pe-giphy/pe-decorator"
+import { forkJoin, Observable, of } from "rxjs";
 @Injectable({
     providedIn: 'root'
 })
@@ -36,22 +37,36 @@ export class GifApiService {
         return this.httpClient.get<SingleResponse>(this.appConfig.apiUrl + this.appConfig.apiVersion + `/gifs/${id}`)
     }
 
-    uploadGif(payload: UploadGifOptions) {
-        let completedPayload: FormData | UploadGifOptions;
-        if (payload.files) {
-            completedPayload = new FormData();
-            completedPayload.append('file', payload.files?.[0]);
-            completedPayload.append('api_key', this.appConfig.apiKey);
-            completedPayload.append('username', payload.username);
-            completedPayload.append('tags', payload.tags);
+    uploadGif(payload: UploadGifOptions): Observable<any> {
+
+        if (payload.files && payload.files.length > 0) {
+            const uploadRequests = payload.files.map((file) => {
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('api_key', this.appConfig.apiKey);
+                formData.append('username', payload.username);
+                formData.append('tags', payload.tags);
+                formData.append('is_hidden', '0');
+                return this.httpClient.post<SingleResponse>(
+                    `${this.appConfig.uploadUrl}${this.appConfig.apiVersion}/gifs`,
+                    formData
+                )
+            });
+
+            return forkJoin(uploadRequests);
         } else {
-            completedPayload = {
+            const completedPayload: UploadGifOptions = {
                 source_post_url: payload.source_post_url,
                 source_image_url: payload.source_image_url,
                 username: payload.username,
-                tags: payload.tags
-            }
+                tags: payload.tags,
+                is_hidden: 0,
+            };
+
+            return this.httpClient.post<SingleResponse>(
+                `${this.appConfig.uploadUrl}${this.appConfig.apiVersion}/gifs`,
+                completedPayload
+            );
         }
-        return this.httpClient.post<SingleResponse>(this.appConfig.uploadUrl + this.appConfig.apiVersion + `/gifs`, completedPayload)
     }
 }

@@ -1,6 +1,6 @@
 .nav-bar {
     padding: 12px 0;
-    min-width: 320px;
+    min-width: 240px;
     border-radius: 8px;
     box-shadow: var(--tui-shadow);
     height: 100%;
@@ -20,15 +20,7 @@
 
 tui-data-list {
     margin-top: 16px;
-
-    a {
-        // box-shadow: var(--tui-shadow);
-    }
-
     a.active-link {
-        // background: var(rbg(--background-main-hover));
-        // background: var(--background-linear-gradient-hover);
         background-color: var(--tui-background-neutral-1);
-        // box-shadow: var(--tui-shadow-small-hover);
     }
 }

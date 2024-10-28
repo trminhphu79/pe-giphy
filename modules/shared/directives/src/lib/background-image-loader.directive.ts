@@ -5,8 +5,8 @@ import { Directive, ElementRef, Input, Output, EventEmitter, OnChanges, SimpleCh
     standalone: true
 })
 export class BackgroundImageLoadDirective implements OnChanges {
-@Input() backgroundImageUrl: string | any = ''; // URL for the background image
-    @Output() imageLoaded = new EventEmitter<void>(); // Event emitter for image load
+    @Input() backgroundImageUrl: string | any = '';
+    @Output() imageLoaded = new EventEmitter<void>();
 
     constructor(private el: ElementRef) { }
 
@@ -24,7 +24,7 @@ export class BackgroundImageLoadDirective implements OnChanges {
 
         img.onload = () => {
             this.el.nativeElement.style.backgroundImage = `url(${this.backgroundImageUrl})`;
-            this.imageLoaded.emit(); // Emit when the image is loaded
+            this.imageLoaded.emit();
         };
 
         img.onerror = () => {

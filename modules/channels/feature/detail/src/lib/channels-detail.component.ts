@@ -40,6 +40,7 @@ export class ChannelsDetailComponent {
   protected readonly appStore = inject(AppStore);
   protected readonly channelStore = inject(ChannelStore);
 
+  protected readonly tabs = this.channelStore.tabs;
   protected readonly item = this.channelStore.detailChannel;
   protected readonly loading = this.channelStore.loading;
   protected readonly relatedGifs = this.channelStore.relatedGifs;
@@ -54,5 +55,11 @@ export class ChannelsDetailComponent {
     }
     this.channelStore.clearRelatedChannels();
     this.router.navigateByUrl(`gif/${event.id}`).then()
+  }
+
+  ngOnDestroy(): void {
+    this.channelStore.clearSuggestionChannels();
+    this.channelStore.clearDetailChannel();
+    this.channelStore.clearRelatedChannels();
   }
 }

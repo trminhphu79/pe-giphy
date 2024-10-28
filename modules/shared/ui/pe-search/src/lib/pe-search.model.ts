@@ -8,5 +8,6 @@ export type PeSearchData = {
 
 export type SuggestionItem = {
     name: string,
+    username: string,
     avatarUrl: string
 }

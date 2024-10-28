@@ -3,6 +3,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { TuiSkeleton } from '@taiga-ui/kit';
 import { TuiButton } from '@taiga-ui/core';
 import { BackgroundImageLoadDirective } from '@pe-giphy/directives';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'pe-author-info',
@@ -12,6 +13,7 @@ import { BackgroundImageLoadDirective } from '@pe-giphy/directives';
     TuiSkeleton,
     CommonModule,
     NgOptimizedImage,
+    TranslocoModule,
     BackgroundImageLoadDirective,
   ],
   templateUrl: './pe-author-info.component.html',
@@ -20,7 +22,7 @@ import { BackgroundImageLoadDirective } from '@pe-giphy/directives';
 })
 export class PeAuthorInfoComponent {
   item = input<any>();
-  loading = input<boolean>();
+  loading = input<boolean>(true);
   defaultAsset = input<{
     avatarUrl: string,
     backgroundUrl: string
@@ -28,18 +30,17 @@ export class PeAuthorInfoComponent {
 
   authorAvatarLoading = signal(true);
   authorAvatar = computed(() => {
-    if (!this.loading() && this.item()?.user?.avatar_url) {
-      return this.item()?.user?.avatar_url
+    if (!this.loading()) {
+      return this.item()?.user?.avatar_url || this.defaultAsset().avatarUrl
     }
-    return this.defaultAsset().avatarUrl
+    return ''
   })
 
   backgroundLoading = signal(true);
   backgroundImg = computed(() => {
-    if (!this.loading() && this.item()?.banner_image) {
-      return this.item()?.banner_image
+    if (!this.loading()) {
+      return this.item()?.banner_image || this.defaultAsset().backgroundUrl
     }
-    return (!this.loading() && this.defaultAsset().backgroundUrl)
   })
 
 

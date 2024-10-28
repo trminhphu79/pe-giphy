@@ -1,7 +1,8 @@
 <div class="pe-my-gif">
     <div class="pe-my-gif-wrapper">
         <pe-author-info [loading]="loading()" [item]="item()" [defaultAsset]="appStore.defaultAsset()"></pe-author-info>
-        <pe-action-tabs></pe-action-tabs>
-        <pe-collections (titleClick)="titleClick($event)" [dataSource]="relatedGifs()"></pe-collections>
+        <pe-action-tabs [tabs]="tabActions()" (selectedTabChanges)="selectedTabChanges($event)"></pe-action-tabs>
+        <pe-collections [disableFooter]="true" (titleClick)="titleClick($event)"
+            [dataSource]="selectedList()"></pe-collections>
     </div>
 </div>

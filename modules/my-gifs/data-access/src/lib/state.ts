@@ -1,8 +1,12 @@
 import { SelfState } from "./model";
 
+export const TabAction = [{ label: 'COMMON.LABEL.COLLECTIONS', value: 'COLLECTION' }, { value: 'FAVORITE', label: 'COMMON.LABEL.FAVORITES' }];
+
 export const initialSleftState: SelfState = {
     loading: false,
     detailChannel: null,
+    tabActions: TabAction,
+    currentTab: 'COLLECTION',
     relatedGifs: [],
     favoriteGifs: [],
     filterModel: {

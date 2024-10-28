@@ -31,9 +31,9 @@ This project aimed to establish a monorepo infrastructure using [Nx](https://nx.
 
 ## Features Overview
 
-- Dark-mode supported
-- Multi-language (vi, en) supported
-
+- Trending Gifs
+- Channel Detail
+- My Gif
 ## Deep-dived Libraries
 
 Follows 4 types of a specific library by [Nx Library Types](https://nx.dev/latest/angular/structure/library-types)

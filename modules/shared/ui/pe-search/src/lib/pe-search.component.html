@@ -12,7 +12,7 @@
             <tui-avatar [tuiSkeleton]="loading()" *ngIf="item?.avatarUrl" size="s" [src]="item?.avatarUrl">
             </tui-avatar>
             <span [tuiSkeleton]="loading()" [tuiHighlight]="searchControl().value" [tuiHighlightColor]="'#666'">
-                {{ item.name }}
+                {{ item?.username || item?.name }}
             </span>
         </button>
     </tui-data-list>

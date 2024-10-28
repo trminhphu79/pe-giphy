@@ -28,6 +28,9 @@ import { TuiLike } from '@taiga-ui/kit';
 export class PeCardComponent {
   @Input() item!: any;
   @Input() wrapperClass: string = '';
+  @Input() disableOverlayAction = false;
+  @Input() disableFooter = false;
+  @Input() disableOverlayTitle = false;
 
   @ContentChild('footerTemplate') externalFooterTemplate!: TemplateRef<any>;
   @ContentChild('overlayTitleTemplate') externalOverlayTitleTemplate!: TemplateRef<any>;

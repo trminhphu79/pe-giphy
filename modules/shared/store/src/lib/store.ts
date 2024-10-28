@@ -15,6 +15,14 @@ export const AppStore = signalStore(
         },
         resetState(state: Partial<AppState> = initialAppState) {
             patchState(store, state)
+        },
+        setLogin(value: boolean) {
+            patchState(store, ({
+                user: {
+                    ...store.user(),
+                    isLogin: value
+                }
+            }))
         }
     }))
 )

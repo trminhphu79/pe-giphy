@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PeCollectionsComponent } from '@pe-giphy/pe-collections';
 import { PeAuthorInfoComponent } from '@pe-giphy/pe-author-info';
@@ -8,6 +8,8 @@ import { TuiIcon, TuiButton, TuiDropdown, TuiDataList } from '@taiga-ui/core';
 import { TuiTabs, TuiAvatar, TuiChevron, TuiSkeleton } from '@taiga-ui/kit';
 import { SelfStore } from '@pe-giphy/my-gifs/data-access';
 import { AppStore } from '@pe-giphy/app-store';
+import { Router } from '@angular/router';
+import { GIFObject } from 'giphy-api';
 @Component({
   selector: 'pe-self',
   standalone: true,
@@ -32,15 +34,25 @@ import { AppStore } from '@pe-giphy/app-store';
 })
 export class SelfComponent {
   store = inject(SelfStore);
+  router = inject(Router);
   appStore = inject(AppStore);
 
-  protected readonly item = this.store.detailChannel;
+  protected readonly item = this.appStore.user;
   protected readonly loading = this.store.loading;
-  protected readonly relatedGifs = this.store.relatedGifs;
+  protected readonly tabActions = this.store.tabActions;
+  protected readonly selectedList = this.store.selectedList;
 
-  titleClick(v: any) { }
+  titleClick(event: GIFObject) {
+    this.router.navigateByUrl(`gif/${event.id}`).then()
+  }
 
   ngOnInit() {
     this.store.loadMe$(null);
   }
+
+  selectedTabChanges(event: any) {
+    this.store.setTab(event)
+  }
+
+
 }

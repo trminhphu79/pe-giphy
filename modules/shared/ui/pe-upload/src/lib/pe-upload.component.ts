@@ -33,6 +33,9 @@ import { urlValidator } from '@pe-giphy/utils';
 })
 export class PeUploadComponent {
 
+  accept = input('.gif,.webp');
+  acceptHint = input('COMMON.LABEL.ENTER_VALID_GIF_LINK');
+  
   protected readonly control = new FormControl<TuiFileLike | null>(null);
   protected readonly uploadForm = new FormGroup({
     attachment: new FormControl<Array<File>>([]),
@@ -47,15 +50,19 @@ export class PeUploadComponent {
 
   get formValue() { return this.uploadForm.getRawValue() }
 
+  get isValid() { return this.uploadForm.valid }
+
+  get formInstance() { return this.uploadForm }
+
   protected registerValueChanges() {
     this.uploadForm.get('attachment')?.valueChanges.subscribe({
       next: (value) => {
         if (value?.length) {
-          this.uploadForm.get('sourceImageUrl')?.disable();
-          this.uploadForm.get('sourcePostUrl')?.disable();
+          this.uploadForm.get('sourceImageUrl')?.disable({ onlySelf: true, emitEvent: false });
+          this.uploadForm.get('sourcePostUrl')?.disable({ onlySelf: true, emitEvent: false });
         } else {
-          this.uploadForm.get('sourceImageUrl')?.enable();
-          this.uploadForm.get('sourcePostUrl')?.enable();
+          this.uploadForm.get('sourceImageUrl')?.enable({ onlySelf: true, emitEvent: false });
+          this.uploadForm.get('sourcePostUrl')?.enable({ onlySelf: true, emitEvent: false });
         }
       }
     });
@@ -63,9 +70,9 @@ export class PeUploadComponent {
     this.uploadForm.get('sourceImageUrl')?.valueChanges.subscribe({
       next: (value) => {
         if (value?.length) {
-          this.uploadForm.get('attachment')?.disable();
+          this.uploadForm.get('attachment')?.disable({ onlySelf: true, emitEvent: false });
         } else {
-          this.uploadForm.get('attachment')?.enable();
+          this.uploadForm.get('attachment')?.enable({ onlySelf: true, emitEvent: false });
         }
       }
     });

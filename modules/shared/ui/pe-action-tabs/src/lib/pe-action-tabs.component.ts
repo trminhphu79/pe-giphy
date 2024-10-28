@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
 import { CommonModule } from '@angular/common';
 import { TuiTabs } from '@taiga-ui/kit';
 import { TuiButton } from '@taiga-ui/core';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'pe-action-tabs',
@@ -10,27 +11,28 @@ import { TuiButton } from '@taiga-ui/core';
     CommonModule,
     TuiTabs,
     TuiButton,
+    TranslocoModule,
   ],
   templateUrl: './pe-action-tabs.component.html',
   styleUrl: './pe-action-tabs.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PeActionTabsComponent {
-  tabs = input(['Collections', 'Followers'])
+  tabs = input<Array<{ label: string, value: string }>>([])
   selectedTabChanges = output<string>()
 
-  protected activeElement = String(this.tabs()[0]);
+  protected activeElement = '';
 
   protected get activeItemIndex(): number {
-    return this.tabs().indexOf(this.activeElement);
+    return this.tabs().findIndex((item) => item.value == this.activeElement)
   }
 
   protected stop(event: Event): void {
     event.stopPropagation();
   }
 
-  protected onClick(activeElement: string): void {
-    this.activeElement = activeElement;
+  protected onClick(activeElement: { label: string, value: string }): void {
+    this.activeElement = activeElement.value;
     this.selectedTabChanges.emit(this.activeElement);
   }
 }

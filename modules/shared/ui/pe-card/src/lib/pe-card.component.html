@@ -10,13 +10,13 @@
         </ng-template>
         <div class="overlay">
             <div class="overlay__content">
-                <span class="title">
+                <span class="title" *ngIf="!disableOverlayTitle">
                     <ng-container *ngIf="externalOverlayTitleTemplate; else defaultOverlayTitle">
                         <ng-container
                             *ngTemplateOutlet="externalOverlayTitleTemplate; context: { $implicit: item }"></ng-container>
                     </ng-container>
                 </span>
-                <div class="actions">
+                <div class="actions" *ngIf="!disableOverlayAction">
                     <ng-container *ngIf="externalOverlayActionTemplate; else defaultOverlayAction">
                         <ng-container
                             *ngTemplateOutlet="externalOverlayActionTemplate; context: { $implicit: item }"></ng-container>
@@ -32,7 +32,7 @@
         </div>
     </div>
 
-    <div class="pe-card-footer">
+    <div class="pe-card-footer" *ngIf="!disableFooter">
         <ng-container *ngIf="externalFooterTemplate; else defaultFooter">
             <ng-container *ngTemplateOutlet="externalFooterTemplate; context: { $implicit: item }"></ng-container>
         </ng-container>

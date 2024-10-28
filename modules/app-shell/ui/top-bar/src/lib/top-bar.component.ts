@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, signal, ViewChild, WritableSignal } from '@angular/core';
 import { NgForOf, NgIf, NgOptimizedImage, NgStyle } from '@angular/common';
-import { TranslocoModule } from "@jsverse/transloco";
+import { TranslocoModule, TranslocoService } from "@jsverse/transloco";
 import { PeSearchComponent, PeSearchType } from '@pe-giphy/ui/pe-search';
 import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { TUI_DARK_MODE, TuiButton, TuiDataList, TuiDialogContext, TuiDialogService, TuiDropdown, TuiIcon } from '@taiga-ui/core';
-import { TuiChevron } from '@taiga-ui/kit';
+import { TUI_DARK_MODE, TuiAlertService, TuiButton, TuiDataList, TuiDialogContext, TuiDialogService, TuiDropdown, TuiIcon } from '@taiga-ui/core';
+import { TuiButtonLoading, TuiChevron } from '@taiga-ui/kit';
 import { AppStore } from "@pe-giphy/app-store";
 import { HomeStore } from "@pe-giphy/home-data-access";
 import { ChannelStore } from "@pe-giphy/channels/data-access";
@@ -12,6 +12,7 @@ import { PeUploadComponent } from "@pe-giphy/ui/pe-upload";
 import { type PolymorpheusContent } from '@taiga-ui/polymorpheus';
 import { SelfStore } from "@pe-giphy/my-gifs/data-access";
 import { UploadGifOptions } from '@pe-giphy/models';
+import { catchError, tap } from 'rxjs';
 
 @Component({
   selector: 'pe-top-bar',
@@ -26,6 +27,7 @@ import { UploadGifOptions } from '@pe-giphy/models';
     TuiDataList,
     TuiDropdown,
     RouterLink,
+    TuiButtonLoading,
     NgOptimizedImage,
     TranslocoModule,
     TranslocoModule,
@@ -41,6 +43,8 @@ export class TopBarComponent {
 
   private readonly router = inject(Router);
   private readonly dialogs = inject(TuiDialogService);
+  private readonly alert = inject(TuiAlertService);
+  private readonly transloco = inject(TranslocoService);
 
   protected readonly appStore = inject(AppStore);
   protected readonly darkMode = inject(TUI_DARK_MODE);
@@ -52,6 +56,7 @@ export class TopBarComponent {
     return this.homeStore.loading() || this.channelStore.loading();
   })
 
+  protected uploadLoading = this.selfStore.loading;
   protected readonly suggestionItems = computed(() => {
     if (this.currentSearchMode() == PeSearchType.CHANNEL) {
       return this.channelStore.suggestionChannels()
@@ -80,42 +85,24 @@ export class TopBarComponent {
   @ViewChild('uploadCompTempRef') uploadCompTempRef!: ElementRef<PeUploadComponent>;
   @ViewChild(PeUploadComponent) peComponent!: PeUploadComponent;
 
-  searchChanges(event: string) {
-    switch (this.getSearchForPage()) {
-      case PeSearchType.CHANNEL:
-        this.searchInChannelPage(event)
-        break;
-      case PeSearchType.GIF:
-        this.searchInHomePage(event)
-        break;
-    }
-  }
+  searchChanges(input: { keyword: string, type: PeSearchType }) {
 
-  searchInChannelPage(keyword: string) { }
-
-  searchInHomePage(keyword: string) {
-    if (this.currentSearchMode() == PeSearchType.CHANNEL) {
-      if (!keyword) {
-        this.homeStore.clearTrendingData();
-        // this.channelStore.loadTrending$(null);
-        return;
-      }
-
-      if (keyword) {
-        // this.homeStore.searchGifs$(keyword);
-      }
-    } else {
-      if (!keyword) {
-        this.homeStore.clearTrendingData();
-        this.homeStore.loadTrending$(null);
-        return;
-      }
-
-      if (keyword) {
-        this.homeStore.searchGifs$(keyword);
-      }
+    if (!input.keyword) {
+      this.homeStore.loadTrending$(null);
+      this.getSearchForPage();
+      return;
     }
 
+    if (input.type == PeSearchType.CHANNEL) {
+      input.keyword = "@" + input.keyword;
+    }
+
+    this.homeStore.clearTrendingData();
+    this.homeStore.clearFilterModel();
+    if (input.keyword) {
+      this.homeStore.searchGifs$(input.keyword);
+      this.getSearchForPage();
+    }
   }
 
   keywordChanges(keyword: string) {
@@ -156,51 +143,68 @@ export class TopBarComponent {
   }
 
   register() {
-    this.router.navigate(['/']);
-    this.appStore.updateState({
-      user: {
-        isLogin: true,
-        avatarUrl: 'https://scontent.fsgn8-4.fna.fbcdn.net/v/t39.30808-6/367735256_2400158307038395_7455402540095123111_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFpucHVmPlmdZqIJP7wD9THN64EtvPMcKw3rgS288xwrDu4Dj6NZaFhCAEgqzqYMCLL5Hp6CZdapNTLWPE2msQr&_nc_ohc=2Vlzl1eZIcUQ7kNvgEOlrTL&_nc_zt=23&_nc_ht=scontent.fsgn8-4.fna&_nc_gid=A8APLxhVBzdQ9Hl7e6IHTBK&oh=00_AYBV88o19rgf3Mz7ZCnrxiq3U321UF3oAO3XEK065N1uxQ&oe=67219BEF',
-        fullName: 'Micheal Tran',
-        username: 'micheal',
-        email: ''
-      }
-    });
+    this.appStore.setLogin(true);
   }
 
   login() {
-
+    this.appStore.setLogin(true);
   }
 
   getSearchForPage() {
-    return window.location?.pathname?.includes?.('channels') ? PeSearchType.CHANNEL : PeSearchType.GIF
+    if (this.router.url === '/' || this.router.url === '') {
+      return
+    }
+    this.router.navigate(['/'])
   }
 
-  protected upload() {
-    this.showDialog(this.uploadCompTempRef);
-  }
-
-  protected showDialog(content: PolymorpheusContent<TuiDialogContext>): void {
-    this.dialogs.open(content, {
+  protected openDialogUpload() {
+    this.dialogs.open(this.uploadCompTempRef, {
       size: 'l',
       closeable: true,
-      dismissible: true,
       label: 'Upload Your Animations',
-    }).subscribe({
-      complete: () => {
-        // this.location.go(`/`);
-      },
-    });
-  }
-
-  protected submitUpload(event: UploadGifOptions) {
-    this.selfStore.uploadGif$(event);
+    }).subscribe();
   }
 
   protected cancel() {
+    if (this.uploadLoading()) {
+      this.alert.open(this.transloco.translate('COMMON.LABEL.CAN_NOT_CLOSE_WHEN_UPLOADING'), {
+        label: 'Close dialog',
+        appearance: 'warning',
+      }).subscribe()
+      return;
+    }
     (document.querySelector('[automation-id="tui-dialog__close"]') as HTMLDivElement)?.click()
   }
 
-  protected save() {
+  protected saveFiles() {
+    if (!this.peComponent.isValid) {
+      this.peComponent.formInstance.markAllAsTouched();
+      return;
+    }
+
+    this.selfStore.uploadGif({
+      username: this.appStore.user().username,
+      files: this.peComponent.formValue.attachment || [],
+      source_post_url: this.peComponent.formValue?.sourcePostUrl || '',
+      source_image_url: this.peComponent.formValue?.sourceImageUrl || '',
+      tags: this.peComponent.formValue.tags?.join(",") || ''
+    })
+      .pipe(
+        catchError((err) => {
+          this.alert.open(this.transloco.translate('COMMON.LABEL.UPLOAD_GIF_FAIL'), {
+            label: 'Upload',
+            appearance: 'error',
+          }).subscribe()
+          return err;
+        }),
+        tap(() => {
+          this.alert.open(this.transloco.translate('COMMON.LABEL.UPLOAD_GIF_SUCCESS'), {
+            label: 'Upload',
+            appearance: 'info',
+          }).subscribe();
+          this.cancel();
+        })
+      )
+      .subscribe()
   }
 }

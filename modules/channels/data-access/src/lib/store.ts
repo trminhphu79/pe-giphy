@@ -6,11 +6,14 @@ import { GIFObject } from "giphy-api";
 import { initialChannelState } from "./state";
 import { map, of, pipe, switchMap, tap } from "rxjs";
 import { SearchOptions } from "@pe-giphy/models";
+import { TuiAlertService } from '@taiga-ui/core';
+import { TranslocoService } from "@jsverse/transloco";
+
 
 export const ChannelStore = signalStore(
     { providedIn: "root" },
     withState(initialChannelState),
-    withMethods((store, channelApi = inject(ChannelApiService), gifApi = inject(GifApiService)) => ({
+    withMethods((store, channelApi = inject(ChannelApiService), transloco = inject(TranslocoService), alert = inject(TuiAlertService), gifApi = inject(GifApiService)) => ({
         searchChannels$: rxMethod<string>(
             pipe(
                 tap(() => patchState(store, { loading: true })),
@@ -26,7 +29,7 @@ export const ChannelStore = signalStore(
                 tap((response) => {
                     patchState(store, {
                         loading: false,
-                        suggestionChannels: response.data.map((item) => ({ ...item, name: item.display_name, avatarUrl: item.user.avatar_url }))
+                        suggestionChannels: response.data.map((item) => ({ ...item, username: item.user.username, name: item.display_name, avatarUrl: item.user.avatar_url }))
                     });
                 })
             )
@@ -44,6 +47,14 @@ export const ChannelStore = signalStore(
                     return channelApi.search(payload)
                 }),
                 tap((response) => {
+                    if (response.data.length == 0) {
+                        alert.open(transloco.translate('COMMON.LABEL.CHANNEL_NOT_FOUND') + '...!', {
+                            label: 'Oops!',
+                            appearance: 'error'
+                        }).subscribe()
+                        patchState(store, { loading: false });
+                        return;
+                    }
                     patchState(store, {
                         loading: false,
                         detailChannel: response.data?.[0]
@@ -92,6 +103,9 @@ export const ChannelStore = signalStore(
         },
         clearRelatedChannels: () => {
             patchState(store, { relatedGifs: [], loading: false })
+        },
+        clearDetailChannel: () => {
+            patchState(store, { detailChannel: null, loading: false })
         }
     })),
     withHooks({

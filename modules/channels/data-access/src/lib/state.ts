@@ -1,8 +1,10 @@
 import { ChannelState } from "./model";
 
+export const ActionTab = [{ label: 'COMMON.LABEL.COLLECTIONS', value: 'COLLECTION' }, { label: 'COMMON.LABEL.FOLLOWERS', value: 'FOLLOWER' }];
 export const initialChannelState: ChannelState = {
     loading: false,
     detailChannel: null,
+    tabs: ActionTab,
     relatedGifs: [],
     filterModel: {
         offset: 0,

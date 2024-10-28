@@ -48,7 +48,7 @@ export const HomeStore = signalStore(
                     })
                 }),
                 tap((response) => {
-                    patchState(store, { loading: false, suggestionTags: response.data.map((item) => ({ avatarUrl: '', name: item.name })) });
+                    patchState(store, { loading: false, suggestionTags: response.data.map((item) => ({ avatarUrl: '', name: item.name, username: '' })) });
                 })
             )
         ),
@@ -78,6 +78,9 @@ export const HomeStore = signalStore(
         },
         clearTrendingData() {
             patchState(store, { loading: false, trendingGifs: [] })
+        },
+        clearFilterModel() {
+            patchState(store, { loading: false, filterModel: initialHomeState.filterModel })
         },
         resetDetail() {
             patchState(store, { loading: false, detailGif: null })

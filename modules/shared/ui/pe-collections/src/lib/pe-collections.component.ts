@@ -15,7 +15,11 @@ import { GIFObject } from 'giphy-api';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PeCollectionsComponent {
-  dataSource = input<GIFObject[]>([]);
-  titleClick = output<any>()
-  favoriteClick = output<any>()
+  readonly dataSource = input<GIFObject[]>([]);
+  readonly disableFooter = input<boolean>(false);
+  readonly disableOverlayAction = input<boolean>(false);
+  readonly disableOverlayTitle = input<boolean>(false);
+
+  readonly titleClick = output<any>()
+  readonly favoriteClick = output<any>();
 }

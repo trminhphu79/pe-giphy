@@ -5,12 +5,10 @@
     </div>
     <div class="top-bar__menu-action">
         <ng-container *ngIf="userState.isLogin(); else noneLoginTemplate">
-            <button class="upload-icon" (click)="upload()" appearance="secondary" iconStart="@tui.upload" size="m"
-                tuiButton type="button">
+            <button class="upload-icon" (click)="openDialogUpload()" appearance="secondary" iconStart="@tui.upload"
+                size="m" tuiButton type="button">
                 {{'BUTTON.ACTION.UPLOAD' | transloco}}
             </button>
-
-
             <button class="dropdown-button" #btnElement tuiButton tuiChevron tuiDropdownOpen type="button"
                 [tuiDropdown]="actionDropdownTemplate" appearance="secondary">
                 <div class="top-bar__avatar">
@@ -48,11 +46,12 @@
         <pe-upload #peComponent></pe-upload>
     </div>
     <div class="pe-upload-actions">
-        <button (click)="cancel()" appearance="secondary" tuiButton type="button" size="m" iconStart="@tui.x">
+        <button (click)="cancel()" [loading]="uploadLoading()" appearance="secondary" tuiButton type="button" size="m"
+            iconStart="@tui.x">
             {{'BUTTON.ACTION.CANCEL' | transloco}}
         </button>
-        <button class="upload-icon" (click)="save()" appearance="primary" iconStart="@tui.upload" size="m" tuiButton
-            type="button">
+        <button class="upload-icon" [loading]="uploadLoading()" (click)="saveFiles()" appearance="primary"
+            iconStart="@tui.upload" size="m" tuiButton type="button">
             {{'BUTTON.ACTION.UPLOAD' | transloco}}
         </button>
     </div>

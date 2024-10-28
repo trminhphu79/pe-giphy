@@ -3,11 +3,12 @@ import { GIFObject } from "giphy-api";
 
 export type ChannelState = {
     meta: Meta,
+    tabs: Array<{ label: string, value: string }>,
     channels: UserChannel[],
     loading: boolean,
     pagination: Pagination,
     filterModel: BaseOptions,
     relatedGifs: GIFObject[],
     detailChannel: UserChannel | null,
-    suggestionChannels: Array<{ name: string, avatarUrl: string } & UserChannel>,
+    suggestionChannels: Array<{ name: string, avatarUrl: string, username: string } & UserChannel>,
 }

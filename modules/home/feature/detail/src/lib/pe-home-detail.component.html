@@ -6,12 +6,13 @@
         <div class="left">
             <div class="author-avatar">
                 <img (click)="onAuthorTitleClick(item()?.user?.username)" [tuiSkeleton]="avatarLoading()"
-                    (load)="avatarLoading.set(false)" [src]="defaultAuthorAvatar()" width="50" height="50" priority />
+                    (load)="avatarLoading.set(false)" [ngSrc]="defaultAuthorAvatar()" width="50" height="50"
+                     />
             </div>
             <div class="author-info">
                 <div [tuiSkeleton]="loading()">
                     <span class="user-name"
-                        (click)="onAuthorTitleClick(item()?.user?.username)">{{item()?.user?.display_name}}</span>
+                        (click)="onAuthorTitleClick(item()?.user?.username)">{{authorName() | transloco}}</span>
                 </div>
                 <div [tuiSkeleton]="loading()">
                     <span>{{item()?.import_datetime | date: 'HH:mm dd/MM/yyyy'}}</span>
@@ -19,9 +20,9 @@
             </div>
         </div>
         <div class="right" [tuiSkeleton]="loading()">
-            <button appearance="primary" iconStart="@tui.heart" size="m" tuiButton type="button">
+            <!-- <button appearance="primary" iconStart="@tui.heart" size="m" tuiButton type="button">
                 {{'BUTTON.ACTION.ADD_FAVORITE' | transloco}}
-            </button>
+            </button> -->
         </div>
     </div>
     <div class="pe-home-detail__related-gif" [tuiSkeleton]="loading()">

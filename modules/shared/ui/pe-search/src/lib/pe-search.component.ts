@@ -3,7 +3,7 @@ import { ChangeDetectorRef, computed, QueryList, WritableSignal } from '@angular
 import { ChangeDetectionStrategy, Component, ElementRef, inject, input, output, signal, ViewChild, ViewChildren } from '@angular/core';
 import { debounceTime, delay, distinctUntilChanged, filter, fromEvent, interval, map, Observable, Subject, takeUntil, tap } from 'rxjs';
 import { TranslocoModule } from '@jsverse/transloco';
-import { getNextPlaceholderText, INTERVAL_UPDATE_PLACEHOLDER, MockItems } from './pe-search.constant';
+import { getNextPlaceholderText, INTERVAL_UPDATE_PLACEHOLDER } from './pe-search.constant';
 import { PeSearchData, SuggestionItem } from './pe-search.model';
 import { PeSearchType } from './pe-search.enum';
 import { EMPTY_QUERY, TuiBooleanHandler } from '@taiga-ui/cdk';
@@ -57,7 +57,7 @@ export class PeSearchComponent {
   suggestionItems = input<SuggestionItem[]>([]);
   loading = input(false);
 
-  searchChanges = output<string>();
+  searchChanges = output<{ keyword: string, type: PeSearchType }>();
   keywordChanges = output<string>();
 
   getClassEmptyContent = computed(() => {
@@ -84,8 +84,22 @@ export class PeSearchComponent {
 
 
   onSelect(value: SuggestionItem): void {
-    this.searchChanges.emit(value.name as string)
-    this.searchControl().setValue(value?.name)
+    const isChannelSearch = this.searchControl().value?.[0] == '@';
+    if (isChannelSearch) {
+      this.searchChanges.emit({
+        keyword: value.username,
+        type: PeSearchType.CHANNEL
+      })
+
+      this.searchControl().setValue(value?.username);
+      return;
+    }
+
+    this.searchChanges.emit({
+      keyword: value.name,
+      type: PeSearchType.GIF
+    })
+    this.searchControl().setValue(value?.name);
   }
 
   ngOnInit() {
