@@ -8,7 +8,7 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { UploadGifOptions } from '@pe-giphy/models';
 import { TuiHint, TuiTextfield } from '@taiga-ui/core';
 import { TuiInputModule, TuiInputTagModule, TuiTextfieldControllerModule } from '@taiga-ui/legacy';
-import { urlValidator } from '@pe-giphy/utils';
+import { urlValidator, urlValidatorMedia } from '@pe-giphy/utils';
 
 @Component({
   selector: 'pe-upload',
@@ -35,11 +35,11 @@ export class PeUploadComponent {
 
   accept = input('.gif,.webp');
   acceptHint = input('COMMON.LABEL.ENTER_VALID_GIF_LINK');
-  
+
   protected readonly control = new FormControl<TuiFileLike | null>(null);
   protected readonly uploadForm = new FormGroup({
     attachment: new FormControl<Array<File>>([]),
-    sourceImageUrl: new FormControl('', [urlValidator()]),
+    sourceImageUrl: new FormControl('', [urlValidatorMedia()]),
     tags: new FormControl([], [Validators.required]),
     sourcePostUrl: new FormControl('', [urlValidator()])
   })
