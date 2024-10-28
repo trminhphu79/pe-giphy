@@ -42,6 +42,8 @@ This project aimed to establish a monorepo infrastructure using [Nx](https://nx.
 - Trending Gifs
 - Channel Detail
 - My Gif
+- Upload gif
+- Add favorite gif
 ## Deep-dived Libraries
 
 Follows 4 types of a specific library by [Nx Library Types](https://nx.dev/latest/angular/structure/library-types)
