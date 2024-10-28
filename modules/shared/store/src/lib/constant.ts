@@ -5,7 +5,7 @@ export const APP_STATE_BLANK: AppState = {
         isLogin: false,
         avatarUrl: 'https://img.freepik.com/premium-vector/man-empty-avatar-casual-business-style-vector-photo-placeholder-social-networks-resumes_885953-434.jpg',
         username: 'tmp79',
-        fullName: "Trần Minh Phú",
+        fullName: "PeGiphy Admin",
         email: 'tmp79@gmail.com'
     },
     themeMode: 'dark',

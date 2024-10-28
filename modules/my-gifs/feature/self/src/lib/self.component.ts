@@ -54,5 +54,7 @@ export class SelfComponent {
     this.store.setTab(event)
   }
 
-
+  ngOnDestroy(): void {
+    this.store.setTab('COLLECTION');
+  }
 }
