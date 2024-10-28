@@ -49,7 +49,6 @@ export class ChannelsDetailComponent {
   favoriteClick(event: any) { }
 
   titleClick(event: any) {
-    console.log('event: ', event)
     if (!event?.id) {
       return
     }

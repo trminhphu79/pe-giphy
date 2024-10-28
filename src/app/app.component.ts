@@ -22,15 +22,9 @@ export class AppComponent {
   protected readonly darkMode = inject(TUI_DARK_MODE);
   protected readonly appConfig = inject(APP_CONFIG);
 
-  ngAfterViewInit(): void {
-    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-    //Add 'implements AfterViewInit' to the class.
-    console.log('appConfig: ', this.appConfig)
-  }
   protected reset(): void {
     this.darkMode.set(this.media.matches);
     this.storage.removeItem(this.key);
-    console.log("reset: ", this.darkMode())
   }
 
   protected open = false;

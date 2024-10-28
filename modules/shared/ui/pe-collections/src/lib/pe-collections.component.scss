@@ -1,4 +1,36 @@
-.pe-channel-collections {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+
+
+/* Default style for screens smaller than 1200px */
+.pe-channel-collections{
+    column-count: 2;
+    /* Fewer columns for smaller screens */
+}
+
+/* For 1200px to 1439px wide screens */
+@media (min-width: 1200px) and (max-width: 1439px) {
+    .pe-channel-collections{
+        column-count: 4;
+    }
+}
+
+/* For 1440px to 1599px wide screens */
+@media (min-width: 1440px) and (max-width: 1599px) {
+    .pe-channel-collections{
+        column-count: 4;
+    }
+}
+
+/* For 1600px to 1920px wide screens */
+@media (min-width: 1600px) and (max-width: 1920px) {
+    .pe-channel-collections{
+        column-count: 5;
+    }
+}
+
+/* For screens larger than 1920px */
+@media (min-width: 1921px) {
+    .pe-channel-collections{
+        column-count: 6;
+        /* Extra column for very large screens */
+    }
 }

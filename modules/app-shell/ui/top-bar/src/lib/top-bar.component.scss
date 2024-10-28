@@ -59,10 +59,8 @@
     font-weight: 400;
 }
 
-
 .pe-upload-wrapper {
-    height: 70vh;
-    width: 40vw;
+    overflow-y: auto;
 }
 
 .pe-upload-actions {

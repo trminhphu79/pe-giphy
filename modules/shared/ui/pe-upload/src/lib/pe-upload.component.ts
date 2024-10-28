@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TuiIcon, TuiLink } from '@taiga-ui/core';
@@ -33,16 +33,46 @@ import { urlValidator } from '@pe-giphy/utils';
 })
 export class PeUploadComponent {
 
-  formSubmit = output<UploadGifOptions>();
   protected readonly control = new FormControl<TuiFileLike | null>(null);
-
   protected readonly uploadForm = new FormGroup({
-    username: new FormControl('', [Validators.required]),
-    attachment: new FormControl(null, [urlValidator()]),
+    attachment: new FormControl<Array<File>>([]),
     sourceImageUrl: new FormControl('', [urlValidator()]),
     tags: new FormControl([], [Validators.required]),
-    sourcePostUrl: new FormControl('')
+    sourcePostUrl: new FormControl('', [urlValidator()])
   })
 
+  ngAfterViewInit(): void {
+    this.registerValueChanges();
+  }
+
   get formValue() { return this.uploadForm.getRawValue() }
+
+  protected registerValueChanges() {
+    this.uploadForm.get('attachment')?.valueChanges.subscribe({
+      next: (value) => {
+        if (value?.length) {
+          this.uploadForm.get('sourceImageUrl')?.disable();
+          this.uploadForm.get('sourcePostUrl')?.disable();
+        } else {
+          this.uploadForm.get('sourceImageUrl')?.enable();
+          this.uploadForm.get('sourcePostUrl')?.enable();
+        }
+      }
+    });
+
+    this.uploadForm.get('sourceImageUrl')?.valueChanges.subscribe({
+      next: (value) => {
+        if (value?.length) {
+          this.uploadForm.get('attachment')?.disable();
+        } else {
+          this.uploadForm.get('attachment')?.enable();
+        }
+      }
+    });
+  }
+
+  protected removeFile(index: number): void {
+    const newFiles = this.uploadForm.get('attachment')?.value?.filter((ite, idx) => idx != index) as Array<File>;
+    this.uploadForm.get('attachment')?.patchValue(newFiles)
+  }
 }

@@ -1,10 +1,11 @@
-import { patchState, signalStore, withHooks, withMethods, withState } from "@ngrx/signals";
+import { getState, patchState, signalStore, withHooks, withMethods, withState } from "@ngrx/signals";
 import { initialSleftState } from "./state";
 import { inject } from "@angular/core";
 import { ChannelApiService, GifApiService } from "@pe-giphy/pe-giphy-api";
 import { rxMethod } from "@ngrx/signals/rxjs-interop";
 import { forkJoin, pipe, switchMap, tap } from "rxjs";
 import { SearchOptions, UploadGifOptions } from "@pe-giphy/models";
+import { GIFObject } from "giphy-api";
 
 export const SelfStore = signalStore(
     { providedIn: "root" },
@@ -29,7 +30,6 @@ export const SelfStore = signalStore(
                     ])
                 }),
                 tap(([gifRes, channelRes]) => {
-                    console.log("Channel: ", channelRes)
                     patchState(store, { loading: false, relatedGifs: gifRes.data, detailChannel: channelRes.data?.[0] })
                 }),
             )
@@ -41,11 +41,19 @@ export const SelfStore = signalStore(
                     return gifApi.uploadGif(payload)
                 })
             )
-        )
+        ),
+        likeGifs: (input: GIFObject) => {
+            console.log("likeGifs: ", input);
+            const newGifs = [...store.favoriteGifs(), input];
+            patchState(store, { favoriteGifs: newGifs });
+            localStorage.setItem('favoriteGifs', JSON.stringify(newGifs))
+        }
     })),
     withHooks({
-        onInit() {
+        onInit(store) {
+            const favoriteGifs = localStorage.getItem('favoriteGifs') ?? '';
+            patchState(store, { favoriteGifs: JSON.parse(favoriteGifs) });
+            console.log("On init", getState(store));
         },
-        onDestroy() { }
     })
 )

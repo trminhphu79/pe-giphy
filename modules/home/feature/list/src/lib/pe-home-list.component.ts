@@ -12,6 +12,7 @@ import { TuiButton, TuiDialog, TuiDialogService } from '@taiga-ui/core';
 import type { TuiDialogContext } from '@taiga-ui/core';
 import { type PolymorpheusContent } from '@taiga-ui/polymorpheus';
 import { Location } from '@angular/common';
+import { SelfStore } from '@pe-giphy/my-gifs/data-access';
 
 @Component({
   selector: 'pe-pe-home-list',
@@ -32,6 +33,8 @@ export class PeHomeListComponent {
   private readonly router = inject(Router);
   private readonly dialogs = inject(TuiDialogService);
   private readonly location = inject(Location);
+  private readonly selfStore = inject(SelfStore);
+
 
   protected readonly items = this.store.trendingGifs;
   protected readonly gifId = signal('');
@@ -56,6 +59,7 @@ export class PeHomeListComponent {
   }
 
   favoriteClick(event: any) {
+    this.selfStore.likeGifs(event)
   }
 
   titleClick(event: any) {

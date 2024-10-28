@@ -83,11 +83,9 @@ export class TopBarComponent {
   searchChanges(event: string) {
     switch (this.getSearchForPage()) {
       case PeSearchType.CHANNEL:
-        console.log("searchChanges in channel page")
         this.searchInChannelPage(event)
         break;
       case PeSearchType.GIF:
-        console.log("searchChanges in home page")
         this.searchInHomePage(event)
         break;
     }
@@ -184,7 +182,7 @@ export class TopBarComponent {
 
   protected showDialog(content: PolymorpheusContent<TuiDialogContext>): void {
     this.dialogs.open(content, {
-      size: 'auto',
+      size: 'l',
       closeable: true,
       dismissible: true,
       label: 'Upload Your Animations',
@@ -196,15 +194,13 @@ export class TopBarComponent {
   }
 
   protected submitUpload(event: UploadGifOptions) {
-    console.log("Event", event);
     this.selfStore.uploadGif$(event);
   }
 
   protected cancel() {
-
+    (document.querySelector('[automation-id="tui-dialog__close"]') as HTMLDivElement)?.click()
   }
 
   protected save() {
-    console.log("uploadComponent: ", this.peComponent.formValue)
   }
 }

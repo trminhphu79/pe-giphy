@@ -38,9 +38,9 @@ export class GifApiService {
 
     uploadGif(payload: UploadGifOptions) {
         let completedPayload: FormData | UploadGifOptions;
-        if (payload.file) {
+        if (payload.files) {
             completedPayload = new FormData();
-            completedPayload.append('file', payload.file);
+            completedPayload.append('file', payload.files?.[0]);
             completedPayload.append('api_key', this.appConfig.apiKey);
             completedPayload.append('username', payload.username);
             completedPayload.append('tags', payload.tags);

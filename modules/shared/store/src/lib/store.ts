@@ -12,7 +12,6 @@ export const AppStore = signalStore(
         },
         updateState(newState: Partial<AppState>) {
             patchState(store, (state) => ({ ...state, ...newState }))
-            console.log(store)
         },
         resetState(state: Partial<AppState> = initialAppState) {
             patchState(store, state)

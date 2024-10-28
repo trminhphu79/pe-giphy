@@ -4,6 +4,7 @@ export const initialSleftState: SelfState = {
     loading: false,
     detailChannel: null,
     relatedGifs: [],
+    favoriteGifs: [],
     filterModel: {
         offset: 0,
         limit: 30,

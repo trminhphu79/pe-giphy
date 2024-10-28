@@ -24,7 +24,7 @@ export type SuggestionTagResponse = {
 
 export type UploadGifOptions = {
     username: string,
-    file?: File,
+    files?: Array<File>,
     source_image_url?: string,
     tags: string,
     source_post_url: string

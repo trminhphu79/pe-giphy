@@ -45,7 +45,7 @@
 
 <ng-template #uploadCompTempRef let-observer>
     <div class="pe-upload-wrapper">
-        <pe-upload #peComponent (formSubmit)="submitUpload($event)"></pe-upload>
+        <pe-upload #peComponent></pe-upload>
     </div>
     <div class="pe-upload-actions">
         <button (click)="cancel()" appearance="secondary" tuiButton type="button" size="m" iconStart="@tui.x">

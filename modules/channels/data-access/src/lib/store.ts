@@ -24,7 +24,6 @@ export const ChannelStore = signalStore(
                     return channelApi.search(payload)
                 }),
                 tap((response) => {
-                    console.log("detailChannel response: ", response);
                     patchState(store, {
                         loading: false,
                         suggestionChannels: response.data.map((item) => ({ ...item, name: item.display_name, avatarUrl: item.user.avatar_url }))
@@ -45,13 +44,10 @@ export const ChannelStore = signalStore(
                     return channelApi.search(payload)
                 }),
                 tap((response) => {
-                    console.log("detailChannel response: ", response);
                     patchState(store, {
                         loading: false,
                         detailChannel: response.data?.[0]
                     });
-                    // store.detailChannel()?.user.username
-                    // getState(store)
                 }),
                 switchMap((response) => {
                     if (!response?.data?.[0]?.user?.username) {
@@ -84,7 +80,6 @@ export const ChannelStore = signalStore(
                     return gifApi.search(payload)
                 }),
                 tap((response) => {
-                    console.log("detailChannel response: ", response);
                     patchState(store, {
                         loading: false,
                         relatedGifs: response.data

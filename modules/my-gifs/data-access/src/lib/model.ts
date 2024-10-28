@@ -8,4 +8,5 @@ export type SelfState = {
     filterModel: BaseOptions,
     relatedGifs: GIFObject[],
     detailChannel: UserChannel | null,
+    favoriteGifs: Array<GIFObject>
 }
