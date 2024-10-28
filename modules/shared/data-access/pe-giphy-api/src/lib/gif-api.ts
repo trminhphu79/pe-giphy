@@ -1,8 +1,7 @@
 import { inject, Injectable } from "@angular/core"
 import { APP_CONFIG } from "@pe-giphy/app-config";
 import { HttpClient } from "@angular/common/http"
-import { SearchOptions, TrendingOptions, SuggestionTagResponse, UploadGifOptions, UploadGifResponse } from "@pe-giphy/models";
-import { MultiResponse, SingleResponse } from 'giphy-api';
+import { SearchOptions, TrendingOptions, SuggestionTagResponse, UploadGifOptions, UploadGifResponse, PeMultiResponse, PeSingleResponse } from "@pe-giphy/models";
 import { DefaultParams } from "@pe-giphy/pe-decorator"
 import { forkJoin, Observable, of } from "rxjs";
 @Injectable({
@@ -14,14 +13,14 @@ export class GifApiService {
 
     @DefaultParams({ bundle: 'messaging_non_clips', rating: 'g' })
     searchTrending(params: Partial<TrendingOptions>) {
-        return this.httpClient.get<MultiResponse>(this.appConfig.apiUrl + this.appConfig.apiVersion + "/gifs/trending", {
+        return this.httpClient.get<PeMultiResponse>(this.appConfig.apiUrl + this.appConfig.apiVersion + "/gifs/trending", {
             params: { ...params }
         })
     }
 
     @DefaultParams({ bundle: 'messaging_non_clips', rating: 'g', lang: 'en' })
     search(params: Partial<SearchOptions>) {
-        return this.httpClient.get<MultiResponse>(this.appConfig.apiUrl + this.appConfig.apiVersion + "/gifs/search", {
+        return this.httpClient.get<PeMultiResponse>(this.appConfig.apiUrl + this.appConfig.apiVersion + "/gifs/search", {
             params: { ...params }
         })
     }
@@ -34,12 +33,12 @@ export class GifApiService {
     }
 
     getDetailGif(id: string) {
-        return this.httpClient.get<SingleResponse>(this.appConfig.apiUrl + this.appConfig.apiVersion + `/gifs/${id}`)
+        return this.httpClient.get<PeSingleResponse>(this.appConfig.apiUrl + this.appConfig.apiVersion + `/gifs/${id}`)
     }
 
     @DefaultParams({ rating: 'g' })
     getGifByIds(params: { ids: string }) {
-        return this.httpClient.get<MultiResponse>(this.appConfig.apiUrl + this.appConfig.apiVersion + "/gifs", {
+        return this.httpClient.get<PeMultiResponse>(this.appConfig.apiUrl + this.appConfig.apiVersion + "/gifs", {
             params: { ...params }
         })
     }

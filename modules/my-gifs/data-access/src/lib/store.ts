@@ -3,10 +3,11 @@ import { initialSleftState } from "./state";
 import { computed, inject } from "@angular/core";
 import { ChannelApiService, GifApiService, LocalStorageApiService } from "@pe-giphy/pe-giphy-api";
 import { rxMethod } from "@ngrx/signals/rxjs-interop";
-import { catchError, forkJoin, map, of, pipe, switchMap, tap } from "rxjs";
+import { forkJoin, map, of, pipe, switchMap, tap } from "rxjs";
 import { SearchOptions, UploadGifOptions } from "@pe-giphy/models";
-import { GIFObject } from "giphy-api";
 import { AppStore } from "@pe-giphy/app-store";
+import { TabActionEnum } from "./enum";
+import { PeGIFObject } from "@pe-giphy/models";
 
 export const SelfStore = signalStore(
     { providedIn: "root" },
@@ -34,6 +35,10 @@ export const SelfStore = signalStore(
             )
         ),
         loadGifByIds: (ids: string[] = getState(store).uploadGifIds) => {
+            if (ids?.length == 0) {
+                return of()
+            }
+
             patchState(store, { loading: true });
             return gifApi.getGifByIds({ ids: ids.join(",") }).pipe(
                 tap((response) => {
@@ -71,12 +76,22 @@ export const SelfStore = signalStore(
                 map((res) => ([res?.data?.id] as string[]))
             )
         },
-        likeGifs: (input: GIFObject) => {
-            const newGifs = [...store.favoriteGifs(), input];
+        likeGifs$: (input: PeGIFObject) => {
+            const currentGifs = store.favoriteGifs();
+            const existingIndex = currentGifs.findIndex(gif => gif?.id === input?.id);
+            let newGifs;
+            if (existingIndex > -1) {
+                if (input.liked) {
+                    newGifs = currentGifs.filter((_, index) => index !== existingIndex);
+                }
+            } else {
+                newGifs = [...currentGifs, input];
+            }
             patchState(store, { favoriteGifs: newGifs });
             storageApi.set('favoriteGifs', newGifs);
+            return of(existingIndex > -1)
         },
-        setTab(tab: "COLLECTION" | "FAVORITE") {
+        setTab(tab: string) {
             patchState(store, { currentTab: tab });
         },
         setLoading(value: boolean) { patchState(store, { loading: value }) }
@@ -89,7 +104,7 @@ export const SelfStore = signalStore(
     withHooks({
         onInit(store) {
             const storageApi = inject(LocalStorageApiService)
-            patchState(store, { favoriteGifs: storageApi.get<GIFObject[]>('favoriteGifs') || [] });
+            patchState(store, { favoriteGifs: storageApi.get<PeGIFObject[]>('favoriteGifs') || [] });
             patchState(store, { uploadGifIds: storageApi.get<string[]>('uploadGifIds') || [] });
             store.loadGifByIds(getState(store).uploadGifIds).subscribe();
         },

@@ -56,6 +56,7 @@ export class PeAuthorInfoComponent {
         window.open(this.item()?.user?.instagram_url, '_blank')
         break;
       case 'portfolio':
+        window.open(this.item()?.user?.website_url, '_blank')
         break;
     }
   }

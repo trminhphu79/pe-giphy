@@ -1,19 +1,19 @@
-import { patchState, signalStore, withHooks, withMethods, withState, getState } from "@ngrx/signals";
+import { patchState, signalStore, withHooks, withMethods, withState, getState, withComputed } from "@ngrx/signals";
 import { ChannelApiService, GifApiService } from "@pe-giphy/pe-giphy-api";
-import { inject } from "@angular/core";
+import { computed, inject } from "@angular/core";
 import { rxMethod } from "@ngrx/signals/rxjs-interop"
-import { GIFObject } from "giphy-api";
 import { initialChannelState } from "./state";
 import { map, of, pipe, switchMap, tap } from "rxjs";
 import { SearchOptions } from "@pe-giphy/models";
 import { TuiAlertService } from '@taiga-ui/core';
 import { TranslocoService } from "@jsverse/transloco";
-
+import { PeGIFObject } from "@pe-giphy/models";
+import { SelfStore } from "@pe-giphy/my-gifs/data-access";
 
 export const ChannelStore = signalStore(
     { providedIn: "root" },
     withState(initialChannelState),
-    withMethods((store, channelApi = inject(ChannelApiService), transloco = inject(TranslocoService), alert = inject(TuiAlertService), gifApi = inject(GifApiService)) => ({
+    withMethods((store, channelApi = inject(ChannelApiService), selfStore = inject(SelfStore), transloco = inject(TranslocoService), alert = inject(TuiAlertService), gifApi = inject(GifApiService)) => ({
         searchChannels$: rxMethod<string>(
             pipe(
                 tap(() => patchState(store, { loading: true })),
@@ -71,33 +71,29 @@ export const ChannelStore = signalStore(
                     return gifApi.search(payload)
                 }),
                 tap((response) => {
+                    const relatedGifs = response.data.map((gif) => {
+                        const isExistingFavorited = selfStore.favoriteGifs().findIndex((item) => item.id == gif.id) > -1;
+                        return {
+                            ...gif,
+                            liked: isExistingFavorited
+                        }
+                    })
                     patchState(store, {
                         loading: false,
-                        relatedGifs: response.data
+                        relatedGifs: relatedGifs
                     })
                 })
             )
         ),
-        loadReltedCollections$: rxMethod<string>(
-            pipe(
-                tap(() => patchState(store, { loading: true })),
-                switchMap((username: string) => {
-                    const payload: Partial<SearchOptions> = {
-                        ...store.filterModel(),
-                    };
-                    if (username) {
-                        payload.q = '@' + username;
-                    }
-                    return gifApi.search(payload)
-                }),
-                tap((response) => {
-                    patchState(store, {
-                        loading: false,
-                        relatedGifs: response.data
-                    });
-                })
-            )
-        ),
+        updateItem(item: PeGIFObject) {
+            const newList = store.relatedGifs().map((ite) => {
+                if (ite.id == item.id) {
+                    ite = item;
+                }
+                return ite
+            })
+            patchState(store, { relatedGifs: newList })
+        },
         clearSuggestionChannels: () => {
             patchState(store, { suggestionChannels: [], loading: false })
         },
@@ -107,10 +103,5 @@ export const ChannelStore = signalStore(
         clearDetailChannel: () => {
             patchState(store, { detailChannel: null, loading: false })
         }
-    })),
-    withHooks({
-        onInit(store) {
-            // store.loadChannels$(null)
-        }
-    })
+    }))
 )

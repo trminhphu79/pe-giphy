@@ -24,7 +24,7 @@
                 </div>
             </div>
             <ng-template #defaultOverlayAction>
-                <input tuiLike="var(--tui-status-negative)" type="checkbox" (click)="like($event)" />
+                <input tuiLike="var(--tui-status-negative)" type="checkbox" (click)="like($event)" [checked]="item.liked" />
             </ng-template>
             <ng-template #defaultOverlayTitle>
                 {{item.title}}

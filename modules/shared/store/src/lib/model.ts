@@ -5,6 +5,8 @@ export type AppState = {
         username: string,
         fullName: string,
         email: string,
+        websiteUrl: string,
+        instagramUrl: string
     },
     language: string,
     themeMode: string,

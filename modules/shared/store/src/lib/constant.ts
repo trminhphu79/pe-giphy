@@ -6,12 +6,14 @@ export const APP_STATE_BLANK: AppState = {
         avatarUrl: 'https://img.freepik.com/premium-vector/man-empty-avatar-casual-business-style-vector-photo-placeholder-social-networks-resumes_885953-434.jpg',
         username: 'tmp79',
         fullName: "PeGiphy Admin",
-        email: 'tmp79@gmail.com'
+        email: 'tmp79@gmail.com',
+        websiteUrl: 'https://www.phutran.info.vn/',
+        instagramUrl: 'https://www.linkedin.com/in/tmp-dev79/'
     },
     themeMode: 'dark',
     language: 'en',
     defaultAsset: {
         avatarUrl: 'https://img.freepik.com/premium-vector/man-empty-avatar-casual-business-style-vector-photo-placeholder-social-networks-resumes_885953-434.jpg',
-        backgroundUrl: 'https://wallpapercave.com/wp/wp5126188.jpg'
+        backgroundUrl: 'https://wallpapercave.com/wp/wp5126188.jpg',
     }
 }

@@ -52,6 +52,9 @@ export class TopBarComponent {
   protected readonly selfStore = inject(SelfStore);
   protected readonly channelStore = inject(ChannelStore);
 
+  constructor() {
+  }
+
   protected readonly loading = computed(() => {
     return this.homeStore.loading() || this.channelStore.loading();
   })
@@ -75,10 +78,10 @@ export class TopBarComponent {
       label: "COMMON.LABEL.PROFILE",
 
     },
-    {
-      pageLink: 'logout',
-      label: "COMMON.LABEL.LOGOUT",
-    }
+    // {
+    //   pageLink: 'logout',
+    //   label: "COMMON.LABEL.LOGOUT",
+    // }
   ])
 
   @ViewChild('uploadCompTempRef') uploadCompTempRef!: ElementRef<PeUploadComponent>;

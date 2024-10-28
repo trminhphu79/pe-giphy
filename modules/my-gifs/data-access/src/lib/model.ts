@@ -1,15 +1,15 @@
 import { Meta, Pagination, UserChannel, BaseOptions } from "@pe-giphy/models";
-import { GIFObject } from "giphy-api";
+import { PeGIFObject } from "@pe-giphy/models";
 
 export type SelfState = {
     meta: Meta,
     loading: boolean,
     pagination: Pagination,
-    currentTab: 'COLLECTION' | 'FAVORITE',
+    currentTab: string,
     filterModel: BaseOptions,
-    relatedGifs: GIFObject[],
+    relatedGifs: PeGIFObject[],
     uploadGifIds: string[],
     detailChannel: Partial<UserChannel> | null,
     tabActions: { value: string, label: string }[],
-    favoriteGifs: Array<GIFObject>
+    favoriteGifs: Array<PeGIFObject>
 }

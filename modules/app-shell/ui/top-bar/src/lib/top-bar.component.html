@@ -4,7 +4,7 @@
             (searchChanges)="searchChanges($event)" (keywordChanges)="keywordChanges($event)"></pe-search>
     </div>
     <div class="top-bar__menu-action">
-        <ng-container *ngIf="userState.isLogin(); else noneLoginTemplate">
+        <ng-container *ngIf="true">
             <button class="upload-icon" (click)="openDialogUpload()" appearance="secondary" iconStart="@tui.upload"
                 size="m" tuiButton type="button">
                 {{'BUTTON.ACTION.UPLOAD' | transloco}}

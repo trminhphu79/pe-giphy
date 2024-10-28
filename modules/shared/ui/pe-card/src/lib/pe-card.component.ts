@@ -6,6 +6,7 @@ import { PeImageLoaderComponent } from '@pe-giphy/pe-image-loader';
 import { TuiButton, TuiIcon } from '@taiga-ui/core';
 import { TuiAvatar, TuiSkeleton } from '@taiga-ui/kit';
 import { TuiLike } from '@taiga-ui/kit';
+import { PeGIFObject } from '@pe-giphy/models';
 
 @Component({
   selector: 'pe-card',
@@ -26,7 +27,7 @@ import { TuiLike } from '@taiga-ui/kit';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PeCardComponent {
-  @Input() item!: any;
+  @Input() item!: PeGIFObject;
   @Input() wrapperClass: string = '';
   @Input() disableOverlayAction = false;
   @Input() disableFooter = false;
@@ -39,8 +40,8 @@ export class PeCardComponent {
 
   loading: WritableSignal<boolean> = signal(true);
 
-  titleClick = output();
-  favoriteClick = output();
+  titleClick = output<PeGIFObject>();
+  favoriteClick = output<PeGIFObject>();
 
   imgWidth = computed(() => this.item?.images?.fixed_width?.width);
   imgHeight = computed(() => this.item?.images?.fixed_width?.height);

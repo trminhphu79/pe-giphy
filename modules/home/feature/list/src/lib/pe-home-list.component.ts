@@ -8,16 +8,18 @@ import { Router } from '@angular/router';
 import { HomeStore } from '@pe-giphy/home-data-access';
 import { CdkVirtualScrollViewport, ScrollingModule } from '@angular/cdk/scrolling';
 import { map, pairwise, filter, tap, throttleTime, switchMap } from 'rxjs';
-import { TuiButton, TuiDialog, TuiDialogService } from '@taiga-ui/core';
+import { TuiAlertService, TuiButton, TuiDialog, TuiDialogService } from '@taiga-ui/core';
 import type { TuiDialogContext } from '@taiga-ui/core';
 import { type PolymorpheusContent } from '@taiga-ui/polymorpheus';
 import { Location } from '@angular/common';
 import { SelfStore } from '@pe-giphy/my-gifs/data-access';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
+import { PeGIFObject } from '@pe-giphy/models';
 
 @Component({
   selector: 'pe-pe-home-list',
   standalone: true,
-  imports: [CommonModule, PeCardComponent, PeSearchComponent, ScrollingModule, TuiButton, PeHomeDetailComponent],
+  imports: [CommonModule, PeCardComponent, PeSearchComponent, ScrollingModule, TuiButton, PeHomeDetailComponent, TranslocoModule],
   templateUrl: './pe-home-list.component.html',
   styleUrl: './pe-home-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,14 +31,14 @@ export class PeHomeListComponent {
   @ViewChild('template') detailDialog!: PeHomeDetailComponent;
 
 
+  private readonly alert = inject(TuiAlertService);
   private readonly store = inject(HomeStore);
-  private readonly router = inject(Router);
   private readonly dialogs = inject(TuiDialogService);
   private readonly location = inject(Location);
   private readonly selfStore = inject(SelfStore);
 
 
-  protected readonly items = this.store.trendingGifs;
+  protected readonly items = this.store.trendingListMaped;
   protected readonly gifId = signal('');
   protected readonly loading = this.store.loading;
   protected readonly itemSize = signal(20);
@@ -58,8 +60,18 @@ export class PeHomeListComponent {
       ).subscribe()
   }
 
-  favoriteClick(event: any) {
-    this.selfStore.likeGifs(event)
+  favoriteClick(event: PeGIFObject) {
+    this.selfStore.likeGifs$(event).subscribe((existing) => {
+      let label = 'Liked';
+      if (existing) {
+        label = 'Disliked'
+      }
+      this.alert.open('', {
+        label,
+        appearance: 'success',
+      }).subscribe();
+      this.store.updateItem(event);
+    })
   }
 
   titleClick(event: any) {

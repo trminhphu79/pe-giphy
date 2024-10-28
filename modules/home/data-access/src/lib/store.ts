@@ -1,16 +1,28 @@
-import { patchState, signalStore, withHooks, withMethods, withState } from "@ngrx/signals";
+import { patchState, signalStore, withComputed, withHooks, withMethods, withState } from "@ngrx/signals";
 import { initialHomeState } from "./state";
 import { GifApiService } from "@pe-giphy/pe-giphy-api";
-import { inject } from "@angular/core";
+import { computed, inject } from "@angular/core";
 import { rxMethod } from "@ngrx/signals/rxjs-interop"
-import { GIFObject } from "giphy-api";
 import { delay, pipe, switchMap, tap } from "rxjs";
+import { SelfStore } from "@pe-giphy/my-gifs/data-access";
+import { PeGIFObject } from "@pe-giphy/models";
 
 export const HomeStore = signalStore(
     {
         providedIn: 'root',
     },
     withState(initialHomeState),
+    withComputed((store, selfStore = inject(SelfStore)) => ({
+        trendingListMaped: computed(() => {
+            return store.trendingGifs().map((gif) => {
+                const isExistingFavorited = selfStore.favoriteGifs().findIndex((item) => item.id == gif.id) > -1;
+                return {
+                    ...gif,
+                    liked: isExistingFavorited
+                }
+            })
+        })
+    })),
     withMethods((store, gifApi: GifApiService = inject(GifApiService)) => ({
         loadTrending$: rxMethod(
             pipe(
@@ -73,6 +85,15 @@ export const HomeStore = signalStore(
                 tap((response) => patchState(store, { loading: false, trendingGifs: response.data })),
             )
         ),
+        updateItem(item: PeGIFObject) {
+            const newList = store.trendingGifs().map((ite) => {
+                if (ite.id == item.id) {
+                    ite = item;
+                }
+                return ite
+            })
+            patchState(store, { trendingGifs: newList })
+        },
         clearSuggestionTags() {
             patchState(store, { loading: false, suggestionTags: [] })
         },
