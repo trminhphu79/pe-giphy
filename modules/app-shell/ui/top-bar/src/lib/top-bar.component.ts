@@ -78,10 +78,6 @@ export class TopBarComponent {
       label: "COMMON.LABEL.PROFILE",
 
     },
-    // {
-    //   pageLink: 'logout',
-    //   label: "COMMON.LABEL.LOGOUT",
-    // }
   ])
 
   @ViewChild('uploadCompTempRef') uploadCompTempRef!: ElementRef<PeUploadComponent>;

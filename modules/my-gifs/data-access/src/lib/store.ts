@@ -3,7 +3,7 @@ import { initialSleftState } from "./state";
 import { computed, inject } from "@angular/core";
 import { ChannelApiService, GifApiService, LocalStorageApiService } from "@pe-giphy/pe-giphy-api";
 import { rxMethod } from "@ngrx/signals/rxjs-interop";
-import { forkJoin, map, of, pipe, switchMap, tap } from "rxjs";
+import { catchError, EMPTY, forkJoin, map, of, pipe, switchMap, tap } from "rxjs";
 import { SearchOptions, UploadGifOptions } from "@pe-giphy/models";
 import { AppStore } from "@pe-giphy/app-store";
 import { TabActionEnum } from "./enum";
@@ -52,6 +52,10 @@ export const SelfStore = signalStore(
 
             if (input.files.length) {
                 return gifApi.uploadWithFormData(input).pipe(
+                    catchError((err) => {
+                        patchState(store, { loading: false });
+                        return EMPTY;
+                    }),
                     map((response) => response.map((item) => item.data?.id)),
                     tap((response) => {
                         if (!response?.length) {
@@ -65,6 +69,10 @@ export const SelfStore = signalStore(
             }
 
             return gifApi.uploadNormal(input).pipe(
+                catchError((err) => {
+                    patchState(store, { loading: false });
+                    return EMPTY;
+                }),
                 tap((response) => {
                     if (!response?.data?.id) {
                         return;
